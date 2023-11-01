@@ -1,0 +1,202 @@
+@import '../../assets/style.less';
+
+.container {
+  background-color: #colors[primary];
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  min-width: 100vw;
+}
+
+#form-container {
+  background-color: #colors[primary];
+  min-width: 100vw;
+  text-align: center;
+}
+
+#wrapper {
+  margin: 4vh auto 1vh;
+  display: inline-block;
+}
+
+#form-divider {
+  height: 150px;
+  width: 3px;
+  border-radius: 5px;
+  background-color: #colors[tertiary];
+  margin: -30px 20px;
+  display: inline-block;
+}
+
+#box {
+  width: 300px;
+  padding: 40px 20px;
+  background-color: #colors[tertiary];
+  text-align: center;
+  border-radius: 15px;
+  border: 4px solid;
+  border-color: #colors[secondary];
+}
+
+#select-lable {
+  color: #colors[text-primary];
+  font-weight: 550;
+  font-size: 1.1em;
+}
+
+#box select {
+  display: block;
+  background: none;
+  margin: 5px auto 0px;
+  border: 2px solid;
+  border-color: #colors[secondary];
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: #colors[text-primary];
+  border-radius: 8px;
+  transition: 0.25s;
+}
+
+#box select:focus {
+  width: 220px;
+}
+
+#box input[type='button'] {
+  background: darken(#colors[tertiary], 30%);
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid;
+  border-color: #colors[secondary];
+  padding: 14px 40px;
+  outline: none;
+  color: #colors[text-secondary];
+  font-size: 1.5em;
+  font-weight: 550;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.25s;
+
+  &:hover {
+    color: lighten(#colors[secondary], 20%);
+  }
+
+  position: relative;
+  bottom: -65px;
+}
+
+#login-logo {
+  width: 250px;
+  height: auto;
+  position: relative;
+  bottom: -10px;
+}
+
+#link-container {
+  background-color: #colors[primary];
+  color: #colors[text-secondary];
+  font-size: 1.4em;
+  text-decoration: underline;
+  text-align: center;
+  position: relative;
+  margin: auto;
+}
+
+#link-button {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  color: #colors[text-secondary];
+  text-decoration: none;
+  transition: 0.25s;
+
+  &:hover {
+    color: #colors[secondary];
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  margin: 0 15px;
+  display: inline-block;
+  font-size: 3vh;
+}
+
+#login-button {
+  background: #colors[quaternary];
+  width: 20%;
+  display: block;
+  margin: 20px auto 0px;
+  border: none;
+  padding: 14px 40px;
+  outline: none;
+  color: #colors[text-primary];
+  font-size: 1.5em;
+  font-weight: 550;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.377);
+
+  &:hover {
+    width: 21%;
+    background: #colors[quinary];
+  }
+}
+
+#disabled-option {
+  opacity: 0.6;
+  background-color: darken(#colors[tertiary], 10%);
+}
+
+#box-auth-fail {
+  width: 300px;
+  padding: 40px 20px;
+  text-align: center;
+  border-radius: 15px;
+  border: 4px solid;
+  border-color: #colors[secondary];
+  background-color: #ffccc7 !important;
+}
+
+#box-auth-fail select {
+  display: block;
+  background: none;
+  margin: 5px auto 0px;
+  border: 2px solid;
+  border-color: #colors[secondary];
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: #colors[text-primary];
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+#box-auth-fail select:focus {
+  width: 220px;
+}
+
+#box-auth-fail input[type='button'] {
+  background: darken(#colors[tertiary], 30%);
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid;
+  border-color: #colors[secondary];
+  padding: 14px 40px;
+  outline: none;
+  color: #colors[text-secondary];
+  font-size: 1.5em;
+  font-weight: 550;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.25s;
+
+  &:hover {
+    color: lighten(#colors[secondary], 20%);
+  }
+
+  position: relative;
+  bottom: -65px;
+}
