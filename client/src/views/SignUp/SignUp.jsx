@@ -11,6 +11,7 @@ export default function SignUp() {
 
   return (
     <div className='container nav-padding'>
+      <NavBar />
         Signup Page
     </div>
   );

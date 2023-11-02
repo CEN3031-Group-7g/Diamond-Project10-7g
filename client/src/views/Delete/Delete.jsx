@@ -11,6 +11,7 @@ export default function Delete() {
 
   return (
     <div className='container nav-padding'>
+      <NavBar />
         Delete Page
     </div>
   );

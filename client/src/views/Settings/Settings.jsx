@@ -11,6 +11,7 @@ export default function Settings() {
 
   return (
     <div className='container nav-padding'>
+      <NavBar />
         Settings
     </div>
   );
