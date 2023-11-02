@@ -68,9 +68,12 @@ export default function TeacherLogin() {
             placeholder='Password'
             autoComplete='current-password'
           />
-          <p id='forgot-password' onClick={() => navigate('/forgot-password')}>
+          <u id='forgot-password' onClick={() => navigate('/forgot-password')}>
             Forgot Password?
-          </p>
+          </u>
+          <u id='create-account' onClick={() => navigate('/SignUp')}>
+            Sign up here.
+          </u>
           <input
             type='button'
             value={loading ? 'Loading...' : 'Login'}
