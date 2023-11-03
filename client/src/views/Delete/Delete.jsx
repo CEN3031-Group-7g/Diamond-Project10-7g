@@ -15,26 +15,20 @@ export default function Delete() {
   const name = currUser.name;
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
-  var num = 0;
 
-  useEffect(() => {
-    navigate('/teacherlogin');
-  }, [num]);
 
   if (sessionStorage.getItem('user') != undefined) {
     const user = JSON.parse(sessionStorage.getItem('user'));
   }
   else {
-    num = num + 1;
-    return (
-      <>
-      <div className='container nav-padding'>
-        <NavBar />
-        Please login first!
-      </div>
-      </>
-    );
+
   }
+
+  useEffect(() => {
+    if (sessionStorage.getItem('user') == undefined) {
+      navigate('/teacherlogin');
+    }
+  }, []);
 
 
 
@@ -54,12 +48,10 @@ export default function Delete() {
       setVisible(false)
   };
 
-
+  try {
   return (
     <div className='container nav-padding'>
       <NavBar />
-        Delete Page
-
         <div id='delete-display-code-modal'>
           <button id='delete-display-code-btn' onClick={showModal}>
               <h1 id="number" style={{color: "white"}}>Delete Account</h1>
@@ -84,4 +76,8 @@ export default function Delete() {
         </div>
     </div>
   );
+  }
+  catch (e) {
+    navigate('/teacherlogin');
+  }
 }
