@@ -1,5 +1,52 @@
 @import '../../assets/style.less';
 
+#dashboard-display-code-modal {
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+
+  #dashboard-display-code-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #dc3545;
+    border-radius: 10px;
+    border: none;
+    color: white;
+
+    &:hover {
+      background: #bf2e3c;
+    }
+
+    #code-display-text {
+      font-size: 15em;
+      text-align: center;
+    }
+  }
+}
+
+input[type='password'] {
+  display: block;
+  background: none;
+  margin: 20px auto 0px;
+  border: 2px solid;
+  border-color: #colors[secondary];
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: #colors[text-primary];
+  border-radius: 8px;
+  transition: 0.25s;
+}
+
+#box input[type='password']:focus {
+  width: 220px;
+}
+
+
 .container {
   background-color: #colors[primary];
   height: 100%;
