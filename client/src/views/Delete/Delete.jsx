@@ -14,6 +14,31 @@ export default function Delete() {
   const role = currUser.role;
   const name = currUser.name;
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+  var num = 0;
+
+  useEffect(() => {
+    navigate('/teacherlogin');
+  }, [num]);
+
+  if (sessionStorage.getItem('user') != undefined) {
+    const user = JSON.parse(sessionStorage.getItem('user'));
+  }
+  else {
+    num = num + 1;
+    return (
+      <>
+      <div className='container nav-padding'>
+        <NavBar />
+        Please login first!
+      </div>
+      </>
+    );
+  }
+
+
+
+
   const user = JSON.parse(sessionStorage.getItem('user'));
 
   const showModal = () => {
