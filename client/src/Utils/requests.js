@@ -672,3 +672,11 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+
+  export const deleteUser = async (id) =>
+    makeRequest({
+      method: DELETE,
+      path: `${server}/users/${id}`,
+      auth: true,
+      error: 'Cannot Retrieve User.',
+    });
