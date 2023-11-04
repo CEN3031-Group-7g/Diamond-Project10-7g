@@ -2,17 +2,23 @@ import React, { useState, useEffect } from 'react';
 import './Delete.less';
 import Logo from '../../assets/casmm_logo.png';
 import { getStudents, postJoin } from '../../Utils/requests';
-import { setUserSession } from '../../Utils/AuthRequests';
+import { postUser, setUserSession } from '../../Utils/AuthRequests';
 import { message } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import {Modal, Button} from 'antd';
+import { useGlobalState } from '../../Utils/userState.js';
 
 export default function Delete() {
+  const [currUser] = useGlobalState('currUser');
+  const role = currUser.role;
+  const name = currUser.name;
   const [visible, setVisible] = useState(false);
+  const user = JSON.parse(sessionStorage.getItem('user'));
 
   const showModal = () => {
       setVisible(true)
+      console.log(user);
   };
 
   const handleCancel = () => {
@@ -29,8 +35,8 @@ export default function Delete() {
       <NavBar />
         Delete Page
 
-        <div id='dashboard-display-code-modal'>
-          <button id='dashboard-display-code-btn' onClick={showModal}>
+        <div id='delete-display-code-modal'>
+          <button id='delete-display-code-btn' onClick={showModal}>
               <h1 id="number" style={{color: "white"}}>Delete Account</h1>
           </button>
           <Modal
@@ -42,6 +48,8 @@ export default function Delete() {
           >
               <div>Are you sure you want to delete your account?</div>
               <div>Please enter your password to verify your identity.</div>
+              <div>{name}</div>
+              <div>{user.username}</div>
               <input
                 type='password'
                 placeholder='Password'
