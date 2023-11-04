@@ -12,7 +12,16 @@ export default function SignUp() {
   return (
     <div className='container nav-padding'>
       <NavBar />
-        Signup Page
+          Signup Page
+          <div className="container">
+              <div id="content-wrapper">
+                  <div id="signup-box">
+                      <div id="signup-title">Please select your account type</div>
+                      <button type="button">Personal</button>
+                      <button type="button">Organizational</button>
+                  </div>
+              </div>
+          </div>
     </div>
   );
 }
