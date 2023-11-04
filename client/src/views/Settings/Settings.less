@@ -8,6 +8,174 @@
   min-width: 100vw;
 }
 
+#main-settings-header {
+  color: #colors[text-secondary]; 
+  font-size: 40px;
+  font-weight: bolder;
+  margin-left: 10%;
+  text-align: left;
+  padding-top: 20px;
+}
+
+#settings-parent {
+  width: 80vw;
+  height: 70vh;
+  margin-left: 10%;
+  display: flex;
+}
+
+#settings-container {
+  flex: 1;
+  padding-top: 10px;
+  padding-bottom: 40px;
+  width: 70%;
+  height: 100%;
+  background: #colors[senary];
+  border-radius: 20px;
+  border: 2px solid #colors[secondary];
+  flex-direction: row;
+  display: flex;
+}
+
+#settings-information-container {
+  flex: left;
+  width: 70%;
+  height: 100%;
+  flex-direction: row;
+}
+
+#settings-button-container {
+  margin-left: 2%; 
+  margin-bottom: 3%;
+  text-align: right;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden; 
+  white-space: nowrap;
+}
+
+#settings-navi-bar {
+  width: 20%;
+  height: 100%;
+  padding-bottom: 40px;
+  background: #colors[senary];
+  border-radius: 20px;
+  border: 2px solid #colors[secondary];
+  color: #colors[text-primary];
+  font-size: 24px;
+  font-weight: 400;
+  overflow: hidden; 
+}
+
+#general-settings-button {
+  padding: 15px;
+  background: #a4cce6;
+  border-radius: 20px;
+  color: #colors[text-secondary];
+  outline: none;
+  cursor: default;
+  pointer-events: none;
+  width: 100%;
+  overflow: hidden; 
+  white-space: nowrap;
+}
+
+#delete-account-button {
+  padding: 15px;
+  width: 100%;
+  background: #colors[senary];
+  color: #E93333;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s;
+  overflow: hidden; 
+  white-space: nowrap;
+
+  &:hover {
+    background: #E93333;
+    color: #colors[senary];
+  }
+}
+
+#settings-header {
+  color: #colors[text-primary];
+  font-size: 24px;
+  font-weight: 600;
+  margin-left: 2%;
+  margin-bottom: 1%;
+  text-align: left;
+}
+
+#display-account-info {
+  color: #colors[text-primary];
+  font-size: 22px;
+  font-weight: 400;
+  margin-left: 2%; 
+  margin-bottom: 5%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+#display-account-sensitive {
+  color: #colors[text-primary];
+  font-size: 18px;
+  font-weight: 400;
+  margin-left: 5%; 
+  margin-bottom: 5%;
+  text-align: left;
+  overflow: hidden; 
+}
+
+#settings-button-1, #settings-button-2, #settings-button-3, #settings-button-4 {
+  background: linear-gradient(#F1C307, #DDB203);
+  display: block;
+  border: none;
+  padding: 10px 25px;
+  outline: none;
+  color: #colors[text-secondary];
+  font-size: 20px;
+  font-weight: 400;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.300);
+  overflow: hidden; 
+  white-space: nowrap;
+
+  &:hover {
+    background: #CBA302;
+  }
+}
+
+#settings-button-1 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  position: relative;
+  top: 90px;
+  width: 100%
+}
+#settings-button-2 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+  position: relative;
+  top: 100px
+}
+#settings-button-3 {
+  position: relative;
+  top: 130px;
+  left: 25px;
+}
+#settings-button-4 {
+  position: relative;
+  top: 140px;
+  left: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+
 #form-container {
   background-color: #colors[primary];
   min-width: 100vw;
