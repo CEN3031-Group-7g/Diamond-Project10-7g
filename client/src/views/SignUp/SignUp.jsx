@@ -12,14 +12,54 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
     const handleButtonClick = (type) => {
         setAccountType(type);
     };
 
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    };
+
+    const validatePassword = (password) => {
+        const re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        return re.test(password);
+    };
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    };
+
     const handleContinueClick = () => {
-        // Implement the logic to handle the continue button click
+        // Initially clear all error messages
+        setEmailError('');
+        setPasswordError('');
+
+        let isValid = true;
+
+        // Validate email
+        if (!validateEmail(email)) {
+            setEmailError('Please enter a valid email address.');
+            isValid = false;
+        }
+
+        // Validate password
+        if (!validatePassword(password)) {
+            setPasswordError('Password must be at least 8 characters long and include at least one letter, one number, and one special character.');
+            isValid = false;
+        }
+
+        // If both email and password are valid, continue
+        if (isValid) {
+            // Logic to handle the continuation after form completion
+        }
     };
 
     return (
@@ -38,16 +78,14 @@ export default function SignUp() {
                         )}
                         {accountType === 'Personal' && (
                             <>
-                                <div id="account-type-title">Account Type: Personal</div>
-                                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email address" className="input-field" />
+                                <div id="account-type-title">Account Type: {accountType}</div>
                                 <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter new username" className="input-field" />
-                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter new password" className="input-field" />
-                                <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm new password" className="input-field" />
+                                <input type="email" value={email} onChange={handleEmailChange} placeholder="Enter email address" className="input-field" />
+                                <div className="error-message">{emailError}</div>
+                                <input type="password" value={password} onChange={handlePasswordChange} placeholder="Enter new password" className="input-field" />
+                                <div className="error-message">{passwordError}</div>
                                 <button type="button" onClick={handleContinueClick}>Continue</button>
                             </>
-                        )}
-                        {accountType === 'Organizational' && (
-                            <div id="account-type-title">Account Type: {accountType}</div>
                         )}
                     </div>
                 </div>
