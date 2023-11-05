@@ -33,6 +33,7 @@ export default function SignUp() {
         return re.test(password);
     };
 
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
@@ -81,7 +82,7 @@ export default function SignUp() {
                 <div className="modal-content">
                     <span className="close" onClick={() => {
                         setShowSuccessModal(false);
-                        navigate('/teacherlogin'); // Navigate to the teacher login page
+                        navigate('/teacherlogin');
                     }}>&times;</span>
                     <div className="modal-body">
                         <div className="success-message">
@@ -97,7 +98,6 @@ export default function SignUp() {
     return (
         <div className='container nav-padding'>
             <NavBar />
-            Signup Page
             <div className="container">
                 <div id="content-wrapper">
                     <div id="signup-box">
