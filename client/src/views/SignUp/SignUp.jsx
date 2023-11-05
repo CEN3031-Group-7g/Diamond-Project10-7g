@@ -14,10 +14,14 @@ export default function SignUp() {
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const navigate = useNavigate();
 
     const handleButtonClick = (type) => {
         setAccountType(type);
     };
+
+    //input validation (still needs to incorporate back-end database for complete input validation ex: username/email already exists)
 
     const validateEmail = (email) => {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -56,10 +60,38 @@ export default function SignUp() {
             isValid = false;
         }
 
-        // If both email and password are valid, continue
-        if (isValid) {
-            // Logic to handle the continuation after form completion
+        /*
+        Validate username
+        if(!validateUsername(username)){
+            setUsernameError('Username already exists');
+            isValid = false;
         }
+        */
+
+        // If both email, username, and password are valid, continue
+        if (isValid) {
+            //...
+            setShowSuccessModal(true);
+        }
+    };
+
+    const SuccessModal = () => {
+        return (
+            <div className="modal" style={{ display: showSuccessModal ? 'block' : 'none' }}>
+                <div className="modal-content">
+                    <span className="close" onClick={() => {
+                        setShowSuccessModal(false);
+                        navigate('/teacherlogin'); // Navigate to the teacher login page
+                    }}>&times;</span>
+                    <div className="modal-body">
+                        <div className="success-message">
+                            <span className="checkmark">&#10003;</span>
+                            Account successfully created
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     };
 
     return (
@@ -76,7 +108,7 @@ export default function SignUp() {
                                 <button type="button" onClick={() => handleButtonClick('Organizational')}>Organizational</button>
                             </>
                         )}
-                        {accountType === 'Personal' && (
+                        {(accountType === 'Personal' || accountType === 'Organizational') && (
                             <>
                                 <div id="account-type-title">Account Type: {accountType}</div>
                                 <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter new username" className="input-field" />
@@ -90,6 +122,7 @@ export default function SignUp() {
                     </div>
                 </div>
             </div>
+            <SuccessModal />
         </div>
     );
 }
