@@ -6,6 +6,7 @@ import { setUserSession } from '../../Utils/AuthRequests';
 import { message, Modal, Input, Button, Form } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
+import DeleteButton from './DeleteButton';
 
 
 function handleUsernameChange() {
@@ -226,7 +227,10 @@ export default function Settings() {
             
           </div>
 
-        <div id="settings-navi-bar"><button id="general-settings-button">General Settings</button><button id="delete-account-button" onClick={handleDeletionNavigation}>Delete Account</button></div>
+        <div id="settings-navi-bar">
+          <button id="general-settings-button">General Settings</button>
+          <DeleteButton />
+        </div>
       </div>
 
 
