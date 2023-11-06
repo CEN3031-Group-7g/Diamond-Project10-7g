@@ -31,10 +31,14 @@ export default function TeacherLogin() {
       .then((response) => {
         setUserSession(response.data.jwt, JSON.stringify(response.data.user));
         setLoading(false);
-        if (response.data.user.role.name === 'Content Creator') {
-          navigate('/ccdashboard');
-        } else if (response.data.user.role.name === 'Researcher') {
-          navigate('/report');
+          if (response.data.user.role.name === 'Content Creator') {
+              navigate('/ccdashboard');
+          } else if (response.data.user.role.name === 'Researcher') {
+              navigate('/report');
+          } else if (response.data.user.role.name === 'Personal') {
+              navigate('');
+          } else if (response.data.user.role.name === 'Admin') {
+              navigate('');
         } else {
           navigate('/dashboard');
         }
