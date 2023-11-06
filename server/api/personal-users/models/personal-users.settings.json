@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "personal_users",
+  "info": {
+    "name": "Personal Users",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "username": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "password": {
+      "type": "password"
+    }
+  }
+}

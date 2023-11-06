@@ -330,6 +330,27 @@ export const deleteStudent = async (student) =>
     error: 'Failed to delete student.',
   });
 
+export const addPersonalUser = async (username, email, password) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/personal-users`,
+        data: {
+            username: username,
+            email: email,
+            password: password,
+        },
+        auth: false,
+        error: 'Failed to add personal account.',
+    });
+
+export const getPersonalUsers = async () =>
+    makeRequest({
+        method: GET,
+        path: `${server}/personal-users`,
+        auth: false,
+        error: 'Failed to retrieve submission status',
+    });
+
 export const updateActivityLevelTemplate = async (id, workspace, blocksList) =>
   makeRequest({
     method: PUT,
