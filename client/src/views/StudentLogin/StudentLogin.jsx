@@ -84,7 +84,7 @@ export default function StudentLogin() {
         );
       } else if (fails.includes(true)) {
         message.error(
-          `Student Name and Animal do not match. Remaining attemps (${attemp})`
+          `Student Name and Animal do not match. Remaining attempts (${attemp})`
         );
       }
     }
