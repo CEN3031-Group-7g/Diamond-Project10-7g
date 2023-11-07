@@ -149,6 +149,9 @@ export default function SignUp() {
                                 <input type="password" value={password} onChange={handlePasswordChange} placeholder="Enter new password" className="input-field" />
                                 {passwordError && <div className="error-message">{passwordError}</div>}
                                 <button type="button" onClick={handleContinueClick}>Continue</button>
+                                <u id='request-admin' onClick={() => navigate('/AdminSignUp')}>
+                                    Requesting an administrator account?
+                                </u>
                             </>
                         )}
                     </div>
