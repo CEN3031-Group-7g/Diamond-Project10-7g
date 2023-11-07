@@ -693,3 +693,52 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+
+export const deleteUser = async (id) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/users/${id}`,
+    auth: true,
+    error: 'Error deleting',
+  });
+
+export const getAllUsers = async () =>
+  makeRequest({
+    method: GET,
+    path: `${server}/users`,
+    auth: true,
+    error: 'Error getting users',
+  });
+
+export const updateUsername = async (id, newUsername) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/users/${id}`,
+    data: {
+      username: newUsername
+    },
+    auth: true,
+    error: 'Error updating username',
+  });
+
+export const updateEmail = async (id, newEmail) =>
+    makeRequest({
+      method: PUT,
+      path: `${server}/users/${id}`,
+      data: {
+        email: newEmail
+      },
+      auth: true,
+      error: 'Error updating email',
+   });
+
+export const updatePassword = async (id, newPassword) =>
+   makeRequest({
+     method: PUT,
+     path: `${server}/users/${id}`,
+     data: {
+       password: newPassword
+     },
+     auth: true,
+     error: 'Error updating password',
+  });
