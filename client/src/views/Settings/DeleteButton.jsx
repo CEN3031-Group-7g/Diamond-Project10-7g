@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './Delete.less';
+import './DeleteButton.less';
+import './Settings.less';
 import Logo from '../../assets/casmm_logo.png';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
 import { message } from 'antd';
@@ -9,7 +10,7 @@ import {Modal, Button} from 'antd';
 import { deleteUser } from '../../Utils/requests.js'
 import { removeUserSession } from '../../Utils/AuthRequests';
 
-export default function Delete() {
+export default function DeleteButton() {
   const [visible, setVisible] = useState(false);
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -60,11 +61,9 @@ export default function Delete() {
 
   try {
   return (
-    <div className='container nav-padding'>
-      <NavBar />
-        <div id='delete-display-code-modal'>
-          <button id='delete-display-code-btn' onClick={showModal}>
-              <h1 id="number" style={{color: "white"}}>Delete Account</h1>
+    <>
+          <button id='delete-account-button' onClick={showModal}>
+              Delete Account
           </button>
           <Modal
               title={'Delete Account?'}
@@ -93,8 +92,7 @@ export default function Delete() {
                 Delete!
               </button>
           </Modal>
-        </div>
-    </div>
+          </>
   );
   }
   catch (e) {
