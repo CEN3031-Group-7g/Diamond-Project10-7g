@@ -14,7 +14,7 @@
     "Settings": "/settings"
   },
   "users": {
-    "DefaultUser": ["Home", "TeacherLogin", "Sandbox", "About"],
+    "DefaultUser": ["Home", "TeacherLogin", "Sandbox", "About", "SignUp"],
     "Mentor": ["Dashboard", "AccountInfo", "SignOut", "Sandbox", "BugReport", "Settings"],
     "Student": ["SignOut"],
     "ContentCreator": [
