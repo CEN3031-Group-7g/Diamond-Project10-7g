@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './AdminSignUp.less';
-import Logo from '../../../assets/casmm_logo.png';
-import { getStudents, postJoin } from '../../../Utils/requests';
 import { setUserSession } from '../../../Utils/AuthRequests';
 import { message } from 'antd';
 import NavBar from '../../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 
 export default function AdminSignUp() {
-    const [accountType, setAccountType] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -18,10 +15,6 @@ export default function AdminSignUp() {
     const [passwordError, setPasswordError] = useState('');
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
-
-    const handleButtonClick = (type) => {
-        setAccountType(type);
-    };
 
     //input validation (still needs to incorporate back-end database for complete input validation ex: username/email already exists)
 
