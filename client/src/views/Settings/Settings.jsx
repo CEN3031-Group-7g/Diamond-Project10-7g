@@ -23,44 +23,61 @@ export default function Settings() {
   const [isMergeModalOpen, setIsMergeModalOpen] = useState(false);
 
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(""); // Holds user's input of password before updating anything.
 
-  const[newUsername, setNewUsername] = useState("");
-  const[newPassword1, setNewPassword1] = useState("");
-  const[newPassword2, setNewPassword2] = useState("");
-  const[newEmail, setNewEmail] = useState("");
+  const[newUsername, setNewUsername] = useState(""); // Holds user's input of new username
+  const[newPassword1, setNewPassword1] = useState(""); // Holds user's input of new password
+  const[newPassword2, setNewPassword2] = useState(""); // Holds user's input of new password for confirming new password
+  const[newEmail, setNewEmail] = useState(""); // Holds user's input of new email
 
   const allUsers = getAllUsers();
 
   const showUserModal = () => {
+    // Opens modal for change username button
     setIsUserModalOpen(true);
   };
   
   function handleUsernameChange(id, newUsername, password) {
-    // called after clicking change username - code here
+    // called after clicking change username
+
+    // call updateUsername with id and newUsername - function found in ../../Utils/requests.js, communicates with endpoints
     updateUsername(id, newUsername).then((response) => {
       let body = { identifier: newUsername, password: password };
   
+      // login user with new username
       postUser(body)
         .then((response) => {
-          console.log(response.data.user);
-          setUserSession(response.data.jwt, JSON.stringify(response.data.user));
+
+          // Set session variable
+          setUserSession(response.data.jwt, JSON.stringify(response.data.user)); 
+
+          // Get user info
           setUser(JSON.parse(sessionStorage.getItem('user')));
-          message.success(`Username changed to ${newUsername}`);
+          
+          // Show success message
+          message.success(`Username changed to ${newUsername}`); 
+
+          // Clear password state
           setPassword("");
         });
     });
   }
 
   const handleUserOk = () => {
+    // Called when user presses Change Username on modal
+
     if (newUsername == "") {
+      // No username entered!
       message.error("Please enter a username!");
       return;
     }
     else if (newUsername.length < 3) {
+      // Username is too short
       message.error("Username is too short!");
     }
     else {
+      // Check if correct password by logging in
+
       let body = { identifier: user.username, password: password };
   
       postUser(body)
@@ -68,27 +85,35 @@ export default function Settings() {
 
           setUserSession(response.data.jwt, JSON.stringify(response.data.user));
 
+          // Compare username to all users in database: 
+
           var goodUsername = true;
-          getAllUsers().then((result) => {
+          getAllUsers().then((result) => { // Gets all usernames in db
             const users = result.data;
             
             for (var i = 0; i < users.length; i++) {
-              if (users[i].username == newUsername) {
+              if (users[i].username == newUsername) { // Loop through username to find a match
                 message.error("That username is taken!");
                 goodUsername = false;
               }
             }
     
             if (goodUsername == false) {
+              // Do not update username, duplicate username.
+
               return;
             }
             else {
+              // Unique username, call handleUsernameChange and close modal
+
               handleUsernameChange(user.id, newUsername, password);
               setIsUserModalOpen(false);
             }
           });
         
         }).catch((error) => {
+          // User entered wrong password
+
           message.error('Incorrect Password');
         });
     }
@@ -96,26 +121,35 @@ export default function Settings() {
   };
   
   const handleUserCancel = () => {
+    // Clears state variables and closes modal.
+
     setNewUsername("");
     setPassword("");
     setIsUserModalOpen(false);
   };
 
   const showPassModal = () => {
+    // Opens password modal.
+
     setIsPassModalOpen(true);
   };
 
   function handlePasswordChange() {
-    // called after clicking change password - code here
+    // called after clicking change password
+
+    // Call updatePassword - defined in ../../Utils/requests.js, connects to backend.
     updatePassword(user.id, newPassword1).then((response) => {
+      // Login user with new password
+
       let body = { identifier: user.username, password: newPassword1 };
   
       postUser(body)
         .then((response) => {
-          console.log(response.data.user);
-          setUserSession(response.data.jwt, JSON.stringify(response.data.user));
-          setUser(JSON.parse(sessionStorage.getItem('user')));
-          message.success(`Password changed`);
+          setUserSession(response.data.jwt, JSON.stringify(response.data.user)); // Update session
+          setUser(JSON.parse(sessionStorage.getItem('user'))); // Get user session to update screen
+          message.success(`Password changed`); // Show success
+
+          // Clear variables
           setPassword("");
           setNewPassword1("");
           setNewPassword2("");
@@ -124,25 +158,32 @@ export default function Settings() {
   }
   
   const handlePassOk = () => {
-    if (newPassword1 == "") {
+    // Called when user presses change password.
+
+    if (newPassword1 == "") { // Empty password
       message.error("Please enter a valid password");
       return;
     }
-    else if (newPassword1.length < 6) {
+    else if (newPassword1.length < 6) { // Password too short
       message.error("Password is too short.");
       return;
     }
-    else if (newPassword1 != newPassword2) {
+    else if (newPassword1 != newPassword2) { // New passwords do not match
       message.error("Passwords do not match.");
       return;
     }
     else {
+      // Call next function and close modal
+
       handlePasswordChange();
       setIsPassModalOpen(false);
     }
   };
   
   const handlePassCancel = () => {
+    // User cancels out of change password modal
+    // Clear state and close modal.
+
     setPassword("");
     setNewPassword1("");
     setNewPassword2("");
@@ -150,44 +191,58 @@ export default function Settings() {
   };
 
   const showEmailModal = () => {
+    // User presses change email button, show modal
+
     setIsEmailModalOpen(true);
   };
 
   function handleEmailChange(id, newEmail, password) {
-    // called after clicking change email - code here
+    // called after clicking change email
+
+    // Call updateEmail - defined in ../../Utils/requests.js, connects to backend. 
     updateEmail(id, newEmail).then((response) => {
+
+      // login user with new email
+
       let body = { identifier: user.username, password: password };
   
       postUser(body)
         .then((response) => {
-          console.log(response.data.user);
-          setUserSession(response.data.jwt, JSON.stringify(response.data.user));
-          setUser(JSON.parse(sessionStorage.getItem('user')));
-          message.success(`Email changed to ${newEmail}`);
-          setPassword("");
+          setUserSession(response.data.jwt, JSON.stringify(response.data.user)); // Update session
+          setUser(JSON.parse(sessionStorage.getItem('user'))); // Update user state to show new email on screen
+          message.success(`Email changed to ${newEmail}`); // Show sucess message
+          setPassword(""); // Clear password state.
         });
     });
     
   }
   
   const handleEmailOk = () => {
-    if (newEmail == "") {
+    // Called when user tries to change their email after filling out modal.
+
+    if (newEmail == "") { // No email entered
       message.error("Please enter an email!");
       return;
     }
-    else if (!(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(newEmail))) {
+    else if (!(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(newEmail))) { // Regex to make sure new email is valid.
       message.error("Please enter a valid email.");
       return;
     }
     else {
+
+      // Check correct password by logging user in with password entered
+
       let body = { identifier: user.username, password: password };
   
       postUser(body)
         .then((response) => {
 
           setUserSession(response.data.jwt, JSON.stringify(response.data.user));
+          
+          // Check if email is not taken by getting all users and comparing new email to all user's email
 
           var goodUsername = true;
+
           getAllUsers().then((result) => {
             const users = result.data;
             
@@ -202,24 +257,33 @@ export default function Settings() {
               return;
             }
             else {
+              // Call next function, close modal
+
               handleEmailChange(user.id, newEmail, password);
               setIsEmailModalOpen(false);
             }
           });
         
         }).catch((error) => {
+          // user entered incorrect password
+
           message.error('Incorrect Password');
         });
     }
   };
   
   const handleEmailCancel = () => {
+    // Called when user cancels out of change email modal
+    // Clear email and password state and close modal
+
     setNewEmail("");
     setPassword("");
     setIsEmailModalOpen(false);
   };
 
   const showMergeModal = () => {
+    // click merge button
+
     setIsMergeModalOpen(true);
   };
   
@@ -229,6 +293,8 @@ export default function Settings() {
   };
   
   const handleMergeCancel = () => {
+    // close merge modal
+    
     setIsMergeModalOpen(false);
   };
 

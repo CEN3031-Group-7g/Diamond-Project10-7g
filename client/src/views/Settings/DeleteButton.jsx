@@ -16,17 +16,14 @@ export default function DeleteButton() {
   const navigate = useNavigate();
 
   if (sessionStorage.getItem('user') != undefined) {
-    const user = JSON.parse(sessionStorage.getItem('user'));
+    const user = JSON.parse(sessionStorage.getItem('user')); // get user variable
   }
 
-  useEffect(() => {
+  useEffect(() => { // redirect if user is not logged in 
     if (sessionStorage.getItem('user') == undefined) {
       navigate('/teacherlogin');
     }
   }, []);
-
-
-  // console.log(getMentor());
 
   const user = JSON.parse(sessionStorage.getItem('user'));
 
@@ -43,18 +40,28 @@ export default function DeleteButton() {
   };
 
   const handleDelete = () => {
-    console.log(password);
+    
+    // Check if correct password by logging in with postUser
+
     let body = { identifier: user.username, password: password };
 
     postUser(body)
     .then((response) => {
       setUserSession(response.data.jwt, JSON.stringify(response.data.user));
       message.success('Account successfully deleted.');
+
+      // Delete user w/ calling deleteUser - function found in ../../Utils/requests.js, communicates with endpoints
       console.log(deleteUser(user.id));
+
+      // Remove user session
       removeUserSession();
+
+      // Redirect to root of website.
       navigate('/');
     })
     .catch((error) => {
+      // User entered wrong password
+      
       message.error('Incorrect password.');
     });
   }
