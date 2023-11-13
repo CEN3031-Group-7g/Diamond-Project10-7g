@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Delete.less';
+//import cautionImage from './caution.png'
 import Logo from '../../assets/casmm_logo.png';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
 import { message } from 'antd';
@@ -57,43 +58,52 @@ export default function Delete() {
       message.error('Incorrect password.');
     });
   }
+//Go back to dashboard
+  const handleGoBack = () => {
+      navigate('/dashboard');
+  };
 
   try {
   return (
     <div className='container nav-padding'>
       <NavBar />
-        <div id='delete-display-code-modal'>
-          <button id='delete-display-code-btn' onClick={showModal}>
-              <h1 id="number" style={{color: "white"}}>Delete Account</h1>
-          </button>
-          <Modal
-              title={'Delete Account?'}
-              visible={visible}
-              onCancel={handleCancel}
-              width='50vw'
-              footer={''}
-          >
-              <div style={{justifyContent: "center"}}>Are you sure you want to delete your account?</div>
-              <br></br>
-              <div>All of your account's data will be lost and cannot be recovered.</div>
-              <br></br>
-              <div>Please enter your password to verify your identity.</div>
-              <input
-                type='password'
-                placeholder={`Enter password for ${user.username}`}
-                autoComplete='current-password'
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-              <br></br>
-              <button id="delete-in-modal"
-                onClick={handleDelete}
-              >
-                Delete!
-              </button>
-          </Modal>
-        </div>
+      <div id='delete-display-code-modal'>
+      <button id='go-back-button' onClick={handleGoBack}>
+          Dashboard
+        </button>
+        <button id='delete-display-code-btn' onClick={showModal}>
+          <h1 id="number" style={{color: "white"}}>Delete Account</h1>
+        </button>
+        <Modal
+          title={<div className="modal-title">Delete Account?</div>}
+          visible={visible}
+          onCancel={handleCancel}
+          width='50vw'
+          footer={[
+            <div className="modal-footer-center">
+            <button key="back" onClick={handleCancel} className="link-like-button">
+              Cancel
+            </button>
+            </div>
+            
+          ]} 
+        >
+          {}
+          <div className="modal-text-content">
+            <p>Are you sure you want to delete your account?</p>
+            <p>All of your account's data will be lost and cannot be recovered.</p>
+            <p>Please enter your password to verify your identity.</p>
+            <input
+              type='password'
+              placeholder={`Enter password for ${user.username}`}
+              autoComplete='current-password'
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br></br>
+            <button id="delete-in-modal" onClick={handleDelete}>Delete!</button>
+          </div>
+        </Modal>
+      </div>
     </div>
   );
   }

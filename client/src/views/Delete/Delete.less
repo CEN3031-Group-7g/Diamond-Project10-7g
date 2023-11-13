@@ -1,6 +1,52 @@
 @import '../../assets/style.less';
 
+
+.modal-title {
+  text-align: center; // Center the Delete Account? Pop up window title
+  
+}
+.modal-text-content {
+  text-align: center; // Center the text in the popup window
+
+}
+//Cancel button
+.link-like-button {
+  background: none;
+  border: none;
+  color: #1890ff; 
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+//New button for for returning to dashboard
+#go-back-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%; 
+  height: 100%; 
+  background-color: #d7dc36; // Yellow color scheme
+  border-radius: 10px; 
+  border: none;
+  color: white;
+  margin-top: 20px; 
+  margin-bottom: 10px;
+  padding-bottom: 12px; 
+  padding-top:5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+
+  &:hover {
+    background-color: #c6cb2e; // Darker yellow on hover
+  }
+}
 #delete-display-code-modal {
+  margin-top: 150px;
   width: 20%;
   margin-left: auto;
   margin-right: auto;
@@ -16,6 +62,8 @@
     border-radius: 10px;
     border: none;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
+   
 
     &:hover {
       background: #bf2e3c;
