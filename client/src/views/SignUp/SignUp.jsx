@@ -143,7 +143,7 @@ export default function SignUp() {
                             <>
                                 <div id="account-type-title">Account Type: {accountType}</div>
                                 <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter new username" className="input-field" />
-                                {usernameError && <div className="error-message">{usernameError}</div>} /* only shows spacing between text boxes for the error message if there is an error */
+                                {usernameError && <div className="error-message">{usernameError}</div>}
                                 <input type="email" value={email} onChange={handleEmailChange} placeholder="Enter email address" className="input-field" />
                                 {emailError && <div className="error-message">{emailError}</div>}
                                 <input type="password" value={password} onChange={handlePasswordChange} placeholder="Enter new password" className="input-field" />
