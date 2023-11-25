@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './Settings.less';
 import Logo from '../../assets/casmm_logo.png';
-import { getAllUsers, updateEmail, updateUsername, updatePassword } from '../../Utils/requests';
+import { getAllUsers, updateEmail, updateUsername, updatePassword, getAllStudents } from '../../Utils/requests';
 import { message, Modal, Input, Button, Form } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import DeleteButton from './DeleteButton';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
+import Select from 'react-select'
 
-function handleMergeRequest() {
-  // called after clicking merge - code here
-  console.log("test4");
-}
 
 export default function Settings() {
   // to-do: need verification that user is not yet merged, change css of modals, verify current and new are not the same when submitting, connecting form to handle functions
@@ -29,6 +26,8 @@ export default function Settings() {
   const[newPassword1, setNewPassword1] = useState(""); // Holds user's input of new password
   const[newPassword2, setNewPassword2] = useState(""); // Holds user's input of new password for confirming new password
   const[newEmail, setNewEmail] = useState(""); // Holds user's input of new email
+  const[allStudents, setAllStudents] = useState("") // Holds all students from db for merge feature
+  const[studentToMerge, setStudentToMerge] = useState("")
 
   const allUsers = getAllUsers();
 
@@ -281,13 +280,46 @@ export default function Settings() {
     setIsEmailModalOpen(false);
   };
 
+  function handleMergeRequest() {
+    // called after clicking merge - code here
+    console.log("test4");
+
+    // make collections
+
+  }
+
   const showMergeModal = () => {
     // click merge button
+
+    // Get all students for dropdown
+    getAllStudents().then((result) => {
+      const allNames = [];
+
+      for (var i = 0; i < result.data.length; i++) { // populate allNames with response
+
+        var name = result.data[i].name;
+        name += " | ";
+        name += result.data[i].classroom.name;
+
+        var value = {id: result.data[i].id, name: result.data[i].name}
+        var obj = {value: value, label: name};
+        allNames.push(obj);
+      }
+
+      // Sort names in alphabetical order
+      allNames.sort((a, b) => a.label > b.label ? 1 : -1);
+
+      // Set all students vector
+      setAllStudents(allNames);
+
+    });
 
     setIsMergeModalOpen(true);
   };
   
   const handleMergeOk = () => {
+    // Called when user presses merge accounts button
+
     handleMergeRequest();
     setIsMergeModalOpen(false);
   };
@@ -295,7 +327,16 @@ export default function Settings() {
   const handleMergeCancel = () => {
     // close merge modal
     
+    setStudentToMerge("") // CLear selected student state
+
     setIsMergeModalOpen(false);
+  };
+
+  const handleSelectedStudentChange = (selectedOption) => {
+    // Called when user selects a student from the dropdown
+
+    setStudentToMerge(selectedOption); // Update who the selected student is
+
   };
 
   return (
@@ -390,9 +431,11 @@ export default function Settings() {
       </Modal>
 
       <Modal title="Merging Personal and Organizational Accounts" open={isMergeModalOpen} onOk={handleMergeOk} onCancel={handleMergeCancel} footer={[
-         <Button key="redirect" onClick={handleMergeRequest} type="primary">Redirect to Login</Button>
+         <Button key="redirect" onClick={handleMergeRequest} type="primary">Merge Accounts</Button>
       ]} destroyOnClose={true}>
-       <p> To merge accounts, click the button below to be redirected to the login page. You will be prompted to login to the account you want to link. </p>
+       <p> To merge your account to a student account, please first select the student account you want to be merged to from the dropdown. </p>
+       <p>Once your account is merged with a student account, they will be linked in the database! </p>
+       <Select options={allStudents} onChange={handleSelectedStudentChange} />
       </Modal>
 
       <div id='main-settings-header'>User Settings</div>
