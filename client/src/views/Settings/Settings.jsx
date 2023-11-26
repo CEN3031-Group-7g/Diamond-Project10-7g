@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Settings.less';
 import Logo from '../../assets/casmm_logo.png';
-import { getAllUsers, updateEmail, updateUsername, updatePassword, getAllStudents, mergeAccounts, getAllMergedAccounts } from '../../Utils/requests';
+import { getAllUsers, updateEmail, updateUsername, updatePassword, getAllStudents, mergeAccounts, getAllMergedAccounts, deleteMerge } from '../../Utils/requests';
 import { message, Modal, Input, Button, Form } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ export default function Settings() {
   const [isPassModalOpen, setIsPassModalOpen] = useState(false);
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   const [isMergeModalOpen, setIsMergeModalOpen] = useState(false);
+  const [isUnMergeModalOpen, setIsUnMergeModalOpen] = useState(false);
 
 
   const [password, setPassword] = useState(""); // Holds user's input of password before updating anything.
@@ -38,7 +39,6 @@ export default function Settings() {
   useEffect(()=>{ // Get if user is merged
     getAllMergedAccounts().then((response) => {
       for (let i = 0; i < response.data.length; i++) {
-        console.log(response.data[i])
         if (user.username == response.data[i].username) {
           // Set merged state variables.
           setUserIsMerged(true);
@@ -308,7 +308,6 @@ export default function Settings() {
 
   function handleMergeRequest() {
     // called after clicking merge - code here
-    console.log("test4");
 
 
 
@@ -405,13 +404,37 @@ export default function Settings() {
   const handleSelectedStudentChange = (selectedOption) => {
     // Called when user selects a student from the dropdown
 
-    console.log(selectedOption);
     setStudentToMerge(selectedOption); // Update who the selected student is
 
   };
 
   const handleSelectedEmojiChange = (selectedOption) => {
     setSelectedEmoji(selectedOption);
+  }
+
+  const showUnMergeModal = () => {
+    setIsUnMergeModalOpen(true);
+
+  }
+
+  const handleUnMergeOk = () => {
+    getAllMergedAccounts().then((response) => {
+      for (let i = 0; i < response.data.length; i++) {
+        if (user.username == response.data[i].username) {
+          deleteMerge(response.data[i].id).then((response) => {
+            message.success("Accounts successfully unlinked");
+            setUserIsMerged(false);
+            setMergedWith("");
+            setIsUnMergeModalOpen(false);
+          })
+        }
+      }
+    });
+
+  }
+
+  const handleUnMergeCancel = () => {
+    setIsUnMergeModalOpen(false);
   }
 
   return (
@@ -516,6 +539,13 @@ export default function Settings() {
        <Select options={emojiList} onChange={handleSelectedEmojiChange}/>
       </Modal>
 
+      <Modal title="Unmerge Account" open={isUnMergeModalOpen} onOk={handleUnMergeOk} onCancel={handleUnMergeCancel} footer={[
+        <Button key="redirect" onClick={handleUnMergeOk} type="primary">Unmerge Accounts</Button>
+      ]} destroyOnClose={true}>
+        <p>You are about to unmerge your account from the student account.</p>
+        <p>Please press the Unmerge Accounts button to continue.</p>
+      </Modal>
+
       <div id='main-settings-header'>User Settings</div>
       <div id="settings-parent">
         <div id='settings-container'>
@@ -541,7 +571,7 @@ export default function Settings() {
               <button id="settings-button-1" onClick={showUserModal}>Change Username</button>
               <button id="settings-button-2" onClick={showPassModal}>Change Password</button>
               <button id="settings-button-3" onClick={showEmailModal}>Change Email</button>
-              {!userIsMerged ? <button id="settings-button-4" onClick={showMergeModal}>Merge</button> : <div id="settings-alreadyMerged">Account merged with {mergedWith}</div> }
+              {!userIsMerged ? <button id="settings-button-4" onClick={showMergeModal}>Merge</button> : <div id="settings-alreadyMerged" onClick={showUnMergeModal}>Account merged with {mergedWith}</div> }
             </div>
             
           </div>

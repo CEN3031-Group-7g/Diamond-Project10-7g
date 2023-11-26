@@ -763,4 +763,12 @@ export const mergeAccounts = async (newusername, newstudent, newstudentID, newcl
       path: `${server}/merged-accounts`,
       auth: false,
       error: "Error getting merged accounts!",
-    });
+  });
+
+  export const deleteMerge = async (id) =>
+    makeRequest({
+      method: DELETE,
+      path: `${server}/merged-accounts/${id}`,
+      auth: true,
+      error: "Error removing merge"
+  });
