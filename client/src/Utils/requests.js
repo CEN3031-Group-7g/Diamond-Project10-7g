@@ -742,3 +742,25 @@ export const updatePassword = async (id, newPassword) =>
      auth: true,
      error: 'Error updating password',
   });
+
+export const mergeAccounts = async (newusername, newstudent, newstudentID, newclassroom) =>
+    makeRequest({
+      method: POST,
+      path: `${server}/merged-accounts`,
+      data: {
+        username: newusername,
+        student: newstudent,
+        studentID: newstudentID,
+        classroom: newclassroom
+      },
+      auth: false,
+      error: 'Error merging accounts',
+  });
+
+  export const getAllMergedAccounts = async () => 
+    makeRequest({
+      method: GET,
+      path: `${server}/merged-accounts`,
+      auth: false,
+      error: "Error getting merged accounts!",
+    });

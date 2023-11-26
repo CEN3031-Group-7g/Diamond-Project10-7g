@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Settings.less';
 import Logo from '../../assets/casmm_logo.png';
-import { getAllUsers, updateEmail, updateUsername, updatePassword, getAllStudents } from '../../Utils/requests';
+import { getAllUsers, updateEmail, updateUsername, updatePassword, getAllStudents, mergeAccounts, getAllMergedAccounts } from '../../Utils/requests';
 import { message, Modal, Input, Button, Form } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
@@ -27,9 +27,35 @@ export default function Settings() {
   const[newPassword2, setNewPassword2] = useState(""); // Holds user's input of new password for confirming new password
   const[newEmail, setNewEmail] = useState(""); // Holds user's input of new email
   const[allStudents, setAllStudents] = useState("") // Holds all students from db for merge feature
-  const[studentToMerge, setStudentToMerge] = useState("")
+  const[studentToMerge, setStudentToMerge] = useState("") // Holds student user wants to merge with in dropdown
+  const[userIsMerged, setUserIsMerged] = useState(false); // Holds boolean if user is merged or not
+  const[mergedWith, setMergedWith] = useState("") // Holds name of student who user is merged with
+  const[emojiList, setEmojiList] = useState("") // Holds all emojis of students in the dropdown
+  const[selectedEmoji, setSelectedEmoji] = useState(""); // Holds the selected emoji
 
   const allUsers = getAllUsers();
+
+  useEffect(()=>{ // Get if user is merged
+    getAllMergedAccounts().then((response) => {
+      for (let i = 0; i < response.data.length; i++) {
+        console.log(response.data[i])
+        if (user.username == response.data[i].username) {
+          // Set merged state variables.
+          setUserIsMerged(true);
+          setMergedWith(response.data[i].student);
+        }
+      }
+    });
+    getAllStudents().then((response) => {
+        const obj = [];
+        for (let i = 0; i < response.data.length; i++) {
+          obj.push({value: response.data[i].character, label: response.data[i].character});
+        }
+        setEmojiList(obj);
+    });
+  }, []) 
+
+
 
   const showUserModal = () => {
     // Opens modal for change username button
@@ -284,7 +310,17 @@ export default function Settings() {
     // called after clicking merge - code here
     console.log("test4");
 
-    // make collections
+
+
+    // Make call to merge request
+    let studentId = '';
+    studentId += studentToMerge.value.id;
+    mergeAccounts(user.username, studentToMerge.value.name, studentId, studentToMerge.value.classroom).then((result) => {
+      message.success("Successfully merged " + user.username + " to " + studentToMerge.value.name + "!");
+      setUserIsMerged(true);
+      setMergedWith(studentToMerge.value.name)
+      setStudentToMerge("");
+    });
 
   }
 
@@ -301,7 +337,7 @@ export default function Settings() {
         name += " | ";
         name += result.data[i].classroom.name;
 
-        var value = {id: result.data[i].id, name: result.data[i].name}
+        var value = {id: result.data[i].id, name: result.data[i].name, classroom: result.data[i].classroom.name}
         var obj = {value: value, label: name};
         allNames.push(obj);
       }
@@ -320,14 +356,48 @@ export default function Settings() {
   const handleMergeOk = () => {
     // Called when user presses merge accounts button
 
-    handleMergeRequest();
-    setIsMergeModalOpen(false);
+
+    // Make sure that the user has selected something
+    if (studentToMerge == "") { // if didnt select anything, display error message
+      message.error("Please select an account to merge with!");
+      return;
+    }
+    if (selectedEmoji == "") {
+      message.error("Please select an emoji!");
+      return;
+    }
+
+    let correctEmoji = false;
+    getAllStudents().then((result) => {
+      for(let i = 0; i < result.data.length; i++) {
+
+        if (result.data[i].name == studentToMerge.value.name) {
+          if (selectedEmoji.label == result.data[i].character) {
+            correctEmoji = true;
+          }
+          else {
+            message.error("Emoji does not match the student!");
+            correctEmoji = false;
+          }
+        }
+      }
+
+      if (correctEmoji) {
+        handleMergeRequest();
+        setIsMergeModalOpen(false);
+      }
+  
+      
+    });
+
+
   };
   
   const handleMergeCancel = () => {
     // close merge modal
     
-    setStudentToMerge("") // CLear selected student state
+    setStudentToMerge("") // Clear selected student state
+    setSelectedEmoji("") // Clear selected emoji
 
     setIsMergeModalOpen(false);
   };
@@ -335,9 +405,14 @@ export default function Settings() {
   const handleSelectedStudentChange = (selectedOption) => {
     // Called when user selects a student from the dropdown
 
+    console.log(selectedOption);
     setStudentToMerge(selectedOption); // Update who the selected student is
 
   };
+
+  const handleSelectedEmojiChange = (selectedOption) => {
+    setSelectedEmoji(selectedOption);
+  }
 
   return (
     <div className='container nav-padding'>
@@ -429,13 +504,16 @@ export default function Settings() {
           </Form.Item>
         </Form>  
       </Modal>
-
+      
       <Modal title="Merging Personal and Organizational Accounts" open={isMergeModalOpen} onOk={handleMergeOk} onCancel={handleMergeCancel} footer={[
-         <Button key="redirect" onClick={handleMergeRequest} type="primary">Merge Accounts</Button>
+         <Button key="redirect" onClick={handleMergeOk} type="primary">Merge Accounts</Button>
       ]} destroyOnClose={true}>
        <p> To merge your account to a student account, please first select the student account you want to be merged to from the dropdown. </p>
        <p>Once your account is merged with a student account, they will be linked in the database! </p>
        <Select options={allStudents} onChange={handleSelectedStudentChange} />
+       <br></br>
+       <p>Select the student's associated emoji</p>
+       <Select options={emojiList} onChange={handleSelectedEmojiChange}/>
       </Modal>
 
       <div id='main-settings-header'>User Settings</div>
@@ -463,7 +541,7 @@ export default function Settings() {
               <button id="settings-button-1" onClick={showUserModal}>Change Username</button>
               <button id="settings-button-2" onClick={showPassModal}>Change Password</button>
               <button id="settings-button-3" onClick={showEmailModal}>Change Email</button>
-              <button id="settings-button-4" onClick={showMergeModal}>Merge</button>
+              {!userIsMerged ? <button id="settings-button-4" onClick={showMergeModal}>Merge</button> : <div id="settings-alreadyMerged">Account merged with {mergedWith}</div> }
             </div>
             
           </div>
