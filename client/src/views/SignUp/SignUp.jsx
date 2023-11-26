@@ -10,23 +10,25 @@ import { addPersonalUser, getPersonalUsers } from "../../Utils/requests"
 
 export default function SignUp() {
     const [accountType, setAccountType] = useState('');
+    const [showDropdown, setShowDropdown] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
     let dupUsername = false;
     let dupEmail = false;
 
-    const handleButtonClick = (type) => {
-        setAccountType(type);
+    const handleAccountTypeChange = (e) => {
+        setAccountType(e.target.value);
     };
 
-    //input validation (still needs to incorporate back-end database for complete input validation ex: username/email already exists)
-
+    // Input Validation
     const validateEmail = (email) => {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
@@ -60,10 +62,15 @@ export default function SignUp() {
         setPassword(e.target.value);
     };
 
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+    };
+
     const handleContinueClick = async () => {
         // Initially clear all error messages
         setEmailError('');
         setPasswordError('');
+        setConfirmPasswordError('');
 
         let isValid = true;
 
@@ -79,13 +86,12 @@ export default function SignUp() {
             isValid = false;
         }
 
-        /*
-        Validate username
-        if(!validateUsername(username)){
-            setUsernameError('Username already exists');
+        // Validate confirm password
+        if (password !== confirmPassword) {
+            setConfirmPasswordError('Passwords do not match.');
             isValid = false;
         }
-        */
+
 
         // Ensure no duplicate usernames
         await checkDuplicate(username, email);
@@ -132,28 +138,29 @@ export default function SignUp() {
             <div className="container">
                 <div id="content-wrapper">
                     <div id="signup-box">
-                        {!accountType && (
-                            <>
-                                <div id="signup-title">Please select your account type</div>
-                                <button type="button" onClick={() => handleButtonClick('Personal')}>Personal</button>
-                                <button type="button" onClick={() => handleButtonClick('Organizational')}>Organizational</button>
-                            </>
-                        )}
-                        {(accountType === 'Personal' || accountType === 'Organizational') && (
-                            <>
-                                <div id="account-type-title">Account Type: {accountType}</div>
-                                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter new username" className="input-field" />
-                                {usernameError && <div className="error-message">{usernameError}</div>}
-                                <input type="email" value={email} onChange={handleEmailChange} placeholder="Enter email address" className="input-field" />
-                                {emailError && <div className="error-message">{emailError}</div>}
-                                <input type="password" value={password} onChange={handlePasswordChange} placeholder="Enter new password" className="input-field" />
-                                {passwordError && <div className="error-message">{passwordError}</div>}
-                                <button type="button" onClick={handleContinueClick}>Continue</button>
-                                <u id='request-admin' onClick={() => navigate('/AdminSignUp')}>
-                                    Requesting an administrator account?
-                                </u>
-                            </>
-                        )}
+                    <div id="signup-title">Create An Account: </div>
+                        <select
+                            value={accountType}
+                            onChange={handleAccountTypeChange}
+                            className="input-field"
+                        >
+                            <option value="" disabled>Select Account Type</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Organizational">Organizational</option>
+                        </select>
+
+                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter new username" className="input-field" />
+                        {usernameError && <div className="error-message">{usernameError}</div>}
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email address" className="input-field" />
+                        {emailError && <div className="error-message">{emailError}</div>}
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter new password" className="input-field" />
+                        {passwordError && <div className="error-message">{passwordError}</div>}
+                        <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm new password" className="input-field" />
+                        {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
+                        <button type="button" onClick={handleContinueClick}>Continue</button>
+                        <u id='request-admin' onClick={() => navigate('/AdminSignUp')}>
+                            Requesting an administrator account?
+                        </u>
                     </div>
                 </div>
             </div>
