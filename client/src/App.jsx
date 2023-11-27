@@ -31,7 +31,7 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<PublicRoute><Home /></PublicRoute>} />
         <Route path='/about' element={<About />} />
         <Route path='/teacherlogin' element={<PublicRoute><TeacherLogin /></PublicRoute>} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
@@ -44,18 +44,20 @@ const App = () => {
         <Route
           path='/report'
           element={
-            <RedirectCheck role="Researcher">
               <PrivateRoute>
-                <Report />
+                <RedirectCheck role="Researcher">
+                  <Report />
+                </RedirectCheck>
               </PrivateRoute>
-            </RedirectCheck>
           }
         />
         <Route
           path='/activityLevel'
           element={
             <PrivateRoute>
-              <ActivityLevelReport />
+              <RedirectCheck role="Researcher">
+                <ActivityLevelReport />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
@@ -71,9 +73,9 @@ const App = () => {
           path='/delete'
           element = {
             <PrivateRoute>
-            <RedirectCheck deleteattempt="true">
+              <RedirectCheck deleteattempt="true">
                 <Delete />
-            </RedirectCheck>
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
@@ -81,7 +83,9 @@ const App = () => {
           path='/activityLevel/:id'
           element={
             <PrivateRoute>
-              <ActivityLevelReportView />
+              <RedirectCheck role="Researcher">
+                <ActivityLevelReportView />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
@@ -89,7 +93,9 @@ const App = () => {
           path='/group-report'
           element={
             <PrivateRoute>
-              <GroupReport />
+              <RedirectCheck role="Researcher">
+                <GroupReport />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
@@ -117,7 +123,9 @@ const App = () => {
           path='/classroom/:id'
           element={
             <PrivateRoute>
-              <Classroom />
+              <RedirectCheck role="Mentor">
+                <Classroom />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
@@ -125,7 +133,9 @@ const App = () => {
           path='/workspace'
           element={
             <PrivateRoute>
-              <BlocklyPage isSandbox={false} />
+              <RedirectCheck role="Student">
+                <BlocklyPage isSandbox={false} />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
@@ -133,7 +143,9 @@ const App = () => {
           path='/activity'
           element={
             <PrivateRoute>
-              <BlocklyPage isSandbox={false} />
+              <RedirectCheck role="Student">
+                <BlocklyPage isSandbox={false} />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
