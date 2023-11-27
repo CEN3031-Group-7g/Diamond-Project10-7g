@@ -25,9 +25,13 @@ export default function SignUp() {
     let dupUsername = false;
     let dupEmail = false;
 
+
+    //used for dropdown menu
+    /*
     const handleAccountTypeChange = (e) => {
         setAccountType(e.target.value);
     };
+    */
 
     
 
@@ -153,17 +157,7 @@ export default function SignUp() {
             <div className="container">
                 <div id="content-wrapper">
                     <div id="signup-box">
-                    <div id="signup-title">Create An Account: </div>
-                        <select
-                            value={accountType}
-                            onChange={handleAccountTypeChange}
-                            className="input-field"
-                        >
-                            <option value="" disabled>Select Account Type</option>
-                            <option value="Personal">Personal</option>
-                            <option value="Organizational">Organizational</option>
-                        </select>
-
+                        <div id="signup-title">Create An Account: </div>
                         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter new username" className="input-field" />
                         {usernameError && <div className="error-message">{usernameError}</div>}
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email address" className="input-field" />
@@ -177,10 +171,8 @@ export default function SignUp() {
                         {passwordError && <div className="error-message">{passwordError}</div>}
                         <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm new password" className="input-field" />
                         {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
-                        <div className="button-container">
-                            <button type="button" onClick={handleBackClick} className="action-button">Back</button>
-                            <button type="button" onClick={handleContinueClick} className="action-button">Continue</button>
-                        </div>
+                        <button type="button" onClick={handleContinueClick} className="action-button">Continue</button>
+                        <button type="button" onClick={handleBackClick} className="action-button">Back</button>
                         <u id='request-admin' onClick={() => navigate('/AdminSignUp')}>
                             Requesting an administrator account?
                         </u>
@@ -191,3 +183,17 @@ export default function SignUp() {
         </div>
     );
 }
+
+
+//dropdown menu if needed later to choose b/w personal and org accounts
+/*
+                        <select
+                            value={accountType}
+                            onChange={handleAccountTypeChange}
+                            className="input-field"
+                        >
+                            <option value="" disabled>Select Account Type</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Organizational">Organizational</option>
+                        </select>
+*/
