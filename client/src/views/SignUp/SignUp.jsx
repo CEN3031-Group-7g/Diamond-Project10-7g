@@ -77,6 +77,10 @@ export default function SignUp() {
         setConfirmPassword(e.target.value);
     };
 
+    const handleBackClick = () => {
+        navigate('/teacherlogin');
+    };
+
     const handleContinueClick = async () => {
         // Initially clear all error messages
         setEmailError('');
@@ -173,7 +177,10 @@ export default function SignUp() {
                         {passwordError && <div className="error-message">{passwordError}</div>}
                         <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm new password" className="input-field" />
                         {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
-                        <button type="button" onClick={handleContinueClick}>Continue</button>
+                        <div className="button-container">
+                            <button type="button" onClick={handleBackClick} className="action-button">Back</button>
+                            <button type="button" onClick={handleContinueClick} className="action-button">Continue</button>
+                        </div>
                         <u id='request-admin' onClick={() => navigate('/AdminSignUp')}>
                             Requesting an administrator account?
                         </u>

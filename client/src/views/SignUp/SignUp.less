@@ -16,6 +16,7 @@
 }
 
 #signup-box {
+  position: relative;
   width: 300px;
   padding: 40px 20px;
   background-color: #colors[tertiary];
@@ -43,12 +44,14 @@
   border-radius: 8px;
   transition: 0.25s;
   display: block;
+        
 }
 
 #signup-box .input-field:focus {
   width: 220px;
 }
 
+/*
 #signup-box button {
   background: darken(#colors[tertiary], 30%);
   width: 80%;
@@ -70,6 +73,38 @@
     background-color: #colors[quinary];
     color: #colors[text-primary];
   }
+        
+}
+ */
+
+.action-button {
+  background: darken(#colors[tertiary], 30%);
+  width: 60%;
+  display: inline-block;
+  margin: 10px;
+  border: 2px solid;
+  border-color: #colors[secondary];
+  padding: 14px 20px;
+  outline: none;
+  color: #colors[text-primary];
+  background-color: #colors[quaternary];
+  font-size: 1.2em;
+  font-weight: 500;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.25s;
+
+  &:hover {
+    background-color: #colors[quinary];
+    color: #colors[text-primary];
+  }
+        
+}
+
+.button-container {
+    
+    text-align: center;
+        
 }
 
 #request-admin {
@@ -90,8 +125,8 @@
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   width: 250px;
-  left: 260px;
-  top: 510px;
+  left: -260px;
+  top: 310px;
   font-size: 1em;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
 }
@@ -108,6 +143,9 @@
   margin-right: auto;
 }
 
+
+
+//success modal
 .modal {
   display: none;
   position: fixed;
