@@ -6,7 +6,7 @@ import { setUserSession } from '../../Utils/AuthRequests';
 import { message } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
-import { addPersonalUser, getPersonalUsers } from "../../Utils/requests"
+import { updateRole, addUser, getAllUsers } from "../../Utils/requests"
 
 export default function SignUp() {
     const [accountType, setAccountType] = useState('');
@@ -43,12 +43,13 @@ export default function SignUp() {
     };
 
     const checkDuplicate = async (username, email) => {
-        const res = await getPersonalUsers();
+        const res = await getAllUsers();
         if(res.data){
-            const personalUsers = res.data;
+            const users = res.data;
             dupUsername = false;
             dupEmail = false;
-            personalUsers.forEach((user) => {
+            users.forEach((user) => {
+                console.log(user.username + " " + user.email);
                 if(user.username === username)
                     dupUsername = true;
                 if(user.email === email)
@@ -122,7 +123,7 @@ export default function SignUp() {
         // If both email, username, and password are valid, continue
         if (isValid) {
             // Add account to the database
-            const res = await addPersonalUser(username, email, password);
+            const res = await addUser(username, email, password);
             if(res.data)
                 setShowSuccessModal(true);
         }
