@@ -17,6 +17,7 @@ export default function SignUp() {
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [showPasswordTooltip, setShowPasswordTooltip] = useState(false);
     const [confirmPassword, setConfirmPassword] = useState('');
     const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -27,6 +28,8 @@ export default function SignUp() {
     const handleAccountTypeChange = (e) => {
         setAccountType(e.target.value);
     };
+
+    
 
     // Input Validation
     const validateEmail = (email) => {
@@ -60,6 +63,14 @@ export default function SignUp() {
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
+    };
+
+    const handlePasswordFocus = () => {
+        setShowPasswordTooltip(true);
+    };
+
+    const handlePasswordBlur = () => {
+        setShowPasswordTooltip(false);
     };
 
     const handleConfirmPasswordChange = (e) => {
@@ -153,7 +164,12 @@ export default function SignUp() {
                         {usernameError && <div className="error-message">{usernameError}</div>}
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email address" className="input-field" />
                         {emailError && <div className="error-message">{emailError}</div>}
-                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter new password" className="input-field" />
+                        <input type="password" value={password} onChange={handlePasswordChange} onFocus={handlePasswordFocus} onBlur={handlePasswordBlur} placeholder="Enter new password" className="input-field" />
+                        {showPasswordTooltip && (
+                            <div className="password-tooltip">
+                                Password must be at least 8 characters long and include at least one letter, one number, and one special character.
+                            </div>
+                        )}
                         {passwordError && <div className="error-message">{passwordError}</div>}
                         <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm new password" className="input-field" />
                         {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
