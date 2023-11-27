@@ -65,7 +65,9 @@ const App = () => {
           path='/settings'
           element = {
             <PrivateRoute>
-              <Settings />
+              <RedirectCheck deleteattempt="true">
+                <Settings />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
