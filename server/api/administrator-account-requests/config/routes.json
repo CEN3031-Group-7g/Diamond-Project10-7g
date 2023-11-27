@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/administrator-account-requests",
+      "handler": "administrator-account-requests.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/administrator-account-requests/count",
+      "handler": "administrator-account-requests.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/administrator-account-requests/:id",
+      "handler": "administrator-account-requests.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/administrator-account-requests",
+      "handler": "administrator-account-requests.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/administrator-account-requests/:id",
+      "handler": "administrator-account-requests.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/administrator-account-requests/:id",
+      "handler": "administrator-account-requests.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
