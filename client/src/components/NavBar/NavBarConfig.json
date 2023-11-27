@@ -25,6 +25,7 @@
       "SignOut",
       "BugReport"
     ],
-    "Researcher": ["ResearcherDashboard", "BugReport", "Settings", "SignOut"]
+    "Researcher": ["ResearcherDashboard", "BugReport", "Settings", "SignOut"],
+    "PersonalUser" : ["Sandbox", "BugReport", "Settings, SignOut"]
   }
 }

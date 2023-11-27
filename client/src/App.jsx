@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
+import PublicRoute from './Utils/PublicRoute';
+import RedirectCheck from './Utils/RedirectCheck';
 import About from './views/About/About';
 import BlocklyPage from './views/BlocklyPage/BlocklyPage';
 import BugReport from './views/BugReport/BugReport';
@@ -31,20 +33,22 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/teacherlogin' element={<TeacherLogin />} />
+        <Route path='/teacherlogin' element={<PublicRoute><TeacherLogin /></PublicRoute>} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/login' element={<StudentLogin />} />
+        <Route path='/login' element={<PublicRoute><StudentLogin /></PublicRoute>} />
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
-        <Route path='/signup' element={<SignUp />} />
-        <Route path='/adminsignup' element={<AdminSignUp />} />
+        <Route path='/signup' element={<PublicRoute><SignUp /></PublicRoute>} />
+        <Route path='/adminsignup' element={<PublicRoute><AdminSignUp /></PublicRoute>} />
         <Route
           path='/report'
           element={
-            <PrivateRoute>
-              <Report />
-            </PrivateRoute>
+            <RedirectCheck role="Researcher">
+              <PrivateRoute>
+                <Report />
+              </PrivateRoute>
+            </RedirectCheck>
           }
         />
         <Route
@@ -58,13 +62,19 @@ const App = () => {
         <Route
           path='/settings'
           element = {
-            <Settings />
+            <PrivateRoute>
+              <Settings />
+            </PrivateRoute>
           }
         />
         <Route
           path='/delete'
           element = {
-            <Delete />
+            <PrivateRoute>
+            <RedirectCheck deleteattempt="true">
+                <Delete />
+            </RedirectCheck>
+            </PrivateRoute>
           }
         />
         <Route
@@ -85,9 +95,11 @@ const App = () => {
         />
         <Route
           path='/dashboard'
-          element={
+          element={     
             <PrivateRoute>
-              <Dashboard />
+              <RedirectCheck role="Mentor">
+                <Dashboard />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
@@ -95,7 +107,9 @@ const App = () => {
           path='/student'
           element={
             <PrivateRoute>
-              <Student />
+              <RedirectCheck role="Student">
+                <Student />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
@@ -127,7 +141,9 @@ const App = () => {
           path='/ccdashboard'
           element={
             <PrivateRoute>
-              <ContentCreator />
+              <RedirectCheck role="ContentCreator">
+                <ContentCreator />
+              </RedirectCheck>
             </PrivateRoute>
           }
         />
