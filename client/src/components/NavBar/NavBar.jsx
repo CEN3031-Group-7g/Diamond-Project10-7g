@@ -93,25 +93,23 @@ export default function NavBar() {
           &nbsp; Report a Bug
         </Menu.Item>
       ) : null}
-     
+      {shouldShowRoute('Settings') ? (
+        <Menu.Item key='8' onClick={() => handleRouteChange(routes.Settings)}>
+          <i className='fa fa-cog' />
+          &nbsp; User Settings
+        </Menu.Item>
+      ) : null}
       {shouldShowRoute('SignOut') ? (
-        <Menu.Item key='8' onClick={() => handleLogout()}>
+        <Menu.Item key='9' onClick={() => handleLogout()}>
           <i className='fa fa-sign-out-alt' />
           &nbsp; Sign Out
         </Menu.Item>
       ) : null}
       {shouldShowRoute('SignUp') ? (
-        <Menu.Item key="9" onClick={() => handleRouteChange(routes.SignUp)}>
+        <Menu.Item key="10" onClick={() => handleRouteChange(routes.SignUp)}>
           <i class="fa fa-user-plus" />
             &nbsp; Sign Up
         </Menu.Item> 
-      ) : null}
-
-      {shouldShowRoute('Settings') ? (
-        <Menu.Item key='10' onClick={() => handleRouteChange(routes.Settings)}>
-          <i className='fa fa-cog' />
-          &nbsp; User Settings
-        </Menu.Item>
       ) : null}
     </Menu>
   );
@@ -125,6 +123,8 @@ export default function NavBar() {
             ? '/ccdashboard'
             : value.role === 'Mentor'
             ? '/dashboard'
+            : value.role === 'Personal'
+            ? '/student'
             : value.role === 'Student'
             ? '/student'
             : value.role === 'Researcher'

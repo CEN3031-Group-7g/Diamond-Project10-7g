@@ -7,11 +7,21 @@ import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import DeleteButton from './DeleteButton';
 import { postUser, setUserSession } from '../../Utils/AuthRequests';
+import { useGlobalState } from '../../Utils/userState';
 import Select from 'react-select'
 
 
 export default function Settings() {
-  // to-do: need verification that user is not yet merged, change css of modals, verify current and new are not the same when submitting, connecting form to handle functions
+  const [value] = useGlobalState('currUser');
+  const [isPersonalAccount, setPersonalAccount] = useState(false);
+
+  useEffect(() => {
+    if (value.role === "Personal") {
+      setPersonalAccount(true);
+    }
+  }, []);
+  
+
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
@@ -552,7 +562,7 @@ export default function Settings() {
           <div id='settings-information-container'>
             <div id='settings-header'>General Settings</div>
             <div id='display-account-info'>
-              Account Type: {user.role.name}
+              Account Type:  {value.role}
             </div>
             <div id='display-account-sensitive'>
             <p>Username: {user.username} </p>
@@ -563,7 +573,7 @@ export default function Settings() {
             Email Addresss: {user.email}
             </div>
             <div id='display-account-info' >
-            Merge Organizational to Personal Account
+              {isPersonalAccount ? "Merge Organizational to Personal Account" : null}
             </div>
           </div>
 
@@ -571,7 +581,17 @@ export default function Settings() {
               <button id="settings-button-1" onClick={showUserModal}>Change Username</button>
               <button id="settings-button-2" onClick={showPassModal}>Change Password</button>
               <button id="settings-button-3" onClick={showEmailModal}>Change Email</button>
-              {!userIsMerged ? <button id="settings-button-4" onClick={showMergeModal}>Merge</button> : <div id="settings-alreadyMerged" onClick={showUnMergeModal}>Account merged with {mergedWith}</div> }
+              {isPersonalAccount ? (
+                userIsMerged ? (
+                  <div id="settings-alreadyMerged" onClick={showUnMergeModal}>
+                    Account merged with {mergedWith}
+                  </div>
+                ) : (
+                  <button id="settings-button-4" onClick={showMergeModal}>
+                    Merge
+                  </button>
+                )
+              ) : null}
             </div>
             
           </div>
