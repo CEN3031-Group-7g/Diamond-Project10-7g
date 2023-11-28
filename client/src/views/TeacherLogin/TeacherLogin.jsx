@@ -36,7 +36,7 @@ export default function TeacherLogin() {
           } else if (response.data.user.role.name === 'Researcher') {
               navigate('/report');
           } else if (response.data.user.role.name === 'Personal') {
-              navigate('/settings');
+              navigate('/sandbox');
           } else if (response.data.user.role.name === 'Admin') {
               navigate('');
         } else {

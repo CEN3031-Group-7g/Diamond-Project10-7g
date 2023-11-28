@@ -96,11 +96,9 @@ export default function SignUp() {
                 } else if (response.data.user.role.name === 'Researcher') {
                     navigate('/report');
                 } else if (response.data.user.role.name === 'Personal') {
-                    navigate('/dashboard');
+                    navigate('/sandbox');
                 } else if (response.data.user.role.name === 'Admin') {
-                    navigate('/dashboard');
-                } else if (response.data.user.role.name === 'Classroom Manager') {
-                    navigate('/dashboard');
+                    navigate('/');
                 } else {
                     navigate('/dashboard');
                 }
