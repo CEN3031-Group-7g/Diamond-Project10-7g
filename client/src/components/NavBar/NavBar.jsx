@@ -100,9 +100,13 @@ export default function NavBar() {
           &nbsp; Sign Out
         </Menu.Item>
       ) : null}
-      <Menu.Item key="9" onClick={() => handleRouteChange(routes.SignUp)}>
-        Sign Up
-      </Menu.Item> 
+      {shouldShowRoute('SignUp') ? (
+        <Menu.Item key="9" onClick={() => handleRouteChange(routes.SignUp)}>
+          <i class="fa fa-user-plus" />
+            &nbsp; Sign Up
+        </Menu.Item> 
+      ) : null}
+
       {shouldShowRoute('Settings') ? (
         <Menu.Item key='10' onClick={() => handleRouteChange(routes.Settings)}>
           <i className='fa fa-cog' />

@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "merged_accounts",
+  "info": {
+    "name": "merged accounts"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "username": {
+      "type": "string"
+    },
+    "student": {
+      "type": "string"
+    },
+    "studentID": {
+      "type": "string"
+    },
+    "classroom": {
+      "type": "string"
+    }
+  }
+}
