@@ -1,12 +1,12 @@
 {
   "paths": {
-    "/personal-users": {
+    "/administrator-account-requests": {
       "get": {
         "deprecated": false,
-        "description": "Find all the personal-users's records",
+        "description": "Find all the administrator-account-requests's records",
         "responses": {
           "200": {
-            "description": "Retrieve personal-users document(s)",
+            "description": "Retrieve administrator-account-requests document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Personal-users"
+          "Administrator-account-requests"
         ],
         "parameters": [
           {
@@ -195,10 +195,10 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new personal-users record",
+        "description": "Create a new administrator-account-requests record",
         "responses": {
           "200": {
-            "description": "Retrieve personal-users document(s)",
+            "description": "Retrieve administrator-account-requests document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Personal-users"
+          "Administrator-account-requests"
         ],
         "requestBody": {
           "description": "",
@@ -252,20 +252,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPersonal-users"
+                "$ref": "#/components/schemas/NewAdministrator-account-requests"
               }
             }
           }
         }
       }
     },
-    "/personal-users/count": {
+    "/administrator-account-requests/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the number of personal-users documents",
+        "description": "Retrieve the number of administrator-account-requests documents",
         "responses": {
           "200": {
-            "description": "Retrieve personal-users document(s)",
+            "description": "Retrieve administrator-account-requests document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -311,18 +311,18 @@
         },
         "summary": "",
         "tags": [
-          "Personal-users"
+          "Administrator-account-requests"
         ],
         "parameters": []
       }
     },
-    "/personal-users/{id}": {
+    "/administrator-account-requests/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one personal-users record",
+        "description": "Find one administrator-account-requests record",
         "responses": {
           "200": {
-            "description": "Retrieve personal-users document(s)",
+            "description": "Retrieve administrator-account-requests document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -368,7 +368,7 @@
         },
         "summary": "",
         "tags": [
-          "Personal-users"
+          "Administrator-account-requests"
         ],
         "parameters": [
           {
@@ -385,10 +385,10 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single personal-users record",
+        "description": "Update a single administrator-account-requests record",
         "responses": {
           "200": {
-            "description": "Retrieve personal-users document(s)",
+            "description": "Retrieve administrator-account-requests document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -434,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Personal-users"
+          "Administrator-account-requests"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPersonal-users"
+                "$ref": "#/components/schemas/NewAdministrator-account-requests"
               }
             }
           }
@@ -462,10 +462,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single personal-users record",
+        "description": "Delete a single administrator-account-requests record",
         "responses": {
           "200": {
-            "description": "deletes a single personal-users based on the ID supplied",
+            "description": "deletes a single administrator-account-requests based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -508,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Personal-users"
+          "Administrator-account-requests"
         ],
         "parameters": [
           {
@@ -527,7 +527,7 @@
   },
   "components": {
     "schemas": {
-      "Personal-users": {
+      "Administrator-account-requests": {
         "required": [
           "id"
         ],
@@ -535,15 +535,16 @@
           "id": {
             "type": "string"
           },
-          "username": {
+          "Admin_email": {
             "type": "string"
           },
-          "email": {
-            "type": "string"
-          },
-          "password": {
+          "approval_status": {
             "type": "string",
-            "format": "password"
+            "enum": [
+              "awaiting_review",
+              "approved",
+              "denied"
+            ]
           },
           "published_at": {
             "type": "string",
@@ -551,17 +552,18 @@
           }
         }
       },
-      "NewPersonal-users": {
+      "NewAdministrator-account-requests": {
         "properties": {
-          "username": {
+          "Admin_email": {
             "type": "string"
           },
-          "email": {
-            "type": "string"
-          },
-          "password": {
+          "approval_status": {
             "type": "string",
-            "format": "password"
+            "enum": [
+              "awaiting_review",
+              "approved",
+              "denied"
+            ]
           },
           "published_at": {
             "type": "string",

@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "personal_users",
+  "collectionName": "merged_accounts",
   "info": {
-    "name": "Personal Users",
-    "description": ""
+    "name": "merged accounts"
   },
   "options": {
     "increments": true,
@@ -14,11 +13,14 @@
     "username": {
       "type": "string"
     },
-    "email": {
-      "type": "email"
+    "student": {
+      "type": "string"
     },
-    "password": {
-      "type": "password"
+    "studentID": {
+      "type": "string"
+    },
+    "classroom": {
+      "type": "string"
     }
   }
 }

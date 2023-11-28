@@ -330,27 +330,6 @@ export const deleteStudent = async (student) =>
     error: 'Failed to delete student.',
   });
 
-export const addPersonalUser = async (username, email, password) =>
-    makeRequest({
-        method: POST,
-        path: `${server}/personal-users`,
-        data: {
-            username: username,
-            email: email,
-            password: password,
-        },
-        auth: false,
-        error: 'Failed to add personal account.',
-    });
-
-export const getPersonalUsers = async () =>
-    makeRequest({
-        method: GET,
-        path: `${server}/personal-users`,
-        auth: false,
-        error: 'Failed to retrieve submission status',
-    });
-
 export const updateActivityLevelTemplate = async (id, workspace, blocksList) =>
   makeRequest({
     method: PUT,
@@ -706,9 +685,54 @@ export const getAllUsers = async () =>
   makeRequest({
     method: GET,
     path: `${server}/users`,
-    auth: true,
+    auth: false,
     error: 'Error getting users',
   });
+
+export const addUser = async (username, email, password) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/auth/local/register`,
+        data: {
+            username: username,
+            email: email,
+            password: password,
+        },
+        auth: false,
+        error: 'Failed to add user.',
+    });
+
+export const updateRole = async (id, newRole) =>
+    makeRequest({
+        method: PUT,
+        path: `${server}/users/${id}`,
+        data: {
+            role: newRole
+        },
+        auth: true,
+        error: 'Error updating role',
+    });
+
+export const addPersonalUser = async (username, email, password) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/personal-users`,
+        data: {
+            username: username,
+            email: email,
+            password: password,
+        },
+        auth: false,
+        error: 'Failed to add personal account.',
+    });
+
+export const getPersonalUsers = async () =>
+    makeRequest({
+        method: GET,
+        path: `${server}/personal-users`,
+        auth: false,
+        error: 'Failed to retrieve submission status',
+    });
 
 export const updateUsername = async (id, newUsername) =>
   makeRequest({
@@ -742,3 +766,53 @@ export const updatePassword = async (id, newPassword) =>
      auth: true,
      error: 'Error updating password',
   });
+
+export const mergeAccounts = async (newusername, newstudent, newstudentID, newclassroom) =>
+    makeRequest({
+      method: POST,
+      path: `${server}/merged-accounts`,
+      data: {
+        username: newusername,
+        student: newstudent,
+        studentID: newstudentID,
+        classroom: newclassroom
+      },
+      auth: false,
+      error: 'Error merging accounts',
+  });
+
+  export const getAllMergedAccounts = async () => 
+    makeRequest({
+      method: GET,
+      path: `${server}/merged-accounts`,
+      auth: false,
+      error: "Error getting merged accounts!",
+  });
+
+  export const deleteMerge = async (id) =>
+    makeRequest({
+      method: DELETE,
+      path: `${server}/merged-accounts/${id}`,
+      auth: true,
+      error: "Error removing merge"
+  });
+
+export const addAdministratorAccountRequest = async (adminEmail) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/administrator-account-requests`,
+        data: {
+            Admin_email: adminEmail,
+            approval_status: 'awaiting_review',
+        },
+        auth: false,
+        error: 'Error adding administrator account request.',
+    });
+
+export const getAdminRequests = async () =>
+    makeRequest({
+        method: GET,
+        path: `${server}/administrator-account-requests`,
+        auth: false,
+        error: 'Failed to retrieve admin account requests.',
+    });
