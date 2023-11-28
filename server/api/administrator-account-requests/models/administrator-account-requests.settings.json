@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "administrator_account_requests",
+  "info": {
+    "name": "Administrator Account Requests",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Admin_email": {
+      "type": "email"
+    },
+    "approval_status": {
+      "type": "enumeration",
+      "enum": [
+        "awaiting_review",
+        "approved",
+        "denied"
+      ]
+    }
+  }
+}
