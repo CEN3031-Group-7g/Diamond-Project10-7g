@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/merged-accounts",
+      "handler": "merged-accounts.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/merged-accounts/count",
+      "handler": "merged-accounts.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/merged-accounts/:id",
+      "handler": "merged-accounts.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/merged-accounts",
+      "handler": "merged-accounts.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/merged-accounts/:id",
+      "handler": "merged-accounts.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/merged-accounts/:id",
+      "handler": "merged-accounts.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
