@@ -772,3 +772,23 @@ export const mergeAccounts = async (newusername, newstudent, newstudentID, newcl
       auth: true,
       error: "Error removing merge"
   });
+
+export const addAdministratorAccountRequest = async (adminEmail) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/administrator-account-requests`,
+        data: {
+            Admin_email: adminEmail,
+            approval_status: 'awaiting_review',
+        },
+        auth: false,
+        error: 'Error adding administrator account request.',
+    });
+
+export const getAdminRequests = async () =>
+    makeRequest({
+        method: GET,
+        path: `${server}/administrator-account-requests`,
+        auth: false,
+        error: 'Failed to retrieve admin account requests.',
+    });
