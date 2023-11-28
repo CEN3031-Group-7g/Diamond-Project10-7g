@@ -19,7 +19,7 @@ export default function Settings() {
   const [isPersonalAccount, setPersonalAccount] = useState(false);
 
   useEffect(() => {
-    if (value.role === "PersonalUser") {
+    if (value.role === "Personal") {
       setPersonalAccount(true);
     }
   }, []);

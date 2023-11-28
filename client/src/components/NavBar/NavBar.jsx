@@ -123,7 +123,7 @@ export default function NavBar() {
             ? '/ccdashboard'
             : value.role === 'Mentor'
             ? '/dashboard'
-            : value.role === 'PersonalUser'
+            : value.role === 'Personal'
             ? '/student'
             : value.role === 'Student'
             ? '/student'

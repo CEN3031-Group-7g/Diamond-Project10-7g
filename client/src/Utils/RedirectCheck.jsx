@@ -14,7 +14,7 @@ function RedirectCheck({ children, role, deleteattempt }) {
             return children;
         }
     }
-    if (role != value.role && role === 'Student' && value.role === 'PersonalUser' || role == value.role) {
+    if (role === 'Student' && value.role === 'Personal' || role == value.role) {
         return children;
     }
     else {
@@ -30,7 +30,7 @@ function RedirectCheck({ children, role, deleteattempt }) {
         else if (value.role === 'Researcher') {
             return <Navigate to='/report'/> 
         }
-        else if (value.role === 'PersonalUser') {
+        else if (value.role === 'Personal') {
             return <Navigate to='/student'/>
         }
     }
