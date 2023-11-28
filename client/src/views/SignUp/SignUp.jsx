@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './SignUp.less';
 import Logo from '../../assets/casmm_logo.png';
 import { getStudents, postJoin } from '../../Utils/requests';
-import { setUserSession } from '../../Utils/AuthRequests';
+import {postUser, setUserSession} from '../../Utils/AuthRequests';
 import { message } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
@@ -53,7 +53,6 @@ export default function SignUp() {
             dupUsername = false;
             dupEmail = false;
             users.forEach((user) => {
-                console.log(user.username + " " + user.email);
                 if(user.username === username)
                     dupUsername = true;
                 if(user.email === email)
@@ -84,6 +83,31 @@ export default function SignUp() {
 
     const handleBackClick = () => {
         navigate('/teacherlogin');
+    };
+
+    const handleLogin = (email, password) => {
+        let body = { identifier: email, password: password };
+
+        postUser(body)
+            .then((response) => {
+                setUserSession(response.data.jwt, JSON.stringify(response.data.user));
+                if (response.data.user.role.name === 'Content Creator') {
+                    navigate('/ccdashboard');
+                } else if (response.data.user.role.name === 'Researcher') {
+                    navigate('/report');
+                } else if (response.data.user.role.name === 'Personal') {
+                    navigate('/dashboard');
+                } else if (response.data.user.role.name === 'Admin') {
+                    navigate('/dashboard');
+                } else if (response.data.user.role.name === 'Classroom Manager') {
+                    navigate('/dashboard');
+                } else {
+                    navigate('/dashboard');
+                }
+            })
+            .catch((error) => {
+                message.error('Login failed. Please input a valid email and password.');
+            });
     };
 
     const handleContinueClick = async () => {
@@ -130,6 +154,10 @@ export default function SignUp() {
             const res = await addUser(username, email, password);
             if(res.data)
                 setShowSuccessModal(true);
+
+            //Log the new user in
+            handleLogin(email, password);
+
         }
     };
 
