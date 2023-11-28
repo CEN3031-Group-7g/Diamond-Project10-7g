@@ -2,31 +2,40 @@ import React, { useState, useEffect } from 'react';
 import './SignUp.less';
 import Logo from '../../assets/casmm_logo.png';
 import { getStudents, postJoin } from '../../Utils/requests';
-import { setUserSession } from '../../Utils/AuthRequests';
+import {postUser, setUserSession} from '../../Utils/AuthRequests';
 import { message } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
-import { addPersonalUser, getPersonalUsers } from "../../Utils/requests"
+import { updateRole, addUser, getAllUsers } from "../../Utils/requests"
 
 export default function SignUp() {
     const [accountType, setAccountType] = useState('');
+    const [showDropdown, setShowDropdown] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    const [showPasswordTooltip, setShowPasswordTooltip] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const navigate = useNavigate();
     let dupUsername = false;
     let dupEmail = false;
 
-    const handleButtonClick = (type) => {
-        setAccountType(type);
+
+    //used for dropdown menu
+    /*
+    const handleAccountTypeChange = (e) => {
+        setAccountType(e.target.value);
     };
+    */
 
-    //input validation (still needs to incorporate back-end database for complete input validation ex: username/email already exists)
+    
 
+    // Input Validation
     const validateEmail = (email) => {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
@@ -38,12 +47,12 @@ export default function SignUp() {
     };
 
     const checkDuplicate = async (username, email) => {
-        const res = await getPersonalUsers();
+        const res = await getAllUsers();
         if(res.data){
-            const personalUsers = res.data;
+            const users = res.data;
             dupUsername = false;
             dupEmail = false;
-            personalUsers.forEach((user) => {
+            users.forEach((user) => {
                 if(user.username === username)
                     dupUsername = true;
                 if(user.email === email)
@@ -60,10 +69,50 @@ export default function SignUp() {
         setPassword(e.target.value);
     };
 
+    const handlePasswordFocus = () => {
+        setShowPasswordTooltip(true);
+    };
+
+    const handlePasswordBlur = () => {
+        setShowPasswordTooltip(false);
+    };
+
+    const handleConfirmPasswordChange = (e) => {
+        setConfirmPassword(e.target.value);
+    };
+
+    const handleBackClick = () => {
+        navigate('/teacherlogin');
+    };
+
+    const handleLogin = (email, password) => {
+        let body = { identifier: email, password: password };
+
+        postUser(body)
+            .then((response) => {
+                setUserSession(response.data.jwt, JSON.stringify(response.data.user));
+                if (response.data.user.role.name === 'Content Creator') {
+                    navigate('/ccdashboard');
+                } else if (response.data.user.role.name === 'Researcher') {
+                    navigate('/report');
+                } else if (response.data.user.role.name === 'Personal') {
+                    navigate('/sandbox');
+                } else if (response.data.user.role.name === 'Admin') {
+                    navigate('/');
+                } else {
+                    navigate('/dashboard');
+                }
+            })
+            .catch((error) => {
+                message.error('Login failed. Please input a valid email and password.');
+            });
+    };
+
     const handleContinueClick = async () => {
         // Initially clear all error messages
         setEmailError('');
         setPasswordError('');
+        setConfirmPasswordError('');
 
         let isValid = true;
 
@@ -79,13 +128,12 @@ export default function SignUp() {
             isValid = false;
         }
 
-        /*
-        Validate username
-        if(!validateUsername(username)){
-            setUsernameError('Username already exists');
+        // Validate confirm password
+        if (password !== confirmPassword) {
+            setConfirmPasswordError('Passwords do not match.');
             isValid = false;
         }
-        */
+
 
         // Ensure no duplicate usernames
         await checkDuplicate(username, email);
@@ -101,9 +149,13 @@ export default function SignUp() {
         // If both email, username, and password are valid, continue
         if (isValid) {
             // Add account to the database
-            const res = await addPersonalUser(username, email, password);
+            const res = await addUser(username, email, password);
             if(res.data)
                 setShowSuccessModal(true);
+
+            //Log the new user in
+            handleLogin(email, password);
+
         }
     };
 
@@ -132,28 +184,25 @@ export default function SignUp() {
             <div className="container">
                 <div id="content-wrapper">
                     <div id="signup-box">
-                        {!accountType && (
-                            <>
-                                <div id="signup-title">Please select your account type</div>
-                                <button type="button" onClick={() => handleButtonClick('Personal')}>Personal</button>
-                                <button type="button" onClick={() => handleButtonClick('Organizational')}>Organizational</button>
-                            </>
+                        <div id="signup-title">Create An Account: </div>
+                        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter new username" className="input-field" />
+                        {usernameError && <div className="error-message">{usernameError}</div>}
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email address" className="input-field" />
+                        {emailError && <div className="error-message">{emailError}</div>}
+                        <input type="password" value={password} onChange={handlePasswordChange} onFocus={handlePasswordFocus} onBlur={handlePasswordBlur} placeholder="Enter new password" className="input-field" />
+                        {showPasswordTooltip && (
+                            <div className="password-tooltip">
+                                Password must be at least 8 characters long and include at least one letter, one number, and one special character.
+                            </div>
                         )}
-                        {(accountType === 'Personal' || accountType === 'Organizational') && (
-                            <>
-                                <div id="account-type-title">Account Type: {accountType}</div>
-                                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter new username" className="input-field" />
-                                {usernameError && <div className="error-message">{usernameError}</div>}
-                                <input type="email" value={email} onChange={handleEmailChange} placeholder="Enter email address" className="input-field" />
-                                {emailError && <div className="error-message">{emailError}</div>}
-                                <input type="password" value={password} onChange={handlePasswordChange} placeholder="Enter new password" className="input-field" />
-                                {passwordError && <div className="error-message">{passwordError}</div>}
-                                <button type="button" onClick={handleContinueClick}>Continue</button>
-                                <u id='request-admin' onClick={() => navigate('/AdminSignUp')}>
-                                    Requesting an administrator account?
-                                </u>
-                            </>
-                        )}
+                        {passwordError && <div className="error-message">{passwordError}</div>}
+                        <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm new password" className="input-field" />
+                        {confirmPasswordError && <div className="error-message">{confirmPasswordError}</div>}
+                        <button type="button" onClick={handleContinueClick} className="action-button">Continue</button>
+                        <button type="button" onClick={handleBackClick} className="action-button">Back</button>
+                        <u id='request-admin' onClick={() => navigate('/AdminSignUp')}>
+                            Requesting an administrator account?
+                        </u>
                     </div>
                 </div>
             </div>
@@ -161,3 +210,17 @@ export default function SignUp() {
         </div>
     );
 }
+
+
+//dropdown menu if needed later to choose b/w personal and org accounts
+/*
+                        <select
+                            value={accountType}
+                            onChange={handleAccountTypeChange}
+                            className="input-field"
+                        >
+                            <option value="" disabled>Select Account Type</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Organizational">Organizational</option>
+                        </select>
+*/

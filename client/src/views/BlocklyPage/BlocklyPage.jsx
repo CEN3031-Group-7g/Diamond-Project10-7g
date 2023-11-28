@@ -21,7 +21,7 @@ export default function BlocklyPage({ isSandbox }) {
       const sandboxActivity = JSON.parse(localStorage.getItem("sandbox-activity"))
       if (isSandbox) {
         const AllToolboxRes = await getActivityToolboxAll()
-        if (!sandboxActivity?.id || value.role === "Mentor") {
+        if (!sandboxActivity?.id || value.role === "Mentor" || value.role === "Personal") {
           if (AllToolboxRes.data) {
             let loadedActivity = {
               ...sandboxActivity,
@@ -32,7 +32,8 @@ export default function BlocklyPage({ isSandbox }) {
           } else {
             message.error(AllToolboxRes.err)
           }
-        } else if (value.role === "ContentCreator") {
+        }
+        else if (value.role === "ContentCreator") {
           const res = await getAuthorizedWorkspaceToolbox(sandboxActivity.id)
           if (res.data) {
             let loadedActivity = { ...sandboxActivity, selectedToolbox: res.data.toolbox }

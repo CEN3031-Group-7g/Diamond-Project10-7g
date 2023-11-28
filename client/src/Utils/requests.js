@@ -330,27 +330,6 @@ export const deleteStudent = async (student) =>
     error: 'Failed to delete student.',
   });
 
-export const addPersonalUser = async (username, email, password) =>
-    makeRequest({
-        method: POST,
-        path: `${server}/personal-users`,
-        data: {
-            username: username,
-            email: email,
-            password: password,
-        },
-        auth: false,
-        error: 'Failed to add personal account.',
-    });
-
-export const getPersonalUsers = async () =>
-    makeRequest({
-        method: GET,
-        path: `${server}/personal-users`,
-        auth: false,
-        error: 'Failed to retrieve submission status',
-    });
-
 export const updateActivityLevelTemplate = async (id, workspace, blocksList) =>
   makeRequest({
     method: PUT,
@@ -706,9 +685,54 @@ export const getAllUsers = async () =>
   makeRequest({
     method: GET,
     path: `${server}/users`,
-    auth: true,
+    auth: false,
     error: 'Error getting users',
   });
+
+export const addUser = async (username, email, password) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/auth/local/register`,
+        data: {
+            username: username,
+            email: email,
+            password: password,
+        },
+        auth: false,
+        error: 'Failed to add user.',
+    });
+
+export const updateRole = async (id, newRole) =>
+    makeRequest({
+        method: PUT,
+        path: `${server}/users/${id}`,
+        data: {
+            role: newRole
+        },
+        auth: true,
+        error: 'Error updating role',
+    });
+
+export const addPersonalUser = async (username, email, password) =>
+    makeRequest({
+        method: POST,
+        path: `${server}/personal-users`,
+        data: {
+            username: username,
+            email: email,
+            password: password,
+        },
+        auth: false,
+        error: 'Failed to add personal account.',
+    });
+
+export const getPersonalUsers = async () =>
+    makeRequest({
+        method: GET,
+        path: `${server}/personal-users`,
+        auth: false,
+        error: 'Failed to retrieve submission status',
+    });
 
 export const updateUsername = async (id, newUsername) =>
   makeRequest({
