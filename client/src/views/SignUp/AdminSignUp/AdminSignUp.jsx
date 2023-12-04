@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './AdminSignUp.less';
-import { setUserSession } from '../../../Utils/AuthRequests';
-import { message } from 'antd';
 import NavBar from '../../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
 import { addAdministratorAccountRequest } from '../../../Utils/requests';
@@ -49,7 +47,6 @@ export default function AdminSignUp() {
             const adminRequestInfo = res.data;
             dupRequest = false;
             adminRequestInfo.forEach((entry) => {
-                console.log(entry.Admin_email);
                 if (entry.Admin_email === email) {
                     if (entry.approval_status === 'awaiting_review') {
                         dupRequest = true;
@@ -76,7 +73,6 @@ export default function AdminSignUp() {
     };
 
     const handleContinueClick = async () => {
-        console.log('did it work?');
         // Initially clear all error messages
         setEmailError('');
         setPasswordError('');
@@ -106,14 +102,6 @@ export default function AdminSignUp() {
             isValid = false;
         }
 
-        /*
-        Validate username
-        if(!validateUsername(username)){
-            setUsernameError('Username already exists');
-            isValid = false;
-        }
-        */
-
         // Validate password
         if (!validateOrgName(orgName)) {
             setOrgError('Organization name required.');
@@ -122,7 +110,6 @@ export default function AdminSignUp() {
 
         // If email, username, password, and org name are valid, continue
         if (isValid) {
-            console.log('it worked!');
             const res = await addAdministratorAccountRequest(email);
             if (res.data) {
                 const emailAddress = 'superadmin@mail.com';
