@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Settings.less';
-import Logo from '../../assets/casmm_logo.png';
 import { getAllUsers, updateEmail, updateUsername, updatePassword, getAllStudents, mergeAccounts, getAllMergedAccounts, deleteMerge } from '../../Utils/requests';
 import { message, Modal, Input, Button, Form } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
@@ -359,7 +358,7 @@ export default function Settings() {
 
     });
 
-    setIsMergeModalOpen(true);
+    setIsMergeModalOpen(true); // Open modal
   };
   
   const handleMergeOk = () => {
@@ -378,9 +377,9 @@ export default function Settings() {
 
     let correctEmoji = false;
     getAllStudents().then((result) => {
-      for(let i = 0; i < result.data.length; i++) {
+      for(let i = 0; i < result.data.length; i++) { // Check emoji against student
 
-        if (result.data[i].name == studentToMerge.value.name) {
+        if (result.data[i].name == studentToMerge.value.name) { // Emojis have to match
           if (selectedEmoji.label == result.data[i].character) {
             correctEmoji = true;
           }
@@ -391,9 +390,9 @@ export default function Settings() {
         }
       }
 
-      if (correctEmoji) {
-        handleMergeRequest();
-        setIsMergeModalOpen(false);
+      if (correctEmoji) { // Corect emoji selected
+        handleMergeRequest(); // Merge
+        setIsMergeModalOpen(false); // Close modal
       }
   
       
