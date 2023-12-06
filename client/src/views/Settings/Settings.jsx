@@ -12,11 +12,11 @@ import Select from 'react-select'
 
 export default function Settings() {
   const [value] = useGlobalState('currUser');
-  const [isPersonalAccount, setPersonalAccount] = useState(false);
+  const [isPersonalAccount, setIsPersonalAccount] = useState(false);
 
   useEffect(() => {
     if (value.role === "Personal") {
-      setPersonalAccount(true);
+      setIsPersonalAccount(true);
     }
   }, []);
   
@@ -47,18 +47,18 @@ export default function Settings() {
 
   useEffect(()=>{ // Get if user is merged
     getAllMergedAccounts().then((response) => {
-      for (let i = 0; i < response.data.length; i++) {
-        if (user.username == response.data[i].username) {
+      for (let i of response.data) {
+        if (user.username == i.username) {
           // Set merged state variables.
           setUserIsMerged(true);
-          setMergedWith(response.data[i].student);
+          setMergedWith(i.student);
         }
       }
     });
     getAllStudents().then((response) => {
         const obj = [];
-        for (let i = 0; i < response.data.length; i++) {
-          obj.push({value: response.data[i].character, label: response.data[i].character});
+        for (let i of response.data) {
+          obj.push({value: i.character, label: i.character});
         }
         setEmojiList(obj);
     });
@@ -125,8 +125,8 @@ export default function Settings() {
           getAllUsers().then((result) => { // Gets all usernames in db
             const users = result.data;
             
-            for (var i = 0; i < users.length; i++) {
-              if (users[i].username == newUsername) { // Loop through username to find a match
+            for (let i of users) {
+              if (i.username == newUsername) { // Loop through username to find a match
                 message.error("That username is taken!");
                 goodUsername = false;
               }
@@ -275,13 +275,13 @@ export default function Settings() {
           
           // Check if email is not taken by getting all users and comparing new email to all user's email
 
-          var goodUsername = true;
+          let goodUsername = true;
 
           getAllUsers().then((result) => {
             const users = result.data;
             
-            for (var i = 0; i < users.length; i++) {
-              if (users[i].email == newEmail) {
+            for (let i of users) {
+              if (i.email == newEmail) {
                 message.error("That email is already registered to an account!");
                 goodUsername = false;
               }
@@ -339,14 +339,14 @@ export default function Settings() {
     getAllStudents().then((result) => {
       const allNames = [];
 
-      for (var i = 0; i < result.data.length; i++) { // populate allNames with response
+      for (let i of result.data) { // populate allNames with response
 
-        var name = result.data[i].name;
+        let name = i.name;
         name += " | ";
-        name += result.data[i].classroom.name;
+        name += i.classroom.name;
 
-        var value = {id: result.data[i].id, name: result.data[i].name, classroom: result.data[i].classroom.name}
-        var obj = {value: value, label: name};
+        let value = {id: i.id, name: i.name, classroom: i.classroom.name}
+        let obj = {value: value, label: name};
         allNames.push(obj);
       }
 
@@ -377,10 +377,10 @@ export default function Settings() {
 
     let correctEmoji = false;
     getAllStudents().then((result) => {
-      for(let i = 0; i < result.data.length; i++) { // Check emoji against student
+      for(let i of result.data) { // Check emoji against student
 
-        if (result.data[i].name == studentToMerge.value.name) { // Emojis have to match
-          if (selectedEmoji.label == result.data[i].character) {
+        if (i.name == studentToMerge.value.name) { // Emojis have to match
+          if (selectedEmoji.label == i.character) {
             correctEmoji = true;
           }
           else {
@@ -428,9 +428,9 @@ export default function Settings() {
 
   const handleUnMergeOk = () => {
     getAllMergedAccounts().then((response) => {
-      for (let i = 0; i < response.data.length; i++) {
-        if (user.username == response.data[i].username) {
-          deleteMerge(response.data[i].id).then((response) => {
+      for (let i of response.data) {
+        if (user.username == i.username) {
+          deleteMerge(i.id).then((response) => {
             message.success("Accounts successfully unlinked");
             setUserIsMerged(false);
             setMergedWith("");
@@ -582,7 +582,7 @@ export default function Settings() {
               <button id="settings-button-3" onClick={showEmailModal}>Change Email</button>
               {isPersonalAccount ? (
                 userIsMerged ? (
-                  <div id="settings-alreadyMerged" onClick={showUnMergeModal}>
+                  <div id="settings-alreadyMerged" onClick={showUnMergeModal} onKeyDown={showUnMergeModal}>
                     Account merged with {mergedWith}
                   </div>
                 ) : (
