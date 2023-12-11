@@ -11,7 +11,9 @@ const BlocklyCanvasPanel = ({ activity, isSandbox, setActivity }) => {
   const userRole = value.role;
 
   switch (userRole) {
-    case 'DefaultUser', 'Personal':
+    case 'Personal':
+      return <PublicCanvas activity={activity} isSandbox={isSandbox} />;
+    case 'DefaultUser':
       return <PublicCanvas activity={activity} isSandbox={isSandbox} />;
     case 'Student':
       return <StudentCanvas activity={activity} />;

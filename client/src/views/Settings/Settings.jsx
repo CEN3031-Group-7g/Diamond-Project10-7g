@@ -582,9 +582,9 @@ export default function Settings() {
               <button id="settings-button-3" onClick={showEmailModal}>Change Email</button>
               {isPersonalAccount ? (
                 userIsMerged ? (
-                  <div id="settings-alreadyMerged" role="button" onClick={showUnMergeModal} onKeyDown={showUnMergeModal}>
+                  <button id="settings-alreadyMerged" onClick={showUnMergeModal} onKeyDown={showUnMergeModal}>
                     Account merged with {mergedWith}
-                  </div>
+                  </button>
                 ) : (
                   <button id="settings-button-4" onClick={showMergeModal}>
                     Merge

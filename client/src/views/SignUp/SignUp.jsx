@@ -6,11 +6,11 @@ import {postUser, setUserSession} from '../../Utils/AuthRequests';
 import { message } from 'antd';
 import NavBar from '../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
-import { updateRole, addUser, getAllUsers } from "../../Utils/requests"
+import { addUser, getAllUsers } from "../../Utils/requests"
 
 export default function SignUp() {
     const [accountType, setAccountType] = useState('');
-    const [showDropdown, setShowDropdown] = useState(false);
+   
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -25,13 +25,6 @@ export default function SignUp() {
     let dupUsername = false;
     let dupEmail = false;
 
-
-    //used for dropdown menu
-    /*
-    const handleAccountTypeChange = (e) => {
-        setAccountType(e.target.value);
-    };
-    */
 
     
 
@@ -75,10 +68,6 @@ export default function SignUp() {
 
     const handlePasswordBlur = () => {
         setShowPasswordTooltip(false);
-    };
-
-    const handleConfirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value);
     };
 
     const handleBackClick = () => {

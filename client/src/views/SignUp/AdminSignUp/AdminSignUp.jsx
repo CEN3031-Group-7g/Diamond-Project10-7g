@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import './AdminSignUp.less';
 import NavBar from '../../../components/NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
-import { addAdministratorAccountRequest } from '../../../Utils/requests';
-import { getAdminRequests } from '../../../Utils/requests';
+import { addAdministratorAccountRequest, getAdminRequests } from '../../../Utils/requests';
 
 export default function AdminSignUp() {
     const [email, setEmail] = useState('');
