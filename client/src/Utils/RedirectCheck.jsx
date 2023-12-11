@@ -33,8 +33,8 @@ function RedirectCheck({ children, role, deleteattempt }) {
     else if (value.role === 'Personal') {
         return <Navigate to='/student'/>
     }
-    }
-  RedirectCheck.PropTypes = {
+}
+  RedirectCheck.propTypes = {
     children: PropTypes.object,
     role: PropTypes.string,
     deleteattempt: PropTypes.string,
