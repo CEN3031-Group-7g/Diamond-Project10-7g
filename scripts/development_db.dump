@@ -2,30 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.4 (Debian 15.4-1.pgdg120+1)
--- Dumped by pg_dump version 15.4 (Debian 15.4-1.pgdg120+1)
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: strapi; Type: DATABASE; Schema: -; Owner: postgres
---
-
-CREATE DATABASE strapi WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
-
-
-ALTER DATABASE strapi OWNER TO postgres;
-
-\connect strapi
+-- Dumped from database version 16.0 (Debian 16.0-1.pgdg120+1)
+-- Dumped by pg_dump version 16.0 (Debian 16.0-1.pgdg120+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -91,7 +69,7 @@ CREATE SEQUENCE public.activities__blocks_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.activities__blocks_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.activities__blocks_id_seq OWNER TO postgres;
 
 --
 -- Name: activities__blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -113,7 +91,7 @@ CREATE SEQUENCE public.activities_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.activities_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.activities_id_seq OWNER TO postgres;
 
 --
 -- Name: activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -148,13 +126,53 @@ CREATE SEQUENCE public.activities_learning_components__learning_components_activ
     CACHE 1;
 
 
-ALTER TABLE public.activities_learning_components__learning_components_activities_ OWNER TO postgres;
+ALTER SEQUENCE public.activities_learning_components__learning_components_activities_ OWNER TO postgres;
 
 --
 -- Name: activities_learning_components__learning_components_activities_; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.activities_learning_components__learning_components_activities_ OWNED BY public.activities_learning_components__learning_components_activities.id;
+
+
+--
+-- Name: administrator_account_requests; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.administrator_account_requests (
+    id integer NOT NULL,
+    "Admin_email" character varying(255),
+    approval_status character varying(255),
+    published_at timestamp with time zone,
+    created_by integer,
+    updated_by integer,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.administrator_account_requests OWNER TO postgres;
+
+--
+-- Name: administrator_account_requests_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.administrator_account_requests_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.administrator_account_requests_id_seq OWNER TO postgres;
+
+--
+-- Name: administrator_account_requests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.administrator_account_requests_id_seq OWNED BY public.administrator_account_requests.id;
 
 
 --
@@ -203,7 +221,7 @@ CREATE SEQUENCE public.authorized_workspaces__blocks_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.authorized_workspaces__blocks_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.authorized_workspaces__blocks_id_seq OWNER TO postgres;
 
 --
 -- Name: authorized_workspaces__blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -225,7 +243,7 @@ CREATE SEQUENCE public.authorized_workspaces_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.authorized_workspaces_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.authorized_workspaces_id_seq OWNER TO postgres;
 
 --
 -- Name: authorized_workspaces_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -265,7 +283,7 @@ CREATE SEQUENCE public.block_images_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.block_images_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.block_images_id_seq OWNER TO postgres;
 
 --
 -- Name: block_images_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -323,7 +341,7 @@ CREATE SEQUENCE public.blocks_categories_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.blocks_categories_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.blocks_categories_id_seq OWNER TO postgres;
 
 --
 -- Name: blocks_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -345,7 +363,7 @@ CREATE SEQUENCE public.blocks_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.blocks_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.blocks_id_seq OWNER TO postgres;
 
 --
 -- Name: blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -383,7 +401,7 @@ CREATE SEQUENCE public.challenges_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.challenges_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.challenges_id_seq OWNER TO postgres;
 
 --
 -- Name: challenges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -438,7 +456,7 @@ CREATE SEQUENCE public.classrooms__authorized_workspaces_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.classrooms__authorized_workspaces_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.classrooms__authorized_workspaces_id_seq OWNER TO postgres;
 
 --
 -- Name: classrooms__authorized_workspaces_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -460,7 +478,7 @@ CREATE SEQUENCE public.classrooms_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.classrooms_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.classrooms_id_seq OWNER TO postgres;
 
 --
 -- Name: classrooms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -495,7 +513,7 @@ CREATE SEQUENCE public.classrooms_mentors__mentors_classrooms_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.classrooms_mentors__mentors_classrooms_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.classrooms_mentors__mentors_classrooms_id_seq OWNER TO postgres;
 
 --
 -- Name: classrooms_mentors__mentors_classrooms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -530,7 +548,7 @@ CREATE SEQUENCE public.classrooms_teachers__teachers_classrooms_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.classrooms_teachers__teachers_classrooms_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.classrooms_teachers__teachers_classrooms_id_seq OWNER TO postgres;
 
 --
 -- Name: classrooms_teachers__teachers_classrooms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -568,7 +586,7 @@ CREATE SEQUENCE public.core_store_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.core_store_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.core_store_id_seq OWNER TO postgres;
 
 --
 -- Name: core_store_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -606,7 +624,7 @@ CREATE SEQUENCE public.grades_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.grades_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.grades_id_seq OWNER TO postgres;
 
 --
 -- Name: grades_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -645,7 +663,7 @@ CREATE SEQUENCE public.learning_component_types_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.learning_component_types_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.learning_component_types_id_seq OWNER TO postgres;
 
 --
 -- Name: learning_component_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -685,7 +703,7 @@ CREATE SEQUENCE public.learning_components_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.learning_components_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.learning_components_id_seq OWNER TO postgres;
 
 --
 -- Name: learning_components_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -728,7 +746,7 @@ CREATE SEQUENCE public.lesson_modules_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.lesson_modules_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.lesson_modules_id_seq OWNER TO postgres;
 
 --
 -- Name: lesson_modules_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -769,13 +787,55 @@ CREATE SEQUENCE public.mentors_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.mentors_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.mentors_id_seq OWNER TO postgres;
 
 --
 -- Name: mentors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.mentors_id_seq OWNED BY public.mentors.id;
+
+
+--
+-- Name: merged_accounts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.merged_accounts (
+    id integer NOT NULL,
+    username character varying(255),
+    student character varying(255),
+    "studentID" character varying(255),
+    classroom character varying(255),
+    published_at timestamp with time zone,
+    created_by integer,
+    updated_by integer,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ALTER TABLE public.merged_accounts OWNER TO postgres;
+
+--
+-- Name: merged_accounts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.merged_accounts_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.merged_accounts_id_seq OWNER TO postgres;
+
+--
+-- Name: merged_accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.merged_accounts_id_seq OWNED BY public.merged_accounts.id;
 
 
 --
@@ -807,7 +867,7 @@ CREATE SEQUENCE public.objective_types_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.objective_types_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.objective_types_id_seq OWNER TO postgres;
 
 --
 -- Name: objective_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -847,13 +907,55 @@ CREATE SEQUENCE public.objectives_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.objectives_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.objectives_id_seq OWNER TO postgres;
 
 --
 -- Name: objectives_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.objectives_id_seq OWNED BY public.objectives.id;
+
+
+--
+-- Name: personal_users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.personal_users (
+    id integer NOT NULL,
+    username character varying(255),
+    email character varying(255),
+    password character varying(255),
+    published_at timestamp with time zone,
+    created_by integer,
+    updated_by integer,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+    "user" integer
+);
+
+
+ALTER TABLE public.personal_users OWNER TO postgres;
+
+--
+-- Name: personal_users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.personal_users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.personal_users_id_seq OWNER TO postgres;
+
+--
+-- Name: personal_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.personal_users_id_seq OWNED BY public.personal_users.id;
 
 
 --
@@ -889,7 +991,7 @@ CREATE SEQUENCE public.saves_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.saves_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.saves_id_seq OWNER TO postgres;
 
 --
 -- Name: saves_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -929,7 +1031,7 @@ CREATE SEQUENCE public.schools_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.schools_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.schools_id_seq OWNER TO postgres;
 
 --
 -- Name: schools_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -969,7 +1071,7 @@ CREATE SEQUENCE public.selections_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.selections_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.selections_id_seq OWNER TO postgres;
 
 --
 -- Name: selections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1023,7 +1125,7 @@ CREATE SEQUENCE public.sessions__saves_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sessions__saves_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.sessions__saves_id_seq OWNER TO postgres;
 
 --
 -- Name: sessions__saves_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1045,7 +1147,7 @@ CREATE SEQUENCE public.sessions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sessions_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.sessions_id_seq OWNER TO postgres;
 
 --
 -- Name: sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1080,7 +1182,7 @@ CREATE SEQUENCE public.sessions_students__students_sessions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.sessions_students__students_sessions_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.sessions_students__students_sessions_id_seq OWNER TO postgres;
 
 --
 -- Name: sessions_students__students_sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1123,7 +1225,7 @@ CREATE SEQUENCE public.strapi_administrator_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.strapi_administrator_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.strapi_administrator_id_seq OWNER TO postgres;
 
 --
 -- Name: strapi_administrator_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1164,7 +1266,7 @@ CREATE SEQUENCE public.strapi_permission_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.strapi_permission_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.strapi_permission_id_seq OWNER TO postgres;
 
 --
 -- Name: strapi_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1202,7 +1304,7 @@ CREATE SEQUENCE public.strapi_role_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.strapi_role_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.strapi_role_id_seq OWNER TO postgres;
 
 --
 -- Name: strapi_role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1237,7 +1339,7 @@ CREATE SEQUENCE public.strapi_users_roles_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.strapi_users_roles_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.strapi_users_roles_id_seq OWNER TO postgres;
 
 --
 -- Name: strapi_users_roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1275,7 +1377,7 @@ CREATE SEQUENCE public.strapi_webhooks_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.strapi_webhooks_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.strapi_webhooks_id_seq OWNER TO postgres;
 
 --
 -- Name: strapi_webhooks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1317,7 +1419,7 @@ CREATE SEQUENCE public.students_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.students_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.students_id_seq OWNER TO postgres;
 
 --
 -- Name: students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1366,7 +1468,7 @@ CREATE SEQUENCE public.submissions_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.submissions_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.submissions_id_seq OWNER TO postgres;
 
 --
 -- Name: submissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1421,7 +1523,7 @@ CREATE SEQUENCE public.teacher_workspaces__blocks_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.teacher_workspaces__blocks_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.teacher_workspaces__blocks_id_seq OWNER TO postgres;
 
 --
 -- Name: teacher_workspaces__blocks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1443,7 +1545,7 @@ CREATE SEQUENCE public.teacher_workspaces_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.teacher_workspaces_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.teacher_workspaces_id_seq OWNER TO postgres;
 
 --
 -- Name: teacher_workspaces_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1484,7 +1586,7 @@ CREATE SEQUENCE public.teachers_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.teachers_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.teachers_id_seq OWNER TO postgres;
 
 --
 -- Name: teachers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1526,7 +1628,7 @@ CREATE SEQUENCE public.units_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.units_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.units_id_seq OWNER TO postgres;
 
 --
 -- Name: units_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1577,7 +1679,7 @@ CREATE SEQUENCE public.upload_file_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.upload_file_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.upload_file_id_seq OWNER TO postgres;
 
 --
 -- Name: upload_file_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1615,7 +1717,7 @@ CREATE SEQUENCE public.upload_file_morph_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.upload_file_morph_id_seq OWNER TO postgres;
+ALTER SEQUENCE public.upload_file_morph_id_seq OWNER TO postgres;
 
 --
 -- Name: upload_file_morph_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1656,7 +1758,7 @@ CREATE SEQUENCE public."users-permissions_permission_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."users-permissions_permission_id_seq" OWNER TO postgres;
+ALTER SEQUENCE public."users-permissions_permission_id_seq" OWNER TO postgres;
 
 --
 -- Name: users-permissions_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1694,7 +1796,7 @@ CREATE SEQUENCE public."users-permissions_role_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."users-permissions_role_id_seq" OWNER TO postgres;
+ALTER SEQUENCE public."users-permissions_role_id_seq" OWNER TO postgres;
 
 --
 -- Name: users-permissions_role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1741,7 +1843,7 @@ CREATE SEQUENCE public."users-permissions_user_id_seq"
     CACHE 1;
 
 
-ALTER TABLE public."users-permissions_user_id_seq" OWNER TO postgres;
+ALTER SEQUENCE public."users-permissions_user_id_seq" OWNER TO postgres;
 
 --
 -- Name: users-permissions_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -1769,6 +1871,13 @@ ALTER TABLE ONLY public.activities__blocks ALTER COLUMN id SET DEFAULT nextval('
 --
 
 ALTER TABLE ONLY public.activities_learning_components__learning_components_activities ALTER COLUMN id SET DEFAULT nextval('public.activities_learning_components__learning_components_activities_'::regclass);
+
+
+--
+-- Name: administrator_account_requests id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.administrator_account_requests ALTER COLUMN id SET DEFAULT nextval('public.administrator_account_requests_id_seq'::regclass);
 
 
 --
@@ -1884,6 +1993,13 @@ ALTER TABLE ONLY public.mentors ALTER COLUMN id SET DEFAULT nextval('public.ment
 
 
 --
+-- Name: merged_accounts id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.merged_accounts ALTER COLUMN id SET DEFAULT nextval('public.merged_accounts_id_seq'::regclass);
+
+
+--
 -- Name: objective_types id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -1895,6 +2011,13 @@ ALTER TABLE ONLY public.objective_types ALTER COLUMN id SET DEFAULT nextval('pub
 --
 
 ALTER TABLE ONLY public.objectives ALTER COLUMN id SET DEFAULT nextval('public.objectives_id_seq'::regclass);
+
+
+--
+-- Name: personal_users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.personal_users ALTER COLUMN id SET DEFAULT nextval('public.personal_users_id_seq'::regclass);
 
 
 --
@@ -2535,6 +2658,14 @@ COPY public.activities_learning_components__learning_components_activities (id, 
 
 
 --
+-- Data for Name: administrator_account_requests; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.administrator_account_requests (id, "Admin_email", approval_status, published_at, created_by, updated_by, created_at, updated_at) FROM stdin;
+\.
+
+
+--
 -- Data for Name: authorized_workspaces; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2784,6 +2915,12 @@ COPY public.classrooms_mentors__mentors_classrooms (id, mentor_id, classroom_id)
 18	7	12
 19	1	13
 20	7	13
+24	9	8
+25	9	11
+26	9	10
+27	10	8
+28	11	8
+29	12	9
 \.
 
 
@@ -2800,32 +2937,26 @@ COPY public.classrooms_teachers__teachers_classrooms (id, teacher_id, classroom_
 --
 
 COPY public.core_store (id, key, value, type, environment, tag) FROM stdin;
-265	model_def_application::authorized-workspace.authorized-workspace	{"uid":"application::authorized-workspace.authorized-workspace","collectionName":"authorized_workspaces","kind":"collectionType","info":{"name":"AuthorizedWorkspace","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"attributes":{"name":{"type":"string","required":true},"description":{"type":"text"},"template":{"type":"text","required":true},"blocks":{"private":true,"collection":"block","attribute":"block","column":"id","isVirtual":true},"classroom":{"private":true,"via":"authorized_workspaces","model":"classroom"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+301	plugin_content_manager_configuration_content_types::application::school.school	{"uid":"application::school.school","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"county":{"edit":{"label":"County","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"County","searchable":true,"sortable":true}},"state":{"edit":{"label":"State","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"State","searchable":true,"sortable":true}},"classrooms":{"edit":{"label":"Classrooms","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Classrooms","searchable":false,"sortable":false}},"mentors":{"edit":{"label":"Mentors","description":"","placeholder":"","visible":true,"editable":true,"mainField":"first_name"},"list":{"label":"Mentors","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","county","state"],"editRelations":["classrooms","mentors"],"edit":[[{"name":"name","size":6},{"name":"county","size":6}],[{"name":"state","size":6}]]}}	object		
+271	model_def_application::learning-components.learning-components	{"uid":"application::learning-components.learning-components","collectionName":"learning_components","kind":"collectionType","info":{"name":"Learning Components"},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"attributes":{"type":{"type":"string"},"activities":{"via":"learning_components","collection":"activity","dominant":true,"attribute":"activity","column":"id","isVirtual":true},"learning_component_type":{"via":"learning_components","model":"learning-component-types"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 266	model_def_application::block.block	{"uid":"application::block.block","collectionName":"blocks","kind":"collectionType","info":{"name":"Block","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"attributes":{"name":{"type":"string","required":true,"unique":true},"description":{"type":"text"},"blocks_category":{"via":"blocks","model":"blocks-category"},"image_url":{"type":"string"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 267	model_def_application::blocks-category.blocks-category	{"uid":"application::blocks-category.blocks-category","collectionName":"blocks_categories","kind":"collectionType","info":{"name":"Blocks Category"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"name":{"type":"string"},"blocks":{"via":"blocks_category","collection":"block","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-268	model_def_application::classroom.classroom	{"uid":"application::classroom.classroom","collectionName":"classrooms","kind":"collectionType","info":{"name":"Classroom","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"attributes":{"name":{"type":"string"},"school":{"model":"school","via":"classrooms"},"sessions":{"via":"classroom","collection":"session","isVirtual":true},"mentors":{"collection":"mentor","via":"classrooms","attribute":"mentor","column":"id","isVirtual":true},"students":{"via":"classroom","collection":"student","isVirtual":true},"code":{"type":"string","required":true},"grade":{"via":"classrooms","model":"grade"},"selections":{"via":"classroom","collection":"selection","isVirtual":true},"authorized_workspaces":{"via":"classroom","private":true,"collection":"authorized-workspace","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+289	plugin_documentation_config	{"restrictedAccess":false}	object		
 269	model_def_application::grade.grade	{"uid":"application::grade.grade","collectionName":"grades","kind":"collectionType","info":{"name":"grade"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"name":{"type":"string","required":true,"unique":true},"classrooms":{"via":"grade","collection":"classroom","isVirtual":true},"units":{"via":"grade","collection":"unit","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 270	model_def_application::learning-component-types.learning-component-types	{"uid":"application::learning-component-types.learning-component-types","collectionName":"learning_component_types","kind":"collectionType","info":{"name":"Learning Component Types"},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"attributes":{"name":{"type":"string"},"learning_components":{"collection":"learning-components","via":"learning_component_type","isVirtual":true},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-271	model_def_application::learning-components.learning-components	{"uid":"application::learning-components.learning-components","collectionName":"learning_components","kind":"collectionType","info":{"name":"Learning Components"},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"attributes":{"type":{"type":"string"},"activities":{"via":"learning_components","collection":"activity","dominant":true,"attribute":"activity","column":"id","isVirtual":true},"learning_component_type":{"via":"learning_components","model":"learning-component-types"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-289	plugin_documentation_config	{"restrictedAccess":false}	object		
-301	plugin_content_manager_configuration_content_types::application::school.school	{"uid":"application::school.school","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"county":{"edit":{"label":"County","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"County","searchable":true,"sortable":true}},"state":{"edit":{"label":"State","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"State","searchable":true,"sortable":true}},"classrooms":{"edit":{"label":"Classrooms","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Classrooms","searchable":false,"sortable":false}},"mentors":{"edit":{"label":"Mentors","description":"","placeholder":"","visible":true,"editable":true,"mainField":"first_name"},"list":{"label":"Mentors","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","county","state"],"editRelations":["classrooms","mentors"],"edit":[[{"name":"name","size":6},{"name":"county","size":6}],[{"name":"state","size":6}]]}}	object		
 307	plugin_content_manager_configuration_content_types::strapi::user	{"uid":"strapi::user","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"firstname","defaultSortBy":"firstname","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"firstname":{"edit":{"label":"Firstname","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Firstname","searchable":true,"sortable":true}},"lastname":{"edit":{"label":"Lastname","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Lastname","searchable":true,"sortable":true}},"username":{"edit":{"label":"Username","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Username","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}},"password":{"edit":{"label":"Password","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Password","searchable":true,"sortable":true}},"resetPasswordToken":{"edit":{"label":"ResetPasswordToken","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"ResetPasswordToken","searchable":true,"sortable":true}},"registrationToken":{"edit":{"label":"RegistrationToken","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"RegistrationToken","searchable":true,"sortable":true}},"isActive":{"edit":{"label":"IsActive","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"IsActive","searchable":true,"sortable":true}},"roles":{"edit":{"label":"Roles","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Roles","searchable":false,"sortable":false}},"blocked":{"edit":{"label":"Blocked","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Blocked","searchable":true,"sortable":true}},"preferedLanguage":{"edit":{"label":"PreferedLanguage","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"PreferedLanguage","searchable":true,"sortable":true}}},"layouts":{"list":["id","firstname","lastname","username"],"editRelations":["roles"],"edit":[[{"name":"firstname","size":6},{"name":"lastname","size":6}],[{"name":"username","size":6},{"name":"email","size":6}],[{"name":"password","size":6},{"name":"isActive","size":4}],[{"name":"blocked","size":4},{"name":"preferedLanguage","size":6}]]}}	object		
-273	model_def_application::mentor.mentor	{"uid":"application::mentor.mentor","collectionName":"mentors","kind":"collectionType","info":{"name":"Mentor"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"first_name":{"type":"string"},"last_name":{"type":"string"},"school":{"model":"school","via":"mentors"},"classrooms":{"via":"mentors","collection":"classroom","dominant":true,"attribute":"classroom","column":"id","isVirtual":true},"user":{"plugin":"users-permissions","model":"user"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+288	plugin_users-permissions_grant	{"email":{"enabled":true,"icon":"envelope"},"discord":{"enabled":false,"icon":"discord","key":"","secret":"","callback":"/auth/discord/callback","scope":["identify","email"]},"facebook":{"enabled":false,"icon":"facebook-square","key":"","secret":"","callback":"/auth/facebook/callback","scope":["email"]},"google":{"enabled":false,"icon":"google","key":"","secret":"","callback":"/auth/google/callback","scope":["email"]},"github":{"enabled":false,"icon":"github","key":"","secret":"","callback":"/auth/github/callback","scope":["user","user:email"]},"microsoft":{"enabled":false,"icon":"windows","key":"","secret":"","callback":"/auth/microsoft/callback","scope":["user.read"]},"twitter":{"enabled":false,"icon":"twitter","key":"","secret":"","callback":"/auth/twitter/callback"},"instagram":{"enabled":false,"icon":"instagram","key":"","secret":"","callback":"/auth/instagram/callback","scope":["user_profile"]},"vk":{"enabled":false,"icon":"vk","key":"","secret":"","callback":"/auth/vk/callback","scope":["email"]},"twitch":{"enabled":false,"icon":"twitch","key":"","secret":"","callback":"/auth/twitch/callback","scope":["user:read:email"]},"linkedin":{"enabled":false,"icon":"linkedin","key":"","secret":"","callback":"/auth/linkedin/callback","scope":["r_liteprofile","r_emailaddress"]},"cognito":{"enabled":false,"icon":"aws","key":"","secret":"","subdomain":"my.subdomain.com","callback":"/auth/cognito/callback","scope":["email","openid","profile"]},"reddit":{"enabled":false,"icon":"reddit","key":"","secret":"","state":true,"callback":"/auth/reddit/callback","scope":["identity"]},"auth0":{"enabled":false,"icon":"","key":"","secret":"","subdomain":"my-tenant.eu","callback":"/auth/auth0/callback","scope":["openid","email","profile"]},"cas":{"enabled":false,"icon":"book","key":"","secret":"","callback":"/auth/cas/callback","scope":["openid email"],"subdomain":"my.subdomain.com/cas"}}	object		
+295	plugin_content_manager_configuration_content_types::application::classroom.classroom	{"uid":"application::classroom.classroom","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"school":{"edit":{"label":"School","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"School","searchable":true,"sortable":true}},"sessions":{"edit":{"label":"Sessions","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Sessions","searchable":false,"sortable":false}},"mentors":{"edit":{"label":"Mentors","description":"","placeholder":"","visible":true,"editable":true,"mainField":"first_name"},"list":{"label":"Mentors","searchable":false,"sortable":false}},"students":{"edit":{"label":"Students","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Students","searchable":false,"sortable":false}},"code":{"edit":{"label":"Code","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Code","searchable":true,"sortable":true}},"grade":{"edit":{"label":"Grade","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Grade","searchable":true,"sortable":true}},"selections":{"edit":{"label":"Selections","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Selections","searchable":false,"sortable":false}},"authorized_workspaces":{"edit":{"label":"Authorized_workspaces","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Authorized_workspaces","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","school","sessions"],"editRelations":["school","sessions","mentors","students","grade","selections","authorized_workspaces"],"edit":[[{"name":"name","size":6},{"name":"code","size":6}]]}}	object		
+282	model_def_strapi::permission	{"uid":"strapi::permission","collectionName":"strapi_permission","kind":"collectionType","info":{"name":"Permission","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"action":{"type":"string","minLength":1,"configurable":false,"required":true},"subject":{"type":"string","minLength":1,"configurable":false,"required":false},"properties":{"type":"json","configurable":false,"required":false,"default":{}},"conditions":{"type":"json","configurable":false,"required":false,"default":[]},"role":{"configurable":false,"model":"role","plugin":"admin"}}}	object	\N	\N
 274	model_def_application::save.save	{"uid":"application::save.save","collectionName":"saves","kind":"collectionType","info":{"name":"save","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"attributes":{"activity":{"model":"activity"},"student":{"model":"student"},"workspace":{"type":"text","required":true},"replay":{"type":"json"},"session":{"via":"saves","model":"session"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 275	model_def_application::school.school	{"uid":"application::school.school","collectionName":"schools","kind":"collectionType","info":{"name":"School"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"name":{"type":"string"},"county":{"type":"string"},"state":{"type":"string"},"classrooms":{"via":"school","collection":"classroom","isVirtual":true},"mentors":{"via":"school","collection":"mentor","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 276	model_def_application::selection.selection	{"uid":"application::selection.selection","collectionName":"selections","kind":"collectionType","info":{"name":"Selection"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"classroom":{"via":"selections","model":"classroom"},"lesson_module":{"model":"lesson-module"},"current":{"type":"boolean","default":true,"required":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-278	model_def_application::student.student	{"uid":"application::student.student","collectionName":"students","kind":"collectionType","info":{"name":"Student"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"name":{"type":"string","regex":"^([A-Za-z]+)\\\\s*([A-Za-z]*)\\\\s+([A-Za-z])\\\\.$"},"character":{"type":"string"},"classroom":{"via":"students","model":"classroom"},"sessions":{"via":"students","collection":"session","dominant":true,"attribute":"session","column":"id","isVirtual":true},"enrolled":{"type":"boolean","default":true,"required":true},"last_logged_in":{"type":"datetime"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-282	model_def_strapi::permission	{"uid":"strapi::permission","collectionName":"strapi_permission","kind":"collectionType","info":{"name":"Permission","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"action":{"type":"string","minLength":1,"configurable":false,"required":true},"subject":{"type":"string","minLength":1,"configurable":false,"required":false},"properties":{"type":"json","configurable":false,"required":false,"default":{}},"conditions":{"type":"json","configurable":false,"required":false,"default":[]},"role":{"configurable":false,"model":"role","plugin":"admin"}}}	object	\N	\N
-288	plugin_users-permissions_grant	{"email":{"enabled":true,"icon":"envelope"},"discord":{"enabled":false,"icon":"discord","key":"","secret":"","callback":"/auth/discord/callback","scope":["identify","email"]},"facebook":{"enabled":false,"icon":"facebook-square","key":"","secret":"","callback":"/auth/facebook/callback","scope":["email"]},"google":{"enabled":false,"icon":"google","key":"","secret":"","callback":"/auth/google/callback","scope":["email"]},"github":{"enabled":false,"icon":"github","key":"","secret":"","callback":"/auth/github/callback","scope":["user","user:email"]},"microsoft":{"enabled":false,"icon":"windows","key":"","secret":"","callback":"/auth/microsoft/callback","scope":["user.read"]},"twitter":{"enabled":false,"icon":"twitter","key":"","secret":"","callback":"/auth/twitter/callback"},"instagram":{"enabled":false,"icon":"instagram","key":"","secret":"","callback":"/auth/instagram/callback","scope":["user_profile"]},"vk":{"enabled":false,"icon":"vk","key":"","secret":"","callback":"/auth/vk/callback","scope":["email"]},"twitch":{"enabled":false,"icon":"twitch","key":"","secret":"","callback":"/auth/twitch/callback","scope":["user:read:email"]},"linkedin":{"enabled":false,"icon":"linkedin","key":"","secret":"","callback":"/auth/linkedin/callback","scope":["r_liteprofile","r_emailaddress"]},"cognito":{"enabled":false,"icon":"aws","key":"","secret":"","subdomain":"my.subdomain.com","callback":"/auth/cognito/callback","scope":["email","openid","profile"]},"reddit":{"enabled":false,"icon":"reddit","key":"","secret":"","state":true,"callback":"/auth/reddit/callback","scope":["identity"]},"auth0":{"enabled":false,"icon":"","key":"","secret":"","subdomain":"my-tenant.eu","callback":"/auth/auth0/callback","scope":["openid","email","profile"]},"cas":{"enabled":false,"icon":"book","key":"","secret":"","callback":"/auth/cas/callback","scope":["openid email"],"subdomain":"my.subdomain.com/cas"}}	object		
-295	plugin_content_manager_configuration_content_types::application::classroom.classroom	{"uid":"application::classroom.classroom","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"school":{"edit":{"label":"School","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"School","searchable":true,"sortable":true}},"sessions":{"edit":{"label":"Sessions","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Sessions","searchable":false,"sortable":false}},"mentors":{"edit":{"label":"Mentors","description":"","placeholder":"","visible":true,"editable":true,"mainField":"first_name"},"list":{"label":"Mentors","searchable":false,"sortable":false}},"students":{"edit":{"label":"Students","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Students","searchable":false,"sortable":false}},"code":{"edit":{"label":"Code","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Code","searchable":true,"sortable":true}},"grade":{"edit":{"label":"Grade","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Grade","searchable":true,"sortable":true}},"selections":{"edit":{"label":"Selections","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Selections","searchable":false,"sortable":false}},"authorized_workspaces":{"edit":{"label":"Authorized_workspaces","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Authorized_workspaces","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","school","sessions"],"editRelations":["school","sessions","mentors","students","grade","selections","authorized_workspaces"],"edit":[[{"name":"name","size":6},{"name":"code","size":6}]]}}	object		
-280	model_def_application::unit.unit	{"uid":"application::unit.unit","collectionName":"units","kind":"collectionType","info":{"name":"unit"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"grade":{"model":"grade","via":"units"},"name":{"type":"string","required":true},"standards_id":{"type":"string"},"standards_description":{"type":"text"},"number":{"type":"integer","required":true},"lesson_modules":{"via":"unit","collection":"lesson-module","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-281	model_def_strapi::webhooks	{"uid":"strapi::webhooks","collectionName":"strapi_webhooks","info":{"name":"Strapi webhooks","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"name":{"type":"string"},"url":{"type":"text"},"headers":{"type":"json"},"events":{"type":"json"},"enabled":{"type":"boolean"}}}	object	\N	\N
-283	model_def_strapi::role	{"uid":"strapi::role","collectionName":"strapi_role","kind":"collectionType","info":{"name":"Role","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"name":{"type":"string","minLength":1,"unique":true,"configurable":false,"required":true},"code":{"type":"string","minLength":1,"unique":true,"configurable":false,"required":true},"description":{"type":"string","configurable":false},"users":{"configurable":false,"collection":"user","via":"roles","plugin":"admin","attribute":"user","column":"id","isVirtual":true},"permissions":{"configurable":false,"plugin":"admin","collection":"permission","via":"role","isVirtual":true}}}	object	\N	\N
 294	plugin_content_manager_configuration_content_types::application::grade.grade	{"uid":"application::grade.grade","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"classrooms":{"edit":{"label":"Classrooms","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Classrooms","searchable":false,"sortable":false}},"units":{"edit":{"label":"Units","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Units","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","classrooms","units"],"editRelations":["classrooms","units"],"edit":[[{"name":"name","size":6}]]}}	object		
 290	plugin_content_manager_configuration_content_types::application::lesson-module.lesson-module	{"uid":"application::lesson-module.lesson-module","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"number":{"edit":{"label":"Number","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Number","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"expectations":{"edit":{"label":"Expectations","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Expectations","searchable":true,"sortable":true}},"activities":{"edit":{"label":"Activities","description":"","placeholder":"","visible":true,"editable":true,"mainField":"StandardS"},"list":{"label":"Activities","searchable":false,"sortable":false}},"unit":{"edit":{"label":"Unit","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Unit","searchable":true,"sortable":true}},"standards":{"edit":{"label":"Standards","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Standards","searchable":true,"sortable":true}},"link":{"edit":{"label":"Link","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Link","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","number","name","expectations"],"editRelations":["activities","unit"],"edit":[[{"name":"number","size":4},{"name":"name","size":6}],[{"name":"expectations","size":6},{"name":"standards","size":6}],[{"name":"link","size":6}]]}}	object		
 292	plugin_content_manager_configuration_content_types::application::learning-components.learning-components	{"uid":"application::learning-components.learning-components","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"type","defaultSortBy":"type","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"type":{"edit":{"label":"Type","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type","searchable":true,"sortable":true}},"activities":{"edit":{"label":"Activities","description":"","placeholder":"","visible":true,"editable":true,"mainField":"StandardS"},"list":{"label":"Activities","searchable":false,"sortable":false}},"learning_component_type":{"edit":{"label":"Learning_component_type","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Learning_component_type","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","type","activities","learning_component_type"],"editRelations":["activities","learning_component_type"],"edit":[[{"name":"type","size":6}]]}}	object		
 296	plugin_content_manager_configuration_content_types::application::blocks-category.blocks-category	{"uid":"application::blocks-category.blocks-category","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"blocks":{"edit":{"label":"Blocks","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Blocks","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","blocks","created_at"],"editRelations":["blocks"],"edit":[[{"name":"name","size":6}]]}}	object		
-286	model_def_plugins::users-permissions.role	{"uid":"plugins::users-permissions.role","collectionName":"users-permissions_role","kind":"collectionType","info":{"name":"role","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false}},"attributes":{"name":{"type":"string","minLength":3,"required":true,"configurable":false},"description":{"type":"string","configurable":false},"type":{"type":"string","unique":true,"configurable":false},"permissions":{"collection":"permission","via":"role","plugin":"users-permissions","configurable":false,"isVirtual":true},"users":{"collection":"user","via":"role","configurable":false,"plugin":"users-permissions","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+281	model_def_strapi::webhooks	{"uid":"strapi::webhooks","collectionName":"strapi_webhooks","info":{"name":"Strapi webhooks","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"name":{"type":"string"},"url":{"type":"text"},"headers":{"type":"json"},"events":{"type":"json"},"enabled":{"type":"boolean"}}}	object	\N	\N
+283	model_def_strapi::role	{"uid":"strapi::role","collectionName":"strapi_role","kind":"collectionType","info":{"name":"Role","description":""},"options":{"timestamps":["created_at","updated_at"]},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"name":{"type":"string","minLength":1,"unique":true,"configurable":false,"required":true},"code":{"type":"string","minLength":1,"unique":true,"configurable":false,"required":true},"description":{"type":"string","configurable":false},"users":{"configurable":false,"collection":"user","via":"roles","plugin":"admin","attribute":"user","column":"id","isVirtual":true},"permissions":{"configurable":false,"plugin":"admin","collection":"permission","via":"role","isVirtual":true}}}	object	\N	\N
 305	plugin_content_manager_configuration_content_types::plugins::users-permissions.role	{"uid":"plugins::users-permissions.role","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"description":{"edit":{"label":"Description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Description","searchable":true,"sortable":true}},"type":{"edit":{"label":"Type","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type","searchable":true,"sortable":true}},"permissions":{"edit":{"label":"Permissions","description":"","placeholder":"","visible":true,"editable":true,"mainField":"type"},"list":{"label":"Permissions","searchable":false,"sortable":false}},"users":{"edit":{"label":"Users","description":"","placeholder":"","visible":true,"editable":true,"mainField":"username"},"list":{"label":"Users","searchable":false,"sortable":false}}},"layouts":{"list":["id","name","description","type"],"editRelations":["permissions","users"],"edit":[[{"name":"name","size":6},{"name":"description","size":6}],[{"name":"type","size":6}]]}}	object		
 308	plugin_content_manager_configuration_content_types::strapi::permission	{"uid":"strapi::permission","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"action","defaultSortBy":"action","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"action":{"edit":{"label":"Action","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Action","searchable":true,"sortable":true}},"subject":{"edit":{"label":"Subject","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Subject","searchable":true,"sortable":true}},"properties":{"edit":{"label":"Properties","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Properties","searchable":false,"sortable":false}},"conditions":{"edit":{"label":"Conditions","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Conditions","searchable":false,"sortable":false}},"role":{"edit":{"label":"Role","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Role","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","action","subject","role"],"editRelations":["role"],"edit":[[{"name":"action","size":6},{"name":"subject","size":6}],[{"name":"properties","size":12}],[{"name":"conditions","size":12}]]}}	object		
 291	plugin_content_manager_configuration_content_types::application::mentor.mentor	{"uid":"application::mentor.mentor","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"first_name","defaultSortBy":"first_name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"first_name":{"edit":{"label":"First_name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"First_name","searchable":true,"sortable":true}},"last_name":{"edit":{"label":"Last_name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Last_name","searchable":true,"sortable":true}},"school":{"edit":{"label":"School","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"School","searchable":true,"sortable":true}},"classrooms":{"edit":{"label":"Classrooms","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Classrooms","searchable":false,"sortable":false}},"user":{"edit":{"label":"User","description":"","placeholder":"","visible":true,"editable":true,"mainField":"username"},"list":{"label":"User","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","first_name","last_name","school"],"editRelations":["school","classrooms","user"],"edit":[[{"name":"first_name","size":6},{"name":"last_name","size":6}]]}}	object		
@@ -2836,23 +2967,34 @@ COPY public.core_store (id, key, value, type, environment, tag) FROM stdin;
 298	plugin_content_manager_configuration_content_types::application::activity.activity	{"uid":"application::activity.activity","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"StandardS","defaultSortBy":"StandardS","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"lesson_module":{"edit":{"label":"Lesson_module","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Lesson_module","searchable":true,"sortable":true}},"number":{"edit":{"label":"Number","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Number","searchable":true,"sortable":true}},"template":{"edit":{"label":"Template","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Template","searchable":true,"sortable":true}},"blocks":{"edit":{"label":"Blocks","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Blocks","searchable":false,"sortable":false}},"description":{"edit":{"label":"Description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Description","searchable":true,"sortable":true}},"StandardS":{"edit":{"label":"StandardS","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"StandardS","searchable":true,"sortable":true}},"images":{"edit":{"label":"Images","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Images","searchable":true,"sortable":true}},"link":{"edit":{"label":"Link","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Link","searchable":true,"sortable":true}},"learning_components":{"edit":{"label":"Learning_components","description":"","placeholder":"","visible":true,"editable":true,"mainField":"type"},"list":{"label":"Learning_components","searchable":false,"sortable":false}},"activity_template":{"edit":{"label":"Activity_template","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Activity_template","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","lesson_module","number","template"],"editRelations":["lesson_module","blocks","learning_components"],"edit":[[{"name":"number","size":4},{"name":"template","size":6}],[{"name":"description","size":6},{"name":"StandardS","size":6}],[{"name":"images","size":6},{"name":"link","size":6}],[{"name":"activity_template","size":6}]]}}	object		
 299	plugin_content_manager_configuration_content_types::application::authorized-workspace.authorized-workspace	{"uid":"application::authorized-workspace.authorized-workspace","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"description":{"edit":{"label":"Description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Description","searchable":true,"sortable":true}},"template":{"edit":{"label":"Template","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Template","searchable":true,"sortable":true}},"blocks":{"edit":{"label":"Blocks","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Blocks","searchable":false,"sortable":false}},"classroom":{"edit":{"label":"Classroom","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Classroom","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","description","template"],"editRelations":["blocks","classroom"],"edit":[[{"name":"name","size":6},{"name":"description","size":6}],[{"name":"template","size":6}]]}}	object		
 310	plugin_content_manager_configuration_content_types::application::submission.submission	{"uid":"application::submission.submission","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"status","defaultSortBy":"status","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"status":{"edit":{"label":"Status","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Status","searchable":true,"sortable":true}},"workspace":{"edit":{"label":"Workspace","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Workspace","searchable":true,"sortable":true}},"success":{"edit":{"label":"Success","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Success","searchable":true,"sortable":true}},"hex":{"edit":{"label":"Hex","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Hex","searchable":true,"sortable":true}},"stdout":{"edit":{"label":"Stdout","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Stdout","searchable":true,"sortable":true}},"stderr":{"edit":{"label":"Stderr","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Stderr","searchable":true,"sortable":true}},"board":{"edit":{"label":"Board","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Board","searchable":true,"sortable":true}},"sketch":{"edit":{"label":"Sketch","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sketch","searchable":true,"sortable":true}},"sandbox":{"edit":{"label":"Sandbox","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Sandbox","searchable":true,"sortable":true}},"session":{"edit":{"label":"Session","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Session","searchable":true,"sortable":true}},"activity":{"edit":{"label":"Activity","description":"","placeholder":"","visible":true,"editable":true,"mainField":"StandardS"},"list":{"label":"Activity","searchable":true,"sortable":true}},"job_id":{"edit":{"label":"Job_id","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Job_id","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","status","workspace","success"],"editRelations":["session","activity"],"edit":[[{"name":"status","size":6},{"name":"workspace","size":6}],[{"name":"success","size":4},{"name":"hex","size":6}],[{"name":"stdout","size":6},{"name":"stderr","size":6}],[{"name":"board","size":6},{"name":"sketch","size":6}],[{"name":"sandbox","size":4},{"name":"job_id","size":4}]]}}	object		
-264	model_def_application::activity.activity	{"uid":"application::activity.activity","collectionName":"activities","kind":"collectionType","info":{"name":"Activity","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"attributes":{"lesson_module":{"via":"activities","model":"lesson-module"},"number":{"type":"biginteger","required":true},"template":{"type":"text","required":true},"blocks":{"collection":"block","attribute":"block","column":"id","isVirtual":true},"description":{"type":"text"},"StandardS":{"type":"string"},"images":{"type":"text"},"link":{"type":"string","required":false},"learning_components":{"via":"activities","collection":"learning-components","attribute":"learning-component","column":"id","isVirtual":true},"activity_template":{"type":"text","required":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 300	plugin_content_manager_configuration_content_types::application::save.save	{"uid":"application::save.save","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"activity":{"edit":{"label":"Activity","description":"","placeholder":"","visible":true,"editable":true,"mainField":"StandardS"},"list":{"label":"Activity","searchable":true,"sortable":true}},"student":{"edit":{"label":"Student","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Student","searchable":true,"sortable":true}},"workspace":{"edit":{"label":"Workspace","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Workspace","searchable":true,"sortable":true}},"replay":{"edit":{"label":"Replay","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Replay","searchable":false,"sortable":false}},"session":{"edit":{"label":"Session","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Session","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","activity","student","workspace"],"editRelations":["activity","student","session"],"edit":[[{"name":"workspace","size":6}],[{"name":"replay","size":12}]]}}	object		
 302	plugin_content_manager_configuration_content_types::application::student.student	{"uid":"application::student.student","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"character":{"edit":{"label":"Character","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Character","searchable":true,"sortable":true}},"classroom":{"edit":{"label":"Classroom","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Classroom","searchable":true,"sortable":true}},"sessions":{"edit":{"label":"Sessions","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Sessions","searchable":false,"sortable":false}},"enrolled":{"edit":{"label":"Enrolled","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Enrolled","searchable":true,"sortable":true}},"last_logged_in":{"edit":{"label":"Last_logged_in","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Last_logged_in","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","character","classroom"],"editRelations":["classroom","sessions"],"edit":[[{"name":"name","size":6},{"name":"character","size":6}],[{"name":"enrolled","size":4},{"name":"last_logged_in","size":6}]]}}	object		
 303	plugin_content_manager_configuration_content_types::application::session.session	{"uid":"application::session.session","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"classroom":{"edit":{"label":"Classroom","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Classroom","searchable":true,"sortable":true}},"students":{"edit":{"label":"Students","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Students","searchable":false,"sortable":false}},"submissions":{"edit":{"label":"Submissions","description":"","placeholder":"","visible":true,"editable":true,"mainField":"status"},"list":{"label":"Submissions","searchable":false,"sortable":false}},"saves":{"edit":{"label":"Saves","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Saves","searchable":false,"sortable":false}},"unit":{"edit":{"label":"Unit","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Unit","searchable":true,"sortable":true}},"grade":{"edit":{"label":"Grade","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Grade","searchable":true,"sortable":true}},"lesson_module":{"edit":{"label":"Lesson_module","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Lesson_module","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","classroom","students","submissions"],"editRelations":["classroom","students","submissions","saves","unit","grade","lesson_module"],"edit":[]}}	object		
 304	plugin_content_manager_configuration_content_types::plugins::users-permissions.user	{"uid":"plugins::users-permissions.user","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"username","defaultSortBy":"username","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"username":{"edit":{"label":"Username","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Username","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}},"provider":{"edit":{"label":"Provider","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Provider","searchable":true,"sortable":true}},"password":{"edit":{"label":"Password","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Password","searchable":true,"sortable":true}},"resetPasswordToken":{"edit":{"label":"ResetPasswordToken","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"ResetPasswordToken","searchable":true,"sortable":true}},"confirmationToken":{"edit":{"label":"ConfirmationToken","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"ConfirmationToken","searchable":true,"sortable":true}},"confirmed":{"edit":{"label":"Confirmed","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Confirmed","searchable":true,"sortable":true}},"blocked":{"edit":{"label":"Blocked","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Blocked","searchable":true,"sortable":true}},"role":{"edit":{"label":"Role","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Role","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","username","email","confirmed"],"editRelations":["role"],"edit":[[{"name":"username","size":6},{"name":"email","size":6}],[{"name":"password","size":6},{"name":"confirmed","size":4}],[{"name":"blocked","size":4}]]}}	object		
 313	plugin_users-permissions_email	{"reset_password":{"display":"Email.template.reset_password","icon":"sync","options":{"from":{"name":"Administration Panel","email":"no-reply@strapi.io"},"response_email":"","object":"Reset password","message":"<p>We heard that you lost your password. Sorry about that!</p>\\n\\n<p>But don’t worry! You can use the following link to reset your password:</p>\\n<p><%= URL %>?code=<%= TOKEN %></p>\\n\\n<p>Thanks.</p>"}},"email_confirmation":{"display":"Email.template.email_confirmation","icon":"check-square","options":{"from":{"name":"Administration Panel","email":"no-reply@strapi.io"},"response_email":"","object":"Account confirmation","message":"<p>Thank you for registering!</p>\\n\\n<p>You have to confirm your email address. Please click on the link below.</p>\\n\\n<p><%= URL %>?confirmation=<%= CODE %></p>\\n\\n<p>Thanks.</p>"}}}	object		
 309	plugin_content_manager_configuration_content_types::application::unit.unit	{"uid":"application::unit.unit","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"grade":{"edit":{"label":"Grade","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Grade","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"standards_id":{"edit":{"label":"Standards_id","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Standards_id","searchable":true,"sortable":true}},"standards_description":{"edit":{"label":"Standards_description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Standards_description","searchable":true,"sortable":true}},"number":{"edit":{"label":"Number","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Number","searchable":true,"sortable":true}},"lesson_modules":{"edit":{"label":"Lesson_modules","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Lesson_modules","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","grade","name","standards_id"],"editRelations":["grade","lesson_modules"],"edit":[[{"name":"name","size":6},{"name":"standards_id","size":6}],[{"name":"standards_description","size":6},{"name":"number","size":4}]]}}	object		
-314	plugin_users-permissions_advanced	{"unique_email":true,"allow_register":true,"email_confirmation":false,"email_reset_password":null,"email_confirmation_redirection":null,"default_role":"authenticated"}	object		
 312	plugin_content_manager_configuration_content_types::strapi::role	{"uid":"strapi::role","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"code":{"edit":{"label":"Code","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Code","searchable":true,"sortable":true}},"description":{"edit":{"label":"Description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Description","searchable":true,"sortable":true}},"users":{"edit":{"label":"Users","description":"","placeholder":"","visible":true,"editable":true,"mainField":"firstname"},"list":{"label":"Users","searchable":false,"sortable":false}},"permissions":{"edit":{"label":"Permissions","description":"","placeholder":"","visible":true,"editable":true,"mainField":"action"},"list":{"label":"Permissions","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","code","description"],"editRelations":["users","permissions"],"edit":[[{"name":"name","size":6},{"name":"code","size":6}],[{"name":"description","size":6}]]}}	object		
-263	model_def_strapi::core-store	{"uid":"strapi::core-store","collectionName":"core_store","info":{"name":"core_store","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"key":{"type":"string"},"value":{"type":"text"},"type":{"type":"string"},"environment":{"type":"string"},"tag":{"type":"string"}}}	object	\N	\N
+314	plugin_users-permissions_advanced	{"unique_email":true,"allow_register":true,"email_confirmation":false,"email_reset_password":null,"email_confirmation_redirection":null,"default_role":"personal"}	object		
 272	model_def_application::lesson-module.lesson-module	{"uid":"application::lesson-module.lesson-module","collectionName":"lesson_modules","kind":"collectionType","info":{"name":"lesson Module","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"attributes":{"number":{"type":"decimal","required":true},"name":{"type":"string","required":true},"expectations":{"type":"text"},"activities":{"via":"lesson_module","collection":"activity","isVirtual":true},"unit":{"model":"unit","via":"lesson_modules"},"standards":{"type":"string","unique":true},"link":{"type":"string"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 277	model_def_application::session.session	{"uid":"application::session.session","collectionName":"sessions","kind":"collectionType","info":{"name":"Session","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"attributes":{"classroom":{"via":"sessions","model":"classroom"},"students":{"via":"sessions","collection":"student","attribute":"student","column":"id","isVirtual":true},"submissions":{"via":"session","collection":"submission","isVirtual":true},"saves":{"collection":"save","via":"session","isVirtual":true},"unit":{"model":"unit"},"grade":{"model":"grade"},"lesson_module":{"model":"lesson-module"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 279	model_def_application::submission.submission	{"uid":"application::submission.submission","collectionName":"submissions","kind":"collectionType","info":{"name":"Submission"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"status":{"type":"string","default":"WAITING","required":true},"workspace":{"type":"text","required":true},"success":{"type":"boolean","required":false},"hex":{"type":"text"},"stdout":{"type":"text"},"stderr":{"type":"text"},"board":{"type":"string","required":true},"sketch":{"type":"text","required":true},"sandbox":{"type":"boolean","default":false,"required":true},"session":{"via":"submissions","model":"session"},"activity":{"model":"activity"},"job_id":{"type":"biginteger"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
-284	model_def_strapi::user	{"uid":"strapi::user","collectionName":"strapi_administrator","kind":"collectionType","info":{"name":"User","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"firstname":{"type":"string","unique":false,"minLength":1,"configurable":false,"required":false},"lastname":{"type":"string","unique":false,"minLength":1,"configurable":false,"required":false},"username":{"type":"string","unique":false,"configurable":false,"required":false},"email":{"type":"email","minLength":6,"configurable":false,"required":true,"unique":true,"private":true},"password":{"type":"password","minLength":6,"configurable":false,"required":false,"private":true},"resetPasswordToken":{"type":"string","configurable":false,"private":true},"registrationToken":{"type":"string","configurable":false,"private":true},"isActive":{"type":"boolean","default":false,"configurable":false,"private":true},"roles":{"collection":"role","collectionName":"strapi_users_roles","via":"users","dominant":true,"plugin":"admin","configurable":false,"private":true,"attribute":"role","column":"id","isVirtual":true},"blocked":{"type":"boolean","default":false,"configurable":false,"private":true},"preferedLanguage":{"type":"string","configurable":false,"required":false}}}	object	\N	\N
 285	model_def_plugins::users-permissions.permission	{"uid":"plugins::users-permissions.permission","collectionName":"users-permissions_permission","kind":"collectionType","info":{"name":"permission","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false}},"attributes":{"type":{"type":"string","required":true,"configurable":false},"controller":{"type":"string","required":true,"configurable":false},"action":{"type":"string","required":true,"configurable":false},"enabled":{"type":"boolean","required":true,"configurable":false},"policy":{"type":"string","configurable":false},"role":{"model":"role","via":"permissions","plugin":"users-permissions","configurable":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 287	model_def_plugins::users-permissions.user	{"uid":"plugins::users-permissions.user","collectionName":"users-permissions_user","kind":"collectionType","info":{"name":"user","description":""},"options":{"draftAndPublish":false,"timestamps":["created_at","updated_at"]},"attributes":{"username":{"type":"string","minLength":3,"unique":true,"configurable":false,"required":true},"email":{"type":"email","minLength":6,"configurable":false,"required":true},"provider":{"type":"string","configurable":false},"password":{"type":"password","minLength":6,"configurable":false,"private":true},"resetPasswordToken":{"type":"string","configurable":false,"private":true},"confirmationToken":{"type":"string","configurable":false,"private":true},"confirmed":{"type":"boolean","default":false,"configurable":false},"blocked":{"type":"boolean","default":false,"configurable":false},"role":{"model":"role","via":"users","plugin":"users-permissions","configurable":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 315	core_admin_auth	{"providers":{"autoRegister":false,"defaultRole":null}}	object		
+263	model_def_strapi::core-store	{"uid":"strapi::core-store","collectionName":"core_store","info":{"name":"core_store","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"key":{"type":"string"},"value":{"type":"text"},"type":{"type":"string"},"environment":{"type":"string"},"tag":{"type":"string"}}}	object	\N	\N
+278	model_def_application::student.student	{"uid":"application::student.student","collectionName":"students","kind":"collectionType","info":{"name":"Student"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"name":{"type":"string","regex":"^([A-Za-z]+)\\\\s*([A-Za-z]*)\\\\s+([A-Za-z])\\\\.$"},"character":{"type":"string"},"classroom":{"via":"students","model":"classroom"},"sessions":{"via":"students","collection":"session","dominant":true,"attribute":"session","column":"id","isVirtual":true},"enrolled":{"type":"boolean","default":true,"required":true},"last_logged_in":{"type":"datetime"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+280	model_def_application::unit.unit	{"uid":"application::unit.unit","collectionName":"units","kind":"collectionType","info":{"name":"unit"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"grade":{"model":"grade","via":"units"},"name":{"type":"string","required":true},"standards_id":{"type":"string"},"standards_description":{"type":"text"},"number":{"type":"integer","required":true},"lesson_modules":{"via":"unit","collection":"lesson-module","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+265	model_def_application::authorized-workspace.authorized-workspace	{"uid":"application::authorized-workspace.authorized-workspace","collectionName":"authorized_workspaces","kind":"collectionType","info":{"name":"AuthorizedWorkspace","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"attributes":{"name":{"type":"string","required":true},"description":{"type":"text"},"template":{"type":"text","required":true},"blocks":{"private":true,"collection":"block","attribute":"block","column":"id","isVirtual":true},"classroom":{"private":true,"via":"authorized_workspaces","model":"classroom"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+273	model_def_application::mentor.mentor	{"uid":"application::mentor.mentor","collectionName":"mentors","kind":"collectionType","info":{"name":"Mentor"},"options":{"increments":true,"timestamps":["created_at","updated_at"]},"attributes":{"first_name":{"type":"string"},"last_name":{"type":"string"},"school":{"model":"school","via":"mentors"},"classrooms":{"via":"mentors","collection":"classroom","dominant":true,"attribute":"classroom","column":"id","isVirtual":true},"user":{"plugin":"users-permissions","model":"user"},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+286	model_def_plugins::users-permissions.role	{"uid":"plugins::users-permissions.role","collectionName":"users-permissions_role","kind":"collectionType","info":{"name":"role","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false}},"attributes":{"name":{"type":"string","minLength":3,"required":true,"configurable":false},"description":{"type":"string","configurable":false},"type":{"type":"string","unique":true,"configurable":false},"permissions":{"collection":"permission","via":"role","plugin":"users-permissions","configurable":false,"isVirtual":true},"users":{"collection":"user","via":"role","configurable":false,"plugin":"users-permissions","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+316	model_def_application::personal-users.personal-users	{"uid":"application::personal-users.personal-users","collectionName":"personal_users","kind":"collectionType","info":{"name":"Personal Users","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"attributes":{"username":{"type":"string"},"email":{"type":"email"},"password":{"type":"password"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+320	model_def_application::administrator-account-requests.administrator-account-requests	{"uid":"application::administrator-account-requests.administrator-account-requests","collectionName":"administrator_account_requests","kind":"collectionType","info":{"name":"Administrator Account Requests","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"attributes":{"Admin_email":{"type":"email"},"approval_status":{"type":"enumeration","enum":["awaiting_review","approved","denied"]},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+318	model_def_application::merged-accounts.merged-accounts	{"uid":"application::merged-accounts.merged-accounts","collectionName":"merged_accounts","kind":"collectionType","info":{"name":"merged accounts"},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":true},"attributes":{"username":{"type":"string"},"student":{"type":"string"},"studentID":{"type":"string"},"classroom":{"type":"string"},"published_at":{"type":"datetime","configurable":false,"writable":true,"visible":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+284	model_def_strapi::user	{"uid":"strapi::user","collectionName":"strapi_administrator","kind":"collectionType","info":{"name":"User","description":""},"options":{"timestamps":false},"pluginOptions":{"content-manager":{"visible":false},"content-type-builder":{"visible":false}},"attributes":{"firstname":{"type":"string","unique":false,"minLength":1,"configurable":false,"required":false},"lastname":{"type":"string","unique":false,"minLength":1,"configurable":false,"required":false},"username":{"type":"string","unique":false,"configurable":false,"required":false},"email":{"type":"email","minLength":6,"configurable":false,"required":true,"unique":true,"private":true},"password":{"type":"password","minLength":6,"configurable":false,"required":false,"private":true},"resetPasswordToken":{"type":"string","configurable":false,"private":true},"registrationToken":{"type":"string","configurable":false,"private":true},"isActive":{"type":"boolean","default":false,"configurable":false,"private":true},"roles":{"collection":"role","collectionName":"strapi_users_roles","via":"users","dominant":true,"plugin":"admin","configurable":false,"private":true,"attribute":"role","column":"id","isVirtual":true},"blocked":{"type":"boolean","default":false,"configurable":false,"private":true},"preferedLanguage":{"type":"string","configurable":false,"required":false}}}	object	\N	\N
+321	plugin_content_manager_configuration_content_types::application::administrator-account-requests.administrator-account-requests	{"uid":"application::administrator-account-requests.administrator-account-requests","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"Admin_email":{"edit":{"label":"Admin_email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Admin_email","searchable":true,"sortable":true}},"approval_status":{"edit":{"label":"Approval_status","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Approval_status","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","Admin_email","approval_status","created_at"],"editRelations":[],"edit":[[{"name":"Admin_email","size":6},{"name":"approval_status","size":6}]]}}	object		
+322	plugin_content_manager_configuration_content_types::application::merged-accounts.merged-accounts	{"uid":"application::merged-accounts.merged-accounts","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"username","defaultSortBy":"username","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"username":{"edit":{"label":"Username","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Username","searchable":true,"sortable":true}},"student":{"edit":{"label":"Student","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Student","searchable":true,"sortable":true}},"studentID":{"edit":{"label":"StudentID","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"StudentID","searchable":true,"sortable":true}},"classroom":{"edit":{"label":"Classroom","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Classroom","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","username","student","studentID"],"editRelations":[],"edit":[[{"name":"username","size":6},{"name":"student","size":6}],[{"name":"studentID","size":6},{"name":"classroom","size":6}]]}}	object		
+264	model_def_application::activity.activity	{"uid":"application::activity.activity","collectionName":"activities","kind":"collectionType","info":{"name":"Activity","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"attributes":{"lesson_module":{"via":"activities","model":"lesson-module"},"number":{"type":"biginteger","required":true},"template":{"type":"text","required":true},"blocks":{"collection":"block","attribute":"block","column":"id","isVirtual":true},"description":{"type":"text"},"StandardS":{"type":"string"},"images":{"type":"text"},"link":{"type":"string","required":false},"learning_components":{"via":"activities","collection":"learning-components","attribute":"learning-component","column":"id","isVirtual":true},"activity_template":{"type":"text","required":false},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
+268	model_def_application::classroom.classroom	{"uid":"application::classroom.classroom","collectionName":"classrooms","kind":"collectionType","info":{"name":"Classroom","description":""},"options":{"increments":true,"timestamps":["created_at","updated_at"],"draftAndPublish":false},"attributes":{"name":{"type":"string"},"school":{"model":"school","via":"classrooms"},"sessions":{"via":"classroom","collection":"session","isVirtual":true},"mentors":{"collection":"mentor","via":"classrooms","attribute":"mentor","column":"id","isVirtual":true},"students":{"via":"classroom","collection":"student","isVirtual":true},"code":{"type":"string","required":true},"grade":{"via":"classrooms","model":"grade"},"selections":{"via":"classroom","collection":"selection","isVirtual":true},"authorized_workspaces":{"via":"classroom","private":true,"collection":"authorized-workspace","isVirtual":true},"created_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true},"updated_by":{"model":"user","plugin":"admin","configurable":false,"writable":false,"visible":false,"private":true}}}	object	\N	\N
 \.
 
 
@@ -2938,6 +3080,18 @@ COPY public.mentors (id, first_name, last_name, school, "user", created_at, upda
 6	Valerie	Frizzle	\N	9	2023-10-19 18:29:08.595+00	2023-10-19 18:29:08.6+00	1	1
 7	John	Keating	1	10	2023-10-19 18:29:16.647+00	2023-10-19 18:29:19.459+00	1	1
 5	Albus	Dumbledore	3	8	2023-10-19 18:28:57.064+00	2023-10-19 18:29:34.71+00	1	1
+9	David	PeePee	2	18	2023-11-05 03:00:27.25+00	2023-11-05 03:00:27.263+00	1	1
+10	David	Payne	1	20	2023-11-07 17:29:11.49+00	2023-11-07 17:29:11.508+00	1	1
+11	\N	\N	1	22	2023-11-08 03:02:28.2+00	2023-11-08 03:02:28.209+00	1	1
+12	Test	test	1	23	2023-11-08 16:56:14.009+00	2023-11-08 16:56:14.02+00	1	1
+\.
+
+
+--
+-- Data for Name: merged_accounts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.merged_accounts (id, username, student, "studentID", classroom, published_at, created_by, updated_by, created_at, updated_at) FROM stdin;
 \.
 
 
@@ -2963,6 +3117,19 @@ COPY public.objectives (id, activity, description, objective_type, created_at, u
 2	\N	The students will be identify conductors and insulators in the real world by predicting whether a given object will complete a circuit and testing their hypotheses.	1	2020-07-24 16:54:11.457+00	2021-08-01 17:54:54.1+00	\N	\N
 3	\N	The students will identify conductors and insulators in the real world by predicting whether a given object will complete a circuit and testing their hypotheses.	1	2020-07-24 16:56:41.649+00	2021-08-01 17:54:54.139+00	\N	\N
 4	\N	Students will create a circuit and complete it by finding conductors and insulators in the classroom.	2	2020-07-24 16:57:04.842+00	2021-08-01 17:54:54.139+00	\N	\N
+\.
+
+
+--
+-- Data for Name: personal_users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.personal_users (id, username, email, password, published_at, created_by, updated_by, created_at, updated_at, "user") FROM stdin;
+1	david1	david1@gmail.com	David1!!	2023-11-07 00:09:32.453+00	\N	\N	2023-11-07 00:09:32.46+00	2023-11-07 00:09:32.46+00	\N
+2	FinnTheHuman	d4vidpayn3@gmail.com	Password1!	2023-11-07 00:26:57.654+00	\N	\N	2023-11-07 00:26:57.659+00	2023-11-07 00:26:57.659+00	\N
+3	JakeTheDog	jakey@gmail.com	Password1!	2023-11-07 17:25:06.482+00	\N	\N	2023-11-07 17:25:06.486+00	2023-11-07 17:25:06.486+00	\N
+4	David1	davidpayne@gmail.com	Password1!	2023-11-07 19:40:40.624+00	\N	\N	2023-11-07 19:40:40.644+00	2023-11-07 19:40:40.644+00	\N
+5	D4v1d	davidpayne1@gmail.com	Password1!	2023-11-08 17:14:33.35+00	\N	\N	2023-11-08 17:14:33.378+00	2023-11-08 17:14:33.378+00	\N
 \.
 
 
@@ -3008,6 +3175,7 @@ COPY public.selections (id, classroom, lesson_module, current, created_at, updat
 COPY public.sessions (id, classroom, created_at, updated_at, created_by, updated_by, unit, grade, lesson_module) FROM stdin;
 1744	8	2023-10-19 20:30:03.304+00	2023-10-19 20:30:03.314+00	\N	\N	80	5	236
 1745	8	2023-10-20 06:13:02.956+00	2023-10-20 06:13:02.972+00	\N	\N	80	5	236
+1746	8	2023-11-02 16:59:41.98+00	2023-11-02 16:59:42.02+00	\N	\N	80	5	236
 \.
 
 
@@ -3026,6 +3194,7 @@ COPY public.sessions__saves (id, session_id, save_id) FROM stdin;
 COPY public.sessions_students__students_sessions (id, student_id, session_id) FROM stdin;
 3237	33	1744
 3238	32	1745
+3239	32	1746
 \.
 
 
@@ -3133,27 +3302,37 @@ COPY public.strapi_permission (id, action, subject, fields, conditions, role, cr
 4365	plugins::documentation.read	\N	\N	[]	1	2023-10-19 15:56:44.562+00	2023-10-19 15:56:44.576+00	{}
 4366	plugins::documentation.settings.update	\N	\N	[]	1	2023-10-19 15:56:44.562+00	2023-10-19 15:56:44.576+00	{}
 4367	plugins::documentation.settings.regenerate	\N	\N	[]	1	2023-10-19 15:56:44.562+00	2023-10-19 15:56:44.58+00	{}
-4368	plugins::content-manager.explorer.delete	application::blocks-category.blocks-category	\N	[]	1	2023-10-20 05:43:42.105+00	2023-10-20 05:43:42.125+00	{}
-4369	plugins::content-manager.explorer.delete	application::block.block	\N	[]	1	2023-10-20 05:43:42.105+00	2023-10-20 05:43:42.125+00	{}
-4370	plugins::content-manager.explorer.delete	application::authorized-workspace.authorized-workspace	\N	[]	1	2023-10-20 05:43:42.105+00	2023-10-20 05:43:42.125+00	{}
-4371	plugins::content-manager.explorer.delete	application::activity.activity	\N	[]	1	2023-10-20 05:43:42.105+00	2023-10-20 05:43:42.125+00	{}
-4372	plugins::content-manager.explorer.delete	application::classroom.classroom	\N	[]	1	2023-10-20 05:43:42.105+00	2023-10-20 05:43:42.125+00	{}
-4373	plugins::content-manager.explorer.delete	application::grade.grade	\N	[]	1	2023-10-20 05:43:42.105+00	2023-10-20 05:43:42.126+00	{}
-4374	plugins::content-manager.explorer.delete	application::learning-component-types.learning-component-types	\N	[]	1	2023-10-20 05:43:42.105+00	2023-10-20 05:43:42.126+00	{}
-4375	plugins::content-manager.explorer.delete	application::learning-components.learning-components	\N	[]	1	2023-10-20 05:43:42.105+00	2023-10-20 05:43:42.126+00	{}
-4376	plugins::content-manager.explorer.delete	application::lesson-module.lesson-module	\N	[]	1	2023-10-20 05:43:42.106+00	2023-10-20 05:43:42.126+00	{}
-4377	plugins::content-manager.explorer.delete	application::mentor.mentor	\N	[]	1	2023-10-20 05:43:42.106+00	2023-10-20 05:43:42.126+00	{}
-4379	plugins::content-manager.explorer.delete	application::school.school	\N	[]	1	2023-10-20 05:43:42.106+00	2023-10-20 05:43:42.126+00	{}
-4378	plugins::content-manager.explorer.delete	application::save.save	\N	[]	1	2023-10-20 05:43:42.106+00	2023-10-20 05:43:42.126+00	{}
-4380	plugins::content-manager.explorer.delete	application::selection.selection	\N	[]	1	2023-10-20 05:43:42.106+00	2023-10-20 05:43:42.126+00	{}
-4381	plugins::content-manager.explorer.delete	application::session.session	\N	[]	1	2023-10-20 05:43:42.106+00	2023-10-20 05:43:42.126+00	{}
-4383	plugins::content-manager.explorer.delete	application::submission.submission	\N	[]	1	2023-10-20 05:43:42.156+00	2023-10-20 05:43:42.162+00	{}
-4384	plugins::content-manager.explorer.delete	application::unit.unit	\N	[]	1	2023-10-20 05:43:42.159+00	2023-10-20 05:43:42.166+00	{}
-4385	plugins::content-manager.explorer.delete	plugins::users-permissions.user	\N	[]	1	2023-10-20 05:43:42.159+00	2023-10-20 05:43:42.166+00	{}
-4386	plugins::content-manager.explorer.publish	application::authorized-workspace.authorized-workspace	\N	[]	1	2023-10-20 05:43:42.159+00	2023-10-20 05:43:42.166+00	{}
-4387	plugins::content-manager.explorer.publish	application::learning-component-types.learning-component-types	\N	[]	1	2023-10-20 05:43:42.159+00	2023-10-20 05:43:42.168+00	{}
-4388	plugins::content-manager.explorer.publish	application::learning-components.learning-components	\N	[]	1	2023-10-20 05:43:42.159+00	2023-10-20 05:43:42.168+00	{}
-4382	plugins::content-manager.explorer.delete	application::student.student	\N	[]	1	2023-10-20 05:43:42.106+00	2023-10-20 05:43:42.131+00	{}
+4961	plugins::content-manager.explorer.delete	plugins::users-permissions.user	\N	[]	1	2023-12-12 17:41:12.196+00	2023-12-12 17:41:12.208+00	{}
+4964	plugins::content-manager.explorer.publish	application::learning-component-types.learning-component-types	\N	[]	1	2023-12-12 17:41:12.197+00	2023-12-12 17:41:12.208+00	{}
+4965	plugins::content-manager.explorer.publish	application::learning-components.learning-components	\N	[]	1	2023-12-12 17:41:12.197+00	2023-12-12 17:41:12.208+00	{}
+4731	plugins::content-manager.explorer.read	application::administrator-account-requests.administrator-account-requests	\N	[]	1	2023-11-28 04:09:14.752+00	2023-11-28 04:09:14.769+00	{"fields": ["Admin_email", "approval_status"]}
+4734	plugins::content-manager.explorer.create	application::administrator-account-requests.administrator-account-requests	\N	[]	1	2023-11-28 04:09:14.752+00	2023-11-28 04:09:14.769+00	{"fields": ["Admin_email", "approval_status"]}
+4737	plugins::content-manager.explorer.update	application::administrator-account-requests.administrator-account-requests	\N	[]	1	2023-11-28 04:09:14.752+00	2023-11-28 04:09:14.77+00	{"fields": ["Admin_email", "approval_status"]}
+4942	plugins::content-manager.explorer.delete	application::classroom.classroom	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.168+00	{}
+4948	plugins::content-manager.explorer.delete	application::grade.grade	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.168+00	{}
+4951	plugins::content-manager.explorer.delete	application::lesson-module.lesson-module	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.168+00	{}
+4952	plugins::content-manager.explorer.delete	application::mentor.mentor	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.168+00	{}
+4954	plugins::content-manager.explorer.delete	application::save.save	\N	[]	1	2023-12-12 17:41:12.151+00	2023-12-12 17:41:12.168+00	{}
+4735	plugins::content-manager.explorer.read	application::merged-accounts.merged-accounts	\N	[]	1	2023-11-28 04:09:14.752+00	2023-11-28 04:09:14.77+00	{"fields": ["username", "student", "studentID", "classroom"]}
+4738	plugins::content-manager.explorer.update	application::merged-accounts.merged-accounts	\N	[]	1	2023-11-28 04:09:14.752+00	2023-11-28 04:09:14.77+00	{"fields": ["username", "student", "studentID", "classroom"]}
+4944	plugins::content-manager.explorer.delete	application::administrator-account-requests.administrator-account-requests	\N	[]	1	2023-12-12 17:41:12.149+00	2023-12-12 17:41:12.167+00	{}
+4946	plugins::content-manager.explorer.delete	application::authorized-workspace.authorized-workspace	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.167+00	{}
+4947	plugins::content-manager.explorer.delete	application::blocks-category.blocks-category	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.167+00	{}
+4949	plugins::content-manager.explorer.delete	application::learning-component-types.learning-component-types	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.168+00	{}
+4950	plugins::content-manager.explorer.delete	application::learning-components.learning-components	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.168+00	{}
+4955	plugins::content-manager.explorer.delete	application::school.school	\N	[]	1	2023-12-12 17:41:12.151+00	2023-12-12 17:41:12.172+00	{}
+4958	plugins::content-manager.explorer.delete	application::student.student	\N	[]	1	2023-12-12 17:41:12.196+00	2023-12-12 17:41:12.208+00	{}
+4959	plugins::content-manager.explorer.delete	application::submission.submission	\N	[]	1	2023-12-12 17:41:12.196+00	2023-12-12 17:41:12.208+00	{}
+4962	plugins::content-manager.explorer.publish	application::administrator-account-requests.administrator-account-requests	\N	[]	1	2023-12-12 17:41:12.196+00	2023-12-12 17:41:12.208+00	{}
+4963	plugins::content-manager.explorer.publish	application::authorized-workspace.authorized-workspace	\N	[]	1	2023-12-12 17:41:12.197+00	2023-12-12 17:41:12.208+00	{}
+4966	plugins::content-manager.explorer.publish	application::merged-accounts.merged-accounts	\N	[]	1	2023-12-12 17:41:12.197+00	2023-12-12 17:41:12.211+00	{}
+4945	plugins::content-manager.explorer.delete	application::activity.activity	\N	[]	1	2023-12-12 17:41:12.149+00	2023-12-12 17:41:12.167+00	{}
+4943	plugins::content-manager.explorer.delete	application::block.block	\N	[]	1	2023-12-12 17:41:12.15+00	2023-12-12 17:41:12.167+00	{}
+4953	plugins::content-manager.explorer.delete	application::merged-accounts.merged-accounts	\N	[]	1	2023-12-12 17:41:12.151+00	2023-12-12 17:41:12.168+00	{}
+4733	plugins::content-manager.explorer.create	application::merged-accounts.merged-accounts	\N	[]	1	2023-11-28 04:09:14.752+00	2023-11-28 04:09:14.769+00	{"fields": ["username", "student", "studentID", "classroom"]}
+4956	plugins::content-manager.explorer.delete	application::selection.selection	\N	[]	1	2023-12-12 17:41:12.156+00	2023-12-12 17:41:12.172+00	{}
+4960	plugins::content-manager.explorer.delete	application::unit.unit	\N	[]	1	2023-12-12 17:41:12.196+00	2023-12-12 17:41:12.208+00	{}
+4957	plugins::content-manager.explorer.delete	application::session.session	\N	[]	1	2023-12-12 17:41:12.194+00	2023-12-12 17:41:12.209+00	{}
 \.
 
 
@@ -3219,8 +3398,11 @@ COPY public.students (id, name, "character", classroom, enrolled, last_logged_in
 61	Britt G.	🦙	13	t	\N	2023-10-19 20:29:25.976+00	2023-10-19 20:29:25.979+00	\N	\N
 62	Freddy F.	🐻	13	t	\N	2023-10-19 20:29:37.309+00	2023-10-19 20:29:37.312+00	\N	\N
 33	Ron W.	🐀	8	t	2023-10-19 20:30:03.328+00	2023-10-19 20:10:46.675+00	2023-10-19 20:30:03.352+00	\N	\N
-32	Harry P.	🦉	8	t	2023-10-20 06:13:02.991+00	2023-10-19 20:10:38.456+00	2023-10-20 06:13:03.026+00	\N	\N
 37	Gregory G.	🦫	8	t	\N	2023-10-19 20:11:30.83+00	2023-10-20 06:19:31.262+00	\N	\N
+63	David P.	🐵	10	t	\N	2023-10-31 16:56:04.62+00	2023-10-31 16:56:04.629+00	\N	\N
+32	Harry P.	🦉	8	t	2023-11-02 16:59:42.046+00	2023-10-19 20:10:38.456+00	2023-11-02 16:59:42.114+00	\N	\N
+64	David P.	e	10	t	\N	2023-11-24 19:37:23.083+00	2023-11-24 19:37:40.372+00	1	1
+65	David P.	e	10	t	\N	2023-11-24 19:38:06.445+00	2023-11-24 19:38:06.451+00	1	1
 \.
 
 
@@ -3298,78 +3480,27 @@ COPY public.upload_file_morph (id, upload_file_id, related_id, related_type, fie
 --
 
 COPY public."users-permissions_permission" (id, type, controller, action, enabled, policy, role, created_by, updated_by) FROM stdin;
-1	application	block	count	f		1	\N	\N
-2	application	block	count	f		2	\N	\N
-3	application	block	create	f		1	\N	\N
-4	application	block	create	f		2	\N	\N
-5	application	block	delete	f		1	\N	\N
-6	application	block	delete	f		2	\N	\N
-7	application	block	find	f		1	\N	\N
-8	application	block	find	f		2	\N	\N
-9	application	block	findone	f		1	\N	\N
-10	application	block	findone	f		2	\N	\N
-11	application	block	update	f		1	\N	\N
-12	application	block	update	f		2	\N	\N
-13	application	blocks-category	count	f		1	\N	\N
-14	application	blocks-category	count	f		2	\N	\N
-15	application	blocks-category	create	f		1	\N	\N
-16	application	blocks-category	create	f		2	\N	\N
-17	application	blocks-category	delete	f		1	\N	\N
-18	application	blocks-category	delete	f		2	\N	\N
-19	application	blocks-category	find	f		1	\N	\N
-20	application	blocks-category	find	f		2	\N	\N
-21	application	blocks-category	findone	f		1	\N	\N
-22	application	blocks-category	findone	f		2	\N	\N
-23	application	blocks-category	update	f		1	\N	\N
-24	application	blocks-category	update	f		2	\N	\N
 38	application	classroom	initjoin	t		2	\N	\N
 26	application	classroom-manager	me	f		2	\N	\N
-27	application	classroom	count	f		1	\N	\N
-29	application	classroom	create	f		1	\N	\N
 28	application	classroom	count	f		2	\N	\N
 30	application	classroom	create	f		2	\N	\N
-31	application	classroom	delete	f		1	\N	\N
 32	application	classroom	delete	f		2	\N	\N
-33	application	classroom	find	f		1	\N	\N
 34	application	classroom	find	f		2	\N	\N
 40	application	classroom	join	t		2	\N	\N
 36	application	classroom	findone	f		2	\N	\N
-37	application	classroom	initjoin	f		1	\N	\N
-39	application	classroom	join	f		1	\N	\N
 339	application	mentor	find	f		3	\N	\N
-41	application	classroom	update	f		1	\N	\N
 42	application	classroom	update	f		2	\N	\N
-44	application	activity	count	f		2	\N	\N
-46	application	activity	create	f		2	\N	\N
-48	application	activity	delete	f		2	\N	\N
-50	application	activity	find	f		2	\N	\N
-52	application	activity	findone	f		2	\N	\N
-54	application	activity	update	f		2	\N	\N
-55	application	grade	count	f		1	\N	\N
 56	application	grade	count	f		2	\N	\N
-57	application	grade	create	f		1	\N	\N
 58	application	grade	create	f		2	\N	\N
-59	application	grade	delete	f		1	\N	\N
 60	application	grade	delete	f		2	\N	\N
-61	application	grade	find	f		1	\N	\N
 74	application	lesson-module	find	f		2	\N	\N
 76	application	lesson-module	findone	f		2	\N	\N
-89	application	mentor	me	f		1	\N	\N
 90	application	mentor	me	f		2	\N	\N
-91	application	mentor	update	f		1	\N	\N
 1479	application	email	send	f		2	\N	\N
-119	application	school	count	f		1	\N	\N
 120	application	school	count	f		2	\N	\N
-121	application	school	create	f		1	\N	\N
 134	application	selection	create	f		2	\N	\N
-135	application	selection	delete	f		1	\N	\N
 136	application	selection	delete	f		2	\N	\N
-149	application	session	find	f		1	\N	\N
 150	application	session	find	f		2	\N	\N
-151	application	session	findone	f		1	\N	\N
-164	application	student	find	f		2	\N	\N
-165	application	student	findone	f		1	\N	\N
-166	application	student	findone	f		2	\N	\N
 194	application	unit	update	f		2	\N	\N
 225	content-type-builder	builder	getreservednames	f		1	\N	\N
 226	content-type-builder	builder	getreservednames	f		2	\N	\N
@@ -3377,29 +3508,67 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 240	content-type-builder	components	updatecomponent	f		2	\N	\N
 241	content-type-builder	connections	getconnections	f		1	\N	\N
 254	email	email	send	f		2	\N	\N
-284	users-permissions	auth	resetpassword	f		2	\N	\N
 285	users-permissions	auth	sendemailconfirmation	f		1	\N	\N
 35	application	classroom	findone	t		1	\N	\N
 25	application	classroom-manager	me	t		1	\N	\N
 354	application	unit	count	f		3	\N	\N
 62	application	grade	find	f		2	\N	\N
-79	application	mentor	count	f		1	\N	\N
 92	application	mentor	update	f		2	\N	\N
 122	application	school	create	f		2	\N	\N
-137	application	selection	find	f		1	\N	\N
 152	application	session	findone	f		2	\N	\N
-167	application	student	me	f		1	\N	\N
 1216	content-manager	collection-types	create	f		3	\N	\N
 1225	content-manager	collection-types	bulkdelete	f		2	\N	\N
 227	content-type-builder	componentcategories	deletecategory	f		1	\N	\N
 243	content-type-builder	contenttypes	createcontenttype	f		1	\N	\N
-287	users-permissions	user	count	f		1	\N	\N
 303	users-permissions	userspermissions	createrole	f		1	\N	\N
 47	application	activity	delete	t		1	\N	\N
-318	users-permissions	userspermissions	getproviders	f		2	\N	\N
-332	users-permissions	userspermissions	updateadvancedsettings	f		2	\N	\N
 340	application	mentor	count	f		3	\N	\N
 358	application	blocks-category	find	f		3	\N	\N
+166	application	student	findone	t		2	\N	\N
+164	application	student	find	t		2	\N	\N
+2	application	block	count	t		2	\N	\N
+4	application	block	create	t		2	\N	\N
+50	application	activity	find	t		2	\N	\N
+20	application	blocks-category	find	t		2	\N	\N
+22	application	blocks-category	findone	t		2	\N	\N
+16	application	blocks-category	create	t		2	\N	\N
+18	application	blocks-category	delete	t		2	\N	\N
+24	application	blocks-category	update	t		2	\N	\N
+14	application	blocks-category	count	t		2	\N	\N
+54	application	activity	update	t		2	\N	\N
+332	users-permissions	userspermissions	updateadvancedsettings	t		2	\N	\N
+318	users-permissions	userspermissions	getproviders	t		2	\N	\N
+284	users-permissions	auth	resetpassword	t		2	\N	\N
+151	application	session	findone	t		1	\N	\N
+149	application	session	find	t		1	\N	\N
+7	application	block	find	t		1	\N	\N
+1	application	block	count	t		1	\N	\N
+3	application	block	create	t		1	\N	\N
+9	application	block	findone	t		1	\N	\N
+5	application	block	delete	t		1	\N	\N
+11	application	block	update	t		1	\N	\N
+37	application	classroom	initjoin	t		1	\N	\N
+33	application	classroom	find	t		1	\N	\N
+29	application	classroom	create	t		1	\N	\N
+41	application	classroom	update	t		1	\N	\N
+31	application	classroom	delete	t		1	\N	\N
+121	application	school	create	t		1	\N	\N
+119	application	school	count	t		1	\N	\N
+135	application	selection	delete	t		1	\N	\N
+137	application	selection	find	t		1	\N	\N
+19	application	blocks-category	find	t		1	\N	\N
+23	application	blocks-category	update	t		1	\N	\N
+21	application	blocks-category	findone	t		1	\N	\N
+15	application	blocks-category	create	t		1	\N	\N
+13	application	blocks-category	count	t		1	\N	\N
+17	application	blocks-category	delete	t		1	\N	\N
+89	application	mentor	me	t		1	\N	\N
+79	application	mentor	count	t		1	\N	\N
+91	application	mentor	update	t		1	\N	\N
+61	application	grade	find	t		1	\N	\N
+55	application	grade	count	t		1	\N	\N
+57	application	grade	create	t		1	\N	\N
+59	application	grade	delete	t		1	\N	\N
 373	application	selection	count	f		3	\N	\N
 389	application	classroom-manager	me	f		3	\N	\N
 404	application	session	find	f		3	\N	\N
@@ -3407,19 +3576,12 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 463	content-type-builder	contenttypes	updatecontenttype	f		3	\N	\N
 478	users-permissions	auth	forgotpassword	f		3	\N	\N
 491	users-permissions	userspermissions	searchusers	f		3	\N	\N
-1480	application	email	send	f		1	\N	\N
-63	application	grade	findone	f		1	\N	\N
 78	application	lesson-module	update	f		2	\N	\N
 124	application	school	delete	f		2	\N	\N
-139	application	selection	findone	f		1	\N	\N
 154	application	session	update	f		2	\N	\N
-168	application	student	me	f		2	\N	\N
-183	application	unit	count	f		1	\N	\N
 228	content-type-builder	componentcategories	deletecategory	f		2	\N	\N
 242	content-type-builder	connections	getconnections	f		2	\N	\N
 273	users-permissions	auth	callback	f		1	\N	\N
-288	users-permissions	user	count	f		2	\N	\N
-302	users-permissions	user	update	f		2	\N	\N
 317	users-permissions	userspermissions	getproviders	f		1	\N	\N
 333	users-permissions	userspermissions	updateemailtemplate	f		1	\N	\N
 341	application	mentor	findone	f		3	\N	\N
@@ -3433,16 +3595,10 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 500	users-permissions	userspermissions	getpermissions	f		3	\N	\N
 64	application	grade	findone	f		2	\N	\N
 80	application	mentor	count	f		2	\N	\N
-125	application	school	find	f		1	\N	\N
 140	application	selection	findone	f		2	\N	\N
-155	application	student	count	f		1	\N	\N
-170	application	student	update	f		2	\N	\N
-185	application	unit	create	f		1	\N	\N
 230	content-type-builder	componentcategories	editcategory	f		2	\N	\N
 245	content-type-builder	contenttypes	deletecontenttype	f		1	\N	\N
 275	users-permissions	auth	connect	t		1	\N	\N
-290	users-permissions	user	create	f		2	\N	\N
-320	users-permissions	userspermissions	getrole	f		2	\N	\N
 335	users-permissions	userspermissions	updateproviders	f		1	\N	\N
 342	application	mentor	create	f		3	\N	\N
 356	application	unit	update	f		3	\N	\N
@@ -3453,18 +3609,12 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 475	users-permissions	auth	callback	f		3	\N	\N
 490	users-permissions	userspermissions	getemailtemplate	f		3	\N	\N
 505	users-permissions	userspermissions	getadvancedsettings	f		3	\N	\N
-65	application	grade	update	f		1	\N	\N
-77	application	lesson-module	update	f		1	\N	\N
-123	application	school	delete	f		1	\N	\N
 138	application	selection	find	f		2	\N	\N
-153	application	session	update	f		1	\N	\N
 184	application	unit	count	f		2	\N	\N
 231	content-type-builder	components	createcomponent	f		1	\N	\N
 246	content-type-builder	contenttypes	deletecontenttype	f		2	\N	\N
 276	users-permissions	auth	connect	t		2	\N	\N
-292	users-permissions	user	destroy	f		2	\N	\N
 321	users-permissions	userspermissions	getroles	f		1	\N	\N
-336	users-permissions	userspermissions	updateproviders	f		2	\N	\N
 169	application	student	update	t		1	\N	\N
 343	application	mentor	update	f		3	\N	\N
 355	application	unit	create	f		3	\N	\N
@@ -3477,40 +3627,48 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 465	email	email	send	f		3	\N	\N
 479	users-permissions	auth	register	f		3	\N	\N
 494	users-permissions	userspermissions	getpolicies	f		3	\N	\N
-66	application	lesson-module	count	f		1	\N	\N
 82	application	mentor	create	f		2	\N	\N
 1481	application	email	send	f		3	\N	\N
 126	application	school	find	f		2	\N	\N
-141	application	selection	update	f		1	\N	\N
-156	application	student	count	f		2	\N	\N
 188	application	unit	delete	f		2	\N	\N
 233	content-type-builder	components	deletecomponent	f		1	\N	\N
 248	content-type-builder	contenttypes	getcontenttype	f		2	\N	\N
 278	users-permissions	auth	emailconfirmation	t		2	\N	\N
-293	users-permissions	user	destroyall	f		1	\N	\N
-308	users-permissions	userspermissions	deleterole	f		2	\N	\N
 323	users-permissions	userspermissions	getroutes	f		1	\N	\N
-338	users-permissions	userspermissions	updaterole	f		2	\N	\N
 344	application	mentor	delete	f		3	\N	\N
 357	application	unit	delete	f		3	\N	\N
 371	application	selection	find	f		3	\N	\N
 401	application	school	create	f		3	\N	\N
 431	application	activity	findone	f		3	\N	\N
 954	application	mentor	me	f		9	\N	\N
+155	application	student	count	t		1	\N	\N
+156	application	student	count	t		2	\N	\N
+1978	application	student	me	t		10	\N	\N
+320	users-permissions	userspermissions	getrole	t		2	\N	\N
+338	users-permissions	userspermissions	updaterole	t		2	\N	\N
+308	users-permissions	userspermissions	deleterole	t		2	\N	\N
+153	application	session	update	t		1	\N	\N
+125	application	school	find	t		1	\N	\N
+123	application	school	delete	t		1	\N	\N
+139	application	selection	findone	t		1	\N	\N
+141	application	selection	update	t		1	\N	\N
+183	application	unit	count	t		1	\N	\N
+185	application	unit	create	t		1	\N	\N
+63	application	grade	findone	t		1	\N	\N
+65	application	grade	update	t		1	\N	\N
+77	application	lesson-module	update	t		1	\N	\N
+66	application	lesson-module	count	t		1	\N	\N
+1480	application	email	send	t		1	\N	\N
 462	content-type-builder	contenttypes	createcontenttype	f		3	\N	\N
 476	users-permissions	auth	resetpassword	f		3	\N	\N
 492	users-permissions	userspermissions	getroutes	f		3	\N	\N
 507	users-permissions	userspermissions	updaterole	f		3	\N	\N
 67	application	grade	update	f		2	\N	\N
-127	application	school	findone	f		1	\N	\N
-143	application	session	count	f		1	\N	\N
 159	application	student	delete	t		1	\N	\N
 235	content-type-builder	components	getcomponent	f		1	\N	\N
 250	content-type-builder	contenttypes	getcontenttypes	f		2	\N	\N
 279	users-permissions	auth	forgotpassword	f		1	\N	\N
-294	users-permissions	user	destroyall	f		2	\N	\N
 309	users-permissions	userspermissions	getadvancedsettings	f		1	\N	\N
-324	users-permissions	userspermissions	getroutes	f		2	\N	\N
 81	application	mentor	create	t		1	\N	\N
 189	application	unit	find	t		1	\N	\N
 345	application	mentor	me	f		3	\N	\N
@@ -3523,15 +3681,9 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 485	users-permissions	user	findone	f		3	\N	\N
 499	users-permissions	userspermissions	updateadvancedsettings	f		3	\N	\N
 68	application	lesson-module	count	f		2	\N	\N
-83	application	mentor	delete	f		1	\N	\N
-130	application	school	update	f		1	\N	\N
-145	application	session	create	f		1	\N	\N
-158	application	student	create	f		2	\N	\N
-187	application	unit	delete	f		1	\N	\N
 234	content-type-builder	components	deletecomponent	f		2	\N	\N
 249	content-type-builder	contenttypes	getcontenttypes	f		1	\N	\N
 281	users-permissions	auth	register	f		1	\N	\N
-296	users-permissions	user	find	f		2	\N	\N
 311	users-permissions	userspermissions	getemailtemplate	f		1	\N	\N
 325	users-permissions	userspermissions	index	f		1	\N	\N
 365	application	lesson-module	find	f		3	\N	\N
@@ -3542,7 +3694,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 458	content-type-builder	components	deletecomponent	f		3	\N	\N
 488	users-permissions	user	destroy	f		3	\N	\N
 502	users-permissions	userspermissions	index	f		3	\N	\N
-69	application	lesson-module	create	f		1	\N	\N
 84	application	mentor	delete	f		2	\N	\N
 128	application	school	findone	f		2	\N	\N
 142	application	selection	update	f		2	\N	\N
@@ -3552,10 +3703,7 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 274	users-permissions	auth	callback	t		2	\N	\N
 1222	content-manager	collection-types	bulkdelete	f		1	\N	\N
 1227	content-manager	collection-types	delete	f		1	\N	\N
-289	users-permissions	user	create	f		1	\N	\N
-304	users-permissions	userspermissions	createrole	f		2	\N	\N
 319	users-permissions	userspermissions	getrole	f		1	\N	\N
-334	users-permissions	userspermissions	updateemailtemplate	f		2	\N	\N
 157	application	student	create	t		1	\N	\N
 361	application	blocks-category	create	f		3	\N	\N
 375	application	selection	update	f		3	\N	\N
@@ -3566,17 +3714,13 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 477	users-permissions	auth	connect	f		3	\N	\N
 493	users-permissions	userspermissions	deleterole	f		3	\N	\N
 70	application	lesson-module	create	f		2	\N	\N
-85	application	mentor	find	f		1	\N	\N
 129	application	school	update	f		2	\N	\N
 144	application	session	count	f		2	\N	\N
-160	application	student	delete	f		2	\N	\N
 190	application	unit	find	f		2	\N	\N
 232	content-type-builder	components	createcomponent	f		2	\N	\N
 247	content-type-builder	contenttypes	getcontenttype	f		1	\N	\N
 277	users-permissions	auth	emailconfirmation	f		1	\N	\N
-291	users-permissions	user	destroy	f		1	\N	\N
 307	users-permissions	userspermissions	deleterole	f		1	\N	\N
-322	users-permissions	userspermissions	getroles	f		2	\N	\N
 337	users-permissions	userspermissions	updaterole	f		1	\N	\N
 359	application	blocks-category	findone	f		3	\N	\N
 374	application	selection	create	f		3	\N	\N
@@ -3585,16 +3729,28 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 452	content-type-builder	componentcategories	editcategory	f		3	\N	\N
 482	users-permissions	user	find	f		3	\N	\N
 495	users-permissions	userspermissions	getroles	f		3	\N	\N
-71	application	lesson-module	delete	f		1	\N	\N
 86	application	mentor	find	f		2	\N	\N
-131	application	selection	count	f		1	\N	\N
 146	application	session	create	f		2	\N	\N
-191	application	unit	findone	f		1	\N	\N
 237	content-type-builder	components	getcomponents	f		1	\N	\N
 252	content-type-builder	contenttypes	updatecontenttype	f		2	\N	\N
 282	users-permissions	auth	register	t		2	\N	\N
-297	users-permissions	user	findone	f		1	\N	\N
-312	users-permissions	userspermissions	getemailtemplate	f		2	\N	\N
+158	application	student	create	t		2	\N	\N
+289	users-permissions	user	create	t		1	\N	\N
+322	users-permissions	userspermissions	getroles	t		2	\N	\N
+324	users-permissions	userspermissions	getroutes	t		2	\N	\N
+294	users-permissions	user	destroyall	t		2	\N	\N
+296	users-permissions	user	find	t		2	\N	\N
+145	application	session	create	t		1	\N	\N
+143	application	session	count	t		1	\N	\N
+127	application	school	findone	t		1	\N	\N
+130	application	school	update	t		1	\N	\N
+131	application	selection	count	t		1	\N	\N
+187	application	unit	delete	t		1	\N	\N
+191	application	unit	findone	t		1	\N	\N
+83	application	mentor	delete	t		1	\N	\N
+85	application	mentor	find	t		1	\N	\N
+71	application	lesson-module	delete	t		1	\N	\N
+69	application	lesson-module	create	t		1	\N	\N
 161	application	student	enrolled	t		1	\N	\N
 364	application	sandbox	toolbox	f		3	\N	\N
 379	application	block	count	f		3	\N	\N
@@ -3605,17 +3761,11 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 483	users-permissions	user	me	f		3	\N	\N
 498	users-permissions	userspermissions	updateemailtemplate	f		3	\N	\N
 72	application	lesson-module	delete	f		2	\N	\N
-87	application	mentor	findone	f		1	\N	\N
 132	application	selection	count	f		2	\N	\N
-147	application	session	delete	f		1	\N	\N
-162	application	student	enrolled	f		2	\N	\N
 192	application	unit	findone	f		2	\N	\N
 236	content-type-builder	components	getcomponent	f		2	\N	\N
 251	content-type-builder	contenttypes	updatecontenttype	f		1	\N	\N
 280	users-permissions	auth	forgotpassword	t		2	\N	\N
-295	users-permissions	user	find	f		1	\N	\N
-310	users-permissions	userspermissions	getadvancedsettings	f		2	\N	\N
-326	users-permissions	userspermissions	index	f		2	\N	\N
 117	application	sandbox	toolbox	t		1	\N	\N
 363	application	blocks-category	delete	f		3	\N	\N
 376	application	selection	delete	f		3	\N	\N
@@ -3625,17 +3775,13 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 464	content-type-builder	contenttypes	deletecontenttype	f		3	\N	\N
 480	users-permissions	auth	emailconfirmation	f		3	\N	\N
 497	users-permissions	userspermissions	getproviders	f		3	\N	\N
-73	application	lesson-module	find	f		1	\N	\N
 88	application	mentor	findone	f		2	\N	\N
 148	application	session	delete	f		2	\N	\N
 1218	content-manager	collection-types	delete	f		8	\N	\N
 1228	content-manager	collection-types	bulkdelete	f		3	\N	\N
-163	application	student	find	f		1	\N	\N
-193	application	unit	update	f		1	\N	\N
 238	content-type-builder	components	getcomponents	f		2	\N	\N
 253	email	email	send	f		1	\N	\N
 283	users-permissions	auth	resetpassword	f		1	\N	\N
-298	users-permissions	user	findone	f		2	\N	\N
 313	users-permissions	userspermissions	getpermissions	f		1	\N	\N
 118	application	sandbox	toolbox	t		2	\N	\N
 362	application	blocks-category	update	f		3	\N	\N
@@ -3646,9 +3792,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 451	content-type-builder	builder	getreservednames	f		3	\N	\N
 481	users-permissions	auth	sendemailconfirmation	f		3	\N	\N
 496	users-permissions	userspermissions	getrole	f		3	\N	\N
-286	users-permissions	auth	sendemailconfirmation	f		2	\N	\N
-301	users-permissions	user	update	f		1	\N	\N
-316	users-permissions	userspermissions	getpolicies	f		2	\N	\N
 331	users-permissions	userspermissions	updateadvancedsettings	f		1	\N	\N
 352	application	unit	find	f		3	\N	\N
 367	application	lesson-module	count	f		3	\N	\N
@@ -3660,7 +3803,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 487	users-permissions	user	update	f		3	\N	\N
 503	users-permissions	userspermissions	createrole	f		3	\N	\N
 299	users-permissions	user	me	t		1	\N	\N
-314	users-permissions	userspermissions	getpermissions	f		2	\N	\N
 329	users-permissions	userspermissions	searchusers	f		1	\N	\N
 353	application	unit	findone	f		3	\N	\N
 368	application	lesson-module	create	f		3	\N	\N
@@ -3671,7 +3813,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 486	users-permissions	user	create	f		3	\N	\N
 300	users-permissions	user	me	t		2	\N	\N
 315	users-permissions	userspermissions	getpolicies	f		1	\N	\N
-330	users-permissions	userspermissions	searchusers	f		2	\N	\N
 369	application	lesson-module	update	f		3	\N	\N
 399	application	school	findone	f		3	\N	\N
 414	application	grade	update	f		3	\N	\N
@@ -3680,58 +3821,55 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 489	users-permissions	user	destroyall	f		3	\N	\N
 504	users-permissions	userspermissions	updateproviders	f		3	\N	\N
 508	application	activity	toolbox	t		1	\N	\N
-509	application	activity	toolbox	f		2	\N	\N
 510	application	activity	toolbox	t		3	\N	\N
-511	application	classroom	student	f		1	\N	\N
 512	application	classroom	student	f		2	\N	\N
 513	application	classroom	student	t		3	\N	\N
 430	application	activity	find	f		3	\N	\N
 75	application	lesson-module	findone	t		1	\N	\N
 133	application	selection	create	t		1	\N	\N
-514	application	save	count	f		1	\N	\N
 515	application	save	count	f		2	\N	\N
+163	application	student	find	t		1	\N	\N
+162	application	student	enrolled	t		2	\N	\N
+1986	application	unit	find	t		10	\N	\N
+509	application	activity	toolbox	t		2	\N	\N
+312	users-permissions	userspermissions	getemailtemplate	t		2	\N	\N
+316	users-permissions	userspermissions	getpolicies	t		2	\N	\N
+298	users-permissions	user	findone	t		2	\N	\N
+286	users-permissions	auth	sendemailconfirmation	t		2	\N	\N
+147	application	session	delete	t		1	\N	\N
+514	application	save	count	t		1	\N	\N
+511	application	classroom	student	t		1	\N	\N
+193	application	unit	update	t		1	\N	\N
+87	application	mentor	findone	t		1	\N	\N
+73	application	lesson-module	find	t		1	\N	\N
 516	application	save	count	f		3	\N	\N
-517	application	save	create	f		1	\N	\N
 518	application	save	create	f		2	\N	\N
-520	application	save	delete	f		1	\N	\N
 521	application	save	delete	f		2	\N	\N
 522	application	save	delete	f		3	\N	\N
-523	application	save	find	f		1	\N	\N
 524	application	save	find	f		2	\N	\N
 527	application	save	find	f		3	\N	\N
-525	application	save	findbyactivity	f		1	\N	\N
 526	application	save	findbyactivity	f		2	\N	\N
-529	application	save	findone	f		1	\N	\N
 530	application	save	findone	f		2	\N	\N
 531	application	save	findone	f		3	\N	\N
-532	application	save	update	f		1	\N	\N
 533	application	save	update	f		2	\N	\N
 534	application	save	update	f		3	\N	\N
 528	application	save	findbyactivity	t		3	\N	\N
 519	application	save	create	t		3	\N	\N
-535	application	submission	count	f		1	\N	\N
 536	application	submission	count	f		2	\N	\N
 537	application	submission	count	f		3	\N	\N
-538	application	submission	create	f		1	\N	\N
 539	application	submission	create	f		2	\N	\N
-541	application	submission	delete	f		1	\N	\N
 542	application	submission	delete	f		2	\N	\N
 543	application	submission	delete	f		3	\N	\N
-544	application	submission	find	f		1	\N	\N
 551	application	submission	update	f		2	\N	\N
 545	application	submission	find	f		2	\N	\N
 546	application	submission	find	f		3	\N	\N
 552	application	submission	update	f		3	\N	\N
-547	application	submission	findone	f		1	\N	\N
 548	application	submission	findone	f		2	\N	\N
-550	application	submission	update	f		1	\N	\N
 1214	content-manager	collection-types	bulkdelete	f		9	\N	\N
 1215	content-manager	collection-types	create	f		9	\N	\N
 540	application	submission	create	t		3	\N	\N
 549	application	submission	findone	t		3	\N	\N
-553	application	sandbox	createsubmission	f		1	\N	\N
 555	application	sandbox	createsubmission	f		3	\N	\N
-556	application	sandbox	findonesubmission	f		1	\N	\N
 558	application	sandbox	findonesubmission	f		3	\N	\N
 554	application	sandbox	createsubmission	t		2	\N	\N
 557	application	sandbox	findonesubmission	t		2	\N	\N
@@ -3739,26 +3877,22 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1022	application	school	create	f		9	\N	\N
 1036	application	grade	delete	f		9	\N	\N
 1082	content-type-builder	componentcategories	editcategory	f		9	\N	\N
-1113	users-permissions	user	find	f		9	\N	\N
 1127	users-permissions	userspermissions	getproviders	f		9	\N	\N
 994	application	submission	create	f		9	\N	\N
 1009	application	classroom-manager	me	f		9	\N	\N
 1024	application	school	delete	f		9	\N	\N
 1054	application	activity	create	f		9	\N	\N
 1084	content-type-builder	components	getcomponents	f		9	\N	\N
-1114	users-permissions	user	count	f		9	\N	\N
 1129	users-permissions	userspermissions	updateadvancedsettings	f		9	\N	\N
 995	application	submission	update	f		9	\N	\N
 1010	application	classroom	update	f		9	\N	\N
 1055	application	activity	update	f		9	\N	\N
 1085	content-type-builder	components	getcomponent	f		9	\N	\N
-1115	users-permissions	user	findone	f		9	\N	\N
 1130	users-permissions	userspermissions	getpermissions	f		9	\N	\N
 951	application	mentor	create	f		9	\N	\N
 997	application	submission	delete	f		9	\N	\N
 1012	application	classroom	delete	f		9	\N	\N
 1087	content-type-builder	components	updatecomponent	f		9	\N	\N
-1117	users-permissions	user	update	f		9	\N	\N
 1132	users-permissions	userspermissions	index	f		9	\N	\N
 952	application	mentor	update	f		9	\N	\N
 967	application	unit	create	f		9	\N	\N
@@ -3772,7 +3906,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 984	application	lesson-module	delete	f		9	\N	\N
 1029	application	session	create	f		9	\N	\N
 1089	content-type-builder	connections	getconnections	f		9	\N	\N
-1118	users-permissions	user	destroy	f		9	\N	\N
 1134	users-permissions	userspermissions	updateproviders	f		9	\N	\N
 964	application	unit	find	t		9	\N	\N
 950	application	mentor	count	t		9	\N	\N
@@ -3791,19 +3924,27 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1088	content-type-builder	components	deletecomponent	f		9	\N	\N
 1120	users-permissions	userspermissions	getemailtemplate	f		9	\N	\N
 782	application	lesson-module	delete	t		8	\N	\N
+547	application	submission	findone	t		1	\N	\N
+535	application	submission	count	t		1	\N	\N
+538	application	submission	create	t		1	\N	\N
+541	application	submission	delete	t		1	\N	\N
+550	application	submission	update	t		1	\N	\N
+523	application	save	find	t		1	\N	\N
+532	application	save	update	t		1	\N	\N
+517	application	save	create	t		1	\N	\N
+525	application	save	findbyactivity	t		1	\N	\N
+553	application	sandbox	createsubmission	t		1	\N	\N
+556	application	sandbox	findonesubmission	t		1	\N	\N
 1135	users-permissions	userspermissions	getadvancedsettings	f		9	\N	\N
 1217	content-manager	collection-types	bulkdelete	f		8	\N	\N
 1220	content-manager	collection-types	create	f		8	\N	\N
 1002	application	block	update	f		9	\N	\N
 1016	application	classroom	student	f		9	\N	\N
-1045	application	student	create	f		9	\N	\N
 1090	content-type-builder	contenttypes	getcontenttype	f		9	\N	\N
 1104	users-permissions	auth	callback	f		9	\N	\N
-1119	users-permissions	user	destroyall	f		9	\N	\N
 1133	users-permissions	userspermissions	createrole	f		9	\N	\N
 1000	application	block	create	f		9	\N	\N
 1017	application	classroom	initjoin	f		9	\N	\N
-1047	application	student	update	f		9	\N	\N
 1091	content-type-builder	contenttypes	getcontenttypes	f		9	\N	\N
 1106	users-permissions	auth	resetpassword	f		9	\N	\N
 1121	users-permissions	userspermissions	searchusers	f		9	\N	\N
@@ -3822,7 +3963,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 974	application	blocks-category	update	f		9	\N	\N
 989	application	selection	update	f		9	\N	\N
 1018	application	classroom	create	f		9	\N	\N
-1048	application	student	delete	f		9	\N	\N
 1063	application	save	update	f		9	\N	\N
 1093	content-type-builder	contenttypes	updatecontenttype	f		9	\N	\N
 1107	users-permissions	auth	forgotpassword	f		9	\N	\N
@@ -3831,13 +3971,10 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 975	application	blocks-category	delete	f		9	\N	\N
 990	application	selection	delete	f		9	\N	\N
 1035	application	grade	update	f		9	\N	\N
-1052	application	student	me	f		9	\N	\N
 1064	application	save	delete	f		9	\N	\N
 1081	content-type-builder	builder	getreservednames	f		9	\N	\N
-1112	users-permissions	user	me	f		9	\N	\N
 1128	users-permissions	userspermissions	updateemailtemplate	f		9	\N	\N
 977	application	sandbox	findonesubmission	f		9	\N	\N
-1049	application	student	enrolled	f		9	\N	\N
 1095	content-type-builder	contenttypes	deletecontenttype	f		9	\N	\N
 1109	users-permissions	auth	register	f		9	\N	\N
 1124	users-permissions	userspermissions	getroles	f		9	\N	\N
@@ -3889,6 +4026,8 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 778	application	lesson-module	findone	t		8	\N	\N
 780	application	lesson-module	create	t		8	\N	\N
 781	application	lesson-module	update	t		8	\N	\N
+1052	application	student	me	t		9	\N	\N
+1045	application	student	create	t		9	\N	\N
 784	application	selection	findone	f		8	\N	\N
 783	application	selection	find	f		8	\N	\N
 786	application	selection	create	f		8	\N	\N
@@ -3911,20 +4050,16 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 825	application	session	count	f		8	\N	\N
 854	application	activity	delete	t		8	\N	\N
 885	content-type-builder	components	updatecomponent	f		8	\N	\N
-915	users-permissions	user	update	f		8	\N	\N
 930	users-permissions	userspermissions	index	f		8	\N	\N
 796	application	block	findone	t		8	\N	\N
 811	application	classroom	findone	t		8	\N	\N
 826	application	session	create	f		8	\N	\N
-841	application	student	find	f		8	\N	\N
 856	application	activity	toolbox	t		8	\N	\N
 886	content-type-builder	components	deletecomponent	f		8	\N	\N
-916	users-permissions	user	destroy	f		8	\N	\N
 931	users-permissions	userspermissions	createrole	f		8	\N	\N
 797	application	block	count	f		8	\N	\N
 812	application	classroom	count	f		8	\N	\N
 827	application	session	update	f		8	\N	\N
-842	application	student	findone	f		8	\N	\N
 857	application	save	find	t		8	\N	\N
 888	content-type-builder	contenttypes	getcontenttypes	f		8	\N	\N
 903	users-permissions	auth	callback	f		8	\N	\N
@@ -3933,15 +4068,12 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 798	application	block	create	t		8	\N	\N
 813	application	classroom	find	t		8	\N	\N
 828	application	session	delete	f		8	\N	\N
-843	application	student	count	f		8	\N	\N
 858	application	save	findone	t		8	\N	\N
 887	content-type-builder	connections	getconnections	f		8	\N	\N
-917	users-permissions	user	destroyall	f		8	\N	\N
 932	users-permissions	userspermissions	updateproviders	f		8	\N	\N
 799	application	block	update	t		8	\N	\N
 816	application	classroom	create	t		8	\N	\N
 831	application	grade	count	f		8	\N	\N
-845	application	student	update	f		8	\N	\N
 860	application	save	create	t		8	\N	\N
 890	content-type-builder	contenttypes	createcontenttype	f		8	\N	\N
 905	users-permissions	auth	connect	f		8	\N	\N
@@ -3949,14 +4081,12 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 935	users-permissions	userspermissions	updaterole	f		8	\N	\N
 800	application	block	delete	t		8	\N	\N
 814	application	classroom	initjoin	f		8	\N	\N
-844	application	student	create	f		8	\N	\N
 859	application	save	count	t		8	\N	\N
 889	content-type-builder	contenttypes	getcontenttype	f		8	\N	\N
 904	users-permissions	auth	resetpassword	f		8	\N	\N
 919	users-permissions	userspermissions	searchusers	f		8	\N	\N
 829	application	grade	find	t		8	\N	\N
 815	application	classroom	student	f		8	\N	\N
-846	application	student	delete	f		8	\N	\N
 861	application	save	update	t		8	\N	\N
 1224	content-manager	collection-types	create	f		2	\N	\N
 891	content-type-builder	contenttypes	updatecontenttype	f		8	\N	\N
@@ -3965,7 +4095,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 830	application	grade	findone	t		8	\N	\N
 817	application	school	find	f		8	\N	\N
 832	application	grade	create	f		8	\N	\N
-847	application	student	me	f		8	\N	\N
 862	application	save	delete	t		8	\N	\N
 892	content-type-builder	contenttypes	deletecontenttype	f		8	\N	\N
 907	users-permissions	auth	register	f		8	\N	\N
@@ -3978,15 +4107,18 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 923	users-permissions	userspermissions	getroles	f		8	\N	\N
 819	application	school	count	f		8	\N	\N
 833	application	grade	update	f		8	\N	\N
-848	application	student	enrolled	f		8	\N	\N
 863	application	save	findbyactivity	t		8	\N	\N
 893	email	email	send	f		8	\N	\N
-910	users-permissions	user	find	f		8	\N	\N
 925	users-permissions	userspermissions	getproviders	f		8	\N	\N
 821	application	school	update	f		8	\N	\N
 851	application	activity	count	t		8	\N	\N
 881	content-type-builder	componentcategories	deletecategory	f		8	\N	\N
-913	users-permissions	user	findone	f		8	\N	\N
+843	application	student	count	t		8	\N	\N
+848	application	student	enrolled	t		8	\N	\N
+846	application	student	delete	t		8	\N	\N
+844	application	student	create	t		8	\N	\N
+841	application	student	find	t		8	\N	\N
+847	application	student	me	t		8	\N	\N
 927	users-permissions	userspermissions	updateadvancedsettings	f		8	\N	\N
 820	application	school	create	f		8	\N	\N
 850	application	activity	findone	t		8	\N	\N
@@ -3997,13 +4129,11 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 822	application	school	delete	f		8	\N	\N
 852	application	activity	create	t		8	\N	\N
 883	content-type-builder	components	getcomponent	f		8	\N	\N
-912	users-permissions	user	count	f		8	\N	\N
 926	users-permissions	userspermissions	updateemailtemplate	f		8	\N	\N
 808	application	classroom	update	t		8	\N	\N
 823	application	session	find	f		8	\N	\N
 853	application	activity	update	t		8	\N	\N
 882	content-type-builder	components	getcomponents	f		8	\N	\N
-911	users-permissions	user	me	f		8	\N	\N
 1221	content-manager	collection-types	delete	f		9	\N	\N
 1241	content-manager	collection-types	previewmanyrelations	f		3	\N	\N
 1250	content-manager	collection-types	unpublish	f		2	\N	\N
@@ -4075,6 +4205,7 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1234	content-manager	collection-types	findone	f		1	\N	\N
 1256	content-manager	collection-types	update	f		3	\N	\N
 1267	content-manager	components	findcomponents	f		8	\N	\N
+911	users-permissions	user	me	t		8	\N	\N
 1288	content-manager	content-types	updatecontenttypeconfiguration	f		9	\N	\N
 1302	content-manager	single-types	delete	f		8	\N	\N
 1315	content-manager	single-types	unpublish	f		2	\N	\N
@@ -4104,7 +4235,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1291	content-manager	relations	find	f		3	\N	\N
 1308	content-manager	single-types	find	f		9	\N	\N
 1323	content-manager	uid	checkuidavailability	f		9	\N	\N
-1329	application	activity	templateupdate	f		2	\N	\N
 1331	application	activity	templateupdate	f		3	\N	\N
 1333	application	activity	templateupdate	f		9	\N	\N
 1334	content-manager	content-types	findcontenttypessettings	f		1	\N	\N
@@ -4122,16 +4252,13 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1346	email	email	test	f		3	\N	\N
 1347	email	email	test	f		8	\N	\N
 1348	email	email	test	f		9	\N	\N
-1349	application	learning-component-types	count	f		1	\N	\N
 1350	application	learning-component-types	count	f		2	\N	\N
 1351	application	learning-component-types	count	f		3	\N	\N
 1352	application	learning-component-types	count	f		8	\N	\N
-1354	application	learning-component-types	create	f		1	\N	\N
 1355	application	learning-component-types	create	f		2	\N	\N
 1356	application	learning-component-types	create	f		3	\N	\N
 1357	application	learning-component-types	create	f		8	\N	\N
 1358	application	learning-component-types	create	f		9	\N	\N
-1359	application	learning-component-types	delete	f		1	\N	\N
 1360	application	learning-component-types	delete	f		2	\N	\N
 1361	application	learning-component-types	delete	f		3	\N	\N
 1362	application	learning-component-types	delete	f		8	\N	\N
@@ -4139,37 +4266,29 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1365	application	learning-component-types	find	f		2	\N	\N
 1366	application	learning-component-types	find	f		3	\N	\N
 1367	application	learning-component-types	find	f		8	\N	\N
-1369	application	learning-component-types	findone	f		1	\N	\N
 1370	application	learning-component-types	findone	f		2	\N	\N
 1371	application	learning-component-types	findone	f		3	\N	\N
 1372	application	learning-component-types	findone	f		8	\N	\N
-1374	application	learning-component-types	update	f		1	\N	\N
 1332	application	activity	templateupdate	t		8	\N	\N
-1364	application	learning-component-types	find	f		1	\N	\N
 1376	application	learning-component-types	update	f		3	\N	\N
 1377	application	learning-component-types	update	f		8	\N	\N
 1378	application	learning-component-types	update	f		9	\N	\N
 1375	application	learning-component-types	update	f		2	\N	\N
-1379	application	learning-components	count	f		1	\N	\N
 1380	application	learning-components	count	f		2	\N	\N
 1381	application	learning-components	count	f		3	\N	\N
 1382	application	learning-components	count	f		8	\N	\N
-1384	application	learning-components	create	f		1	\N	\N
 1385	application	learning-components	create	f		2	\N	\N
 1386	application	learning-components	create	f		3	\N	\N
 1388	application	learning-components	create	f		9	\N	\N
-1389	application	learning-components	delete	f		1	\N	\N
 1390	application	learning-components	delete	f		2	\N	\N
 1391	application	learning-components	delete	f		3	\N	\N
 1392	application	learning-components	delete	f		8	\N	\N
 1393	application	learning-components	delete	f		9	\N	\N
-1394	application	learning-components	find	f		1	\N	\N
 1395	application	learning-components	find	f		2	\N	\N
+1394	application	learning-components	find	t		1	\N	\N
 1396	application	learning-components	find	f		3	\N	\N
-1399	application	learning-components	findone	f		1	\N	\N
 1400	application	learning-components	findone	f		2	\N	\N
 1401	application	learning-components	findone	f		3	\N	\N
-1404	application	learning-components	update	f		1	\N	\N
 1405	application	learning-components	update	f		2	\N	\N
 1406	application	learning-components	update	f		3	\N	\N
 1408	application	learning-components	update	f		9	\N	\N
@@ -4218,7 +4337,6 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1711	application	authorized-workspace	delete	t		1	\N	\N
 1706	application	authorized-workspace	create	t		1	\N	\N
 1768	application	activity	activitytemplateupdate	f		3	\N	\N
-1767	application	activity	activitytemplateupdate	f		2	\N	\N
 1769	application	activity	activitytemplateupdate	f		9	\N	\N
 1771	application	activity	activitytemplateupdate	f		1	\N	\N
 1734	application	authorized-workspace	update	t		8	\N	\N
@@ -4231,26 +4349,19 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1729	application	authorized-workspace	toolbox	t		8	\N	\N
 1716	application	authorized-workspace	find	t		1	\N	\N
 1721	application	authorized-workspace	findone	t		1	\N	\N
-1702	application	authorized-workspace	count	f		2	\N	\N
 1703	application	authorized-workspace	count	f		3	\N	\N
 1705	application	authorized-workspace	count	f		9	\N	\N
-1707	application	authorized-workspace	create	f		2	\N	\N
 1708	application	authorized-workspace	create	f		3	\N	\N
 1710	application	authorized-workspace	create	f		9	\N	\N
-1712	application	authorized-workspace	delete	f		2	\N	\N
 1713	application	authorized-workspace	delete	f		3	\N	\N
 1715	application	authorized-workspace	delete	f		9	\N	\N
-1717	application	authorized-workspace	find	f		2	\N	\N
 1718	application	authorized-workspace	find	f		3	\N	\N
 1720	application	authorized-workspace	find	f		9	\N	\N
-1722	application	authorized-workspace	findone	f		2	\N	\N
 1723	application	authorized-workspace	findone	f		3	\N	\N
 1725	application	authorized-workspace	findone	f		9	\N	\N
 1726	application	authorized-workspace	toolbox	f		1	\N	\N
-1727	application	authorized-workspace	toolbox	f		2	\N	\N
 1728	application	authorized-workspace	toolbox	f		3	\N	\N
 1730	application	authorized-workspace	toolbox	f		9	\N	\N
-1732	application	authorized-workspace	update	f		2	\N	\N
 1733	application	authorized-workspace	update	f		3	\N	\N
 1735	application	authorized-workspace	update	f		9	\N	\N
 1778	documentation	documentation	getinfos	f		2	\N	\N
@@ -4259,6 +4370,12 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1781	documentation	documentation	getinfos	f		9	\N	\N
 1782	documentation	documentation	index	f		1	\N	\N
 1783	documentation	documentation	index	f		2	\N	\N
+1702	application	authorized-workspace	count	t		2	\N	\N
+1727	application	authorized-workspace	toolbox	t		2	\N	\N
+1707	application	authorized-workspace	create	t		2	\N	\N
+1717	application	authorized-workspace	find	t		2	\N	\N
+1399	application	learning-components	findone	t		1	\N	\N
+1404	application	learning-components	update	t		1	\N	\N
 1784	documentation	documentation	index	f		8	\N	\N
 1785	documentation	documentation	index	f		3	\N	\N
 1786	documentation	documentation	index	f		9	\N	\N
@@ -4288,6 +4405,341 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 1777	documentation	documentation	getinfos	f		1	\N	\N
 1791	documentation	documentation	login	f		9	\N	\N
 1806	documentation	documentation	updatesettings	f		9	\N	\N
+295	users-permissions	user	find	t		1	\N	\N
+301	users-permissions	user	update	t		1	\N	\N
+297	users-permissions	user	findone	t		1	\N	\N
+287	users-permissions	user	count	t		1	\N	\N
+291	users-permissions	user	destroy	t		1	\N	\N
+293	users-permissions	user	destroyall	t		1	\N	\N
+916	users-permissions	user	destroy	t		8	\N	\N
+915	users-permissions	user	update	t		8	\N	\N
+912	users-permissions	user	count	t		8	\N	\N
+917	users-permissions	user	destroyall	t		8	\N	\N
+910	users-permissions	user	find	t		8	\N	\N
+913	users-permissions	user	findone	t		8	\N	\N
+1115	users-permissions	user	findone	t		9	\N	\N
+1119	users-permissions	user	destroyall	t		9	\N	\N
+1117	users-permissions	user	update	t		9	\N	\N
+1114	users-permissions	user	count	t		9	\N	\N
+1113	users-permissions	user	find	t		9	\N	\N
+1118	users-permissions	user	destroy	t		9	\N	\N
+1112	users-permissions	user	me	t		9	\N	\N
+170	application	student	update	t		2	\N	\N
+168	application	student	me	t		2	\N	\N
+160	application	student	delete	t		2	\N	\N
+1049	application	student	enrolled	t		9	\N	\N
+1047	application	student	update	t		9	\N	\N
+1048	application	student	delete	t		9	\N	\N
+165	application	student	findone	t		1	\N	\N
+167	application	student	me	t		1	\N	\N
+842	application	student	findone	t		8	\N	\N
+845	application	student	update	t		8	\N	\N
+1987	application	unit	findone	t		10	\N	\N
+1989	application	unit	create	t		10	\N	\N
+1990	application	unit	update	t		10	\N	\N
+1991	application	unit	delete	t		10	\N	\N
+1992	content-manager	collection-types	find	t		10	\N	\N
+1993	content-manager	collection-types	findone	t		10	\N	\N
+1994	content-manager	collection-types	create	t		10	\N	\N
+1997	content-manager	collection-types	unpublish	t		10	\N	\N
+1998	content-manager	collection-types	publish	t		10	\N	\N
+1995	content-manager	collection-types	update	t		10	\N	\N
+1996	content-manager	collection-types	delete	t		10	\N	\N
+1999	content-manager	collection-types	bulkdelete	t		10	\N	\N
+2000	content-manager	collection-types	previewmanyrelations	t		10	\N	\N
+2001	content-manager	components	findcomponents	t		10	\N	\N
+1923	application	learning-components	update	t		10	\N	\N
+1924	application	learning-components	delete	t		10	\N	\N
+1913	application	learning-component-types	find	t		10	\N	\N
+1925	application	lesson-module	find	t		10	\N	\N
+1935	application	mentor	delete	t		10	\N	\N
+1937	application	mentor	me	t		10	\N	\N
+1951	application	save	update	t		10	\N	\N
+1952	application	save	delete	t		10	\N	\N
+1953	application	save	findbyactivity	t		10	\N	\N
+1954	application	school	find	t		10	\N	\N
+1963	application	selection	create	t		10	\N	\N
+1966	application	session	find	t		10	\N	\N
+1967	application	session	findone	t		10	\N	\N
+1969	application	session	create	t		10	\N	\N
+1970	application	session	update	t		10	\N	\N
+1971	application	session	delete	t		10	\N	\N
+1975	application	student	create	t		10	\N	\N
+1977	application	student	update	t		10	\N	\N
+1976	application	student	delete	t		10	\N	\N
+1979	application	student	enrolled	t		10	\N	\N
+1980	application	submission	find	t		10	\N	\N
+1981	application	submission	findone	t		10	\N	\N
+1982	application	submission	count	t		10	\N	\N
+1983	application	submission	create	t		10	\N	\N
+1984	application	submission	update	t		10	\N	\N
+1985	application	submission	delete	t		10	\N	\N
+1973	application	student	findone	t		10	\N	\N
+1974	application	student	count	t		10	\N	\N
+2003	content-manager	components	updatecomponentconfiguration	t		10	\N	\N
+2004	content-manager	content-types	findcontenttypes	t		10	\N	\N
+2006	content-manager	content-types	findcontenttypeconfiguration	t		10	\N	\N
+2005	content-manager	content-types	findcontenttypessettings	t		10	\N	\N
+2007	content-manager	content-types	updatecontenttypeconfiguration	t		10	\N	\N
+2008	content-manager	relations	find	t		10	\N	\N
+2009	content-manager	single-types	find	t		10	\N	\N
+2010	content-manager	single-types	createorupdate	t		10	\N	\N
+2011	content-manager	single-types	delete	t		10	\N	\N
+2012	content-manager	single-types	publish	t		10	\N	\N
+2013	content-manager	single-types	unpublish	t		10	\N	\N
+2014	content-manager	uid	generateuid	t		10	\N	\N
+2015	content-manager	uid	checkuidavailability	t		10	\N	\N
+2016	content-type-builder	builder	getreservednames	t		10	\N	\N
+2018	content-type-builder	componentcategories	deletecategory	t		10	\N	\N
+2019	content-type-builder	components	getcomponents	t		10	\N	\N
+2021	content-type-builder	components	createcomponent	t		10	\N	\N
+2020	content-type-builder	components	getcomponent	t		10	\N	\N
+2022	content-type-builder	components	updatecomponent	t		10	\N	\N
+2023	content-type-builder	components	deletecomponent	t		10	\N	\N
+2024	content-type-builder	connections	getconnections	t		10	\N	\N
+2025	content-type-builder	contenttypes	getcontenttypes	t		10	\N	\N
+2026	content-type-builder	contenttypes	getcontenttype	t		10	\N	\N
+2032	documentation	documentation	loginview	t		10	\N	\N
+2034	documentation	documentation	regeneratedoc	t		10	\N	\N
+2035	documentation	documentation	deletedoc	t		10	\N	\N
+2036	documentation	documentation	updatesettings	t		10	\N	\N
+2037	email	email	send	t		10	\N	\N
+2041	users-permissions	auth	resetpassword	t		10	\N	\N
+2042	users-permissions	auth	connect	t		10	\N	\N
+2043	users-permissions	auth	forgotpassword	t		10	\N	\N
+2033	documentation	documentation	login	t		10	\N	\N
+2047	users-permissions	user	create	t		10	\N	\N
+2048	users-permissions	user	update	t		10	\N	\N
+2049	users-permissions	user	find	t		10	\N	\N
+2050	users-permissions	user	findone	t		10	\N	\N
+2051	users-permissions	user	count	t		10	\N	\N
+2053	users-permissions	user	destroyall	t		10	\N	\N
+2059	users-permissions	userspermissions	getroles	t		10	\N	\N
+2062	users-permissions	userspermissions	index	t		10	\N	\N
+2063	users-permissions	userspermissions	searchusers	t		10	\N	\N
+1882	application	authorized-workspace	toolbox	t		10	\N	\N
+1883	application	block	find	t		10	\N	\N
+1884	application	block	findone	t		10	\N	\N
+1885	application	block	count	t		10	\N	\N
+1887	application	block	update	t		10	\N	\N
+1888	application	block	delete	t		10	\N	\N
+1889	application	blocks-category	find	t		10	\N	\N
+1890	application	blocks-category	findone	t		10	\N	\N
+1891	application	blocks-category	count	t		10	\N	\N
+1892	application	blocks-category	create	t		10	\N	\N
+1893	application	blocks-category	update	t		10	\N	\N
+1894	application	blocks-category	delete	t		10	\N	\N
+1886	application	block	create	t		10	\N	\N
+1895	application	classroom-manager	me	t		10	\N	\N
+1896	application	classroom	find	t		10	\N	\N
+1897	application	classroom	findone	t		10	\N	\N
+1898	application	classroom	count	t		10	\N	\N
+1899	application	classroom	create	t		10	\N	\N
+1867	application	activity	find	t		10	\N	\N
+1868	application	activity	findone	t		10	\N	\N
+1869	application	activity	count	t		10	\N	\N
+1872	application	activity	delete	t		10	\N	\N
+1873	application	activity	templateupdate	t		10	\N	\N
+1870	application	activity	create	t		10	\N	\N
+1871	application	activity	update	t		10	\N	\N
+1874	application	activity	toolbox	t		10	\N	\N
+1875	application	activity	activitytemplateupdate	t		10	\N	\N
+1876	application	authorized-workspace	find	t		10	\N	\N
+1877	application	authorized-workspace	findone	t		10	\N	\N
+1878	application	authorized-workspace	count	t		10	\N	\N
+1879	application	authorized-workspace	create	t		10	\N	\N
+1880	application	authorized-workspace	update	t		10	\N	\N
+1881	application	authorized-workspace	delete	t		10	\N	\N
+1900	application	classroom	update	t		10	\N	\N
+1901	application	classroom	delete	t		10	\N	\N
+1902	application	classroom	student	t		10	\N	\N
+1903	application	classroom	initjoin	t		10	\N	\N
+1904	application	classroom	workspaces	t		10	\N	\N
+1905	application	classroom	join	t		10	\N	\N
+1906	application	email	send	t		10	\N	\N
+1907	application	grade	find	t		10	\N	\N
+1908	application	grade	findone	t		10	\N	\N
+1909	application	grade	count	t		10	\N	\N
+1910	application	grade	create	t		10	\N	\N
+1911	application	grade	update	t		10	\N	\N
+1912	application	grade	delete	t		10	\N	\N
+1914	application	learning-component-types	findone	t		10	\N	\N
+1915	application	learning-component-types	count	t		10	\N	\N
+1916	application	learning-component-types	create	t		10	\N	\N
+1917	application	learning-component-types	update	t		10	\N	\N
+1918	application	learning-component-types	delete	t		10	\N	\N
+1919	application	learning-components	find	t		10	\N	\N
+1920	application	learning-components	findone	t		10	\N	\N
+1921	application	learning-components	count	t		10	\N	\N
+1922	application	learning-components	create	t		10	\N	\N
+1926	application	lesson-module	findone	t		10	\N	\N
+1927	application	lesson-module	count	t		10	\N	\N
+1928	application	lesson-module	create	t		10	\N	\N
+1929	application	lesson-module	update	t		10	\N	\N
+1930	application	lesson-module	delete	t		10	\N	\N
+1931	application	mentor	find	t		10	\N	\N
+1932	application	mentor	findone	t		10	\N	\N
+1934	application	mentor	update	t		10	\N	\N
+1936	application	mentor	create	t		10	\N	\N
+1933	application	mentor	count	t		10	\N	\N
+1944	application	sandbox	toolbox	t		10	\N	\N
+1946	application	sandbox	createsubmission	t		10	\N	\N
+1947	application	save	find	t		10	\N	\N
+1948	application	save	findone	t		10	\N	\N
+1949	application	save	count	t		10	\N	\N
+1950	application	save	create	t		10	\N	\N
+1945	application	sandbox	findonesubmission	t		10	\N	\N
+1955	application	school	findone	t		10	\N	\N
+1956	application	school	count	t		10	\N	\N
+1957	application	school	create	t		10	\N	\N
+1960	application	selection	find	t		10	\N	\N
+1959	application	school	delete	t		10	\N	\N
+1961	application	selection	findone	t		10	\N	\N
+1962	application	selection	count	t		10	\N	\N
+1964	application	selection	update	t		10	\N	\N
+1965	application	selection	delete	t		10	\N	\N
+1968	application	session	count	t		10	\N	\N
+1958	application	school	update	t		10	\N	\N
+1972	application	student	find	t		10	\N	\N
+1988	application	unit	count	t		10	\N	\N
+2002	content-manager	components	findcomponentconfiguration	t		10	\N	\N
+2017	content-type-builder	componentcategories	editcategory	t		10	\N	\N
+2044	users-permissions	auth	register	t		10	\N	\N
+2058	users-permissions	userspermissions	getrole	t		10	\N	\N
+2027	content-type-builder	contenttypes	createcontenttype	t		10	\N	\N
+2039	email	email	getsettings	t		10	\N	\N
+2055	users-permissions	userspermissions	createrole	t		10	\N	\N
+2028	content-type-builder	contenttypes	updatecontenttype	t		10	\N	\N
+2040	users-permissions	auth	callback	t		10	\N	\N
+2052	users-permissions	user	destroy	t		10	\N	\N
+2066	users-permissions	userspermissions	updateemailtemplate	t		10	\N	\N
+2029	content-type-builder	contenttypes	deletecontenttype	t		10	\N	\N
+2038	email	email	test	t		10	\N	\N
+2054	users-permissions	user	me	t		10	\N	\N
+2068	users-permissions	userspermissions	updateadvancedsettings	t		10	\N	\N
+2030	documentation	documentation	getinfos	t		10	\N	\N
+2045	users-permissions	auth	emailconfirmation	t		10	\N	\N
+2056	users-permissions	userspermissions	getpermissions	t		10	\N	\N
+2031	documentation	documentation	index	t		10	\N	\N
+2046	users-permissions	auth	sendemailconfirmation	t		10	\N	\N
+2057	users-permissions	userspermissions	getpolicies	t		10	\N	\N
+2069	users-permissions	userspermissions	getproviders	t		10	\N	\N
+2060	users-permissions	userspermissions	getroutes	t		10	\N	\N
+2061	users-permissions	userspermissions	deleterole	t		10	\N	\N
+2070	users-permissions	userspermissions	updateproviders	t		10	\N	\N
+2064	users-permissions	userspermissions	updaterole	t		10	\N	\N
+2065	users-permissions	userspermissions	getemailtemplate	t		10	\N	\N
+2067	users-permissions	userspermissions	getadvancedsettings	t		10	\N	\N
+2133	application	merged-accounts	findone	t		2	\N	\N
+2125	application	merged-accounts	find	t		1	\N	\N
+2074	application	administrator-account-requests	count	f		3	\N	\N
+2075	application	administrator-account-requests	count	f		8	\N	\N
+2076	application	administrator-account-requests	count	f		9	\N	\N
+2115	application	merged-accounts	create	t		2	\N	\N
+2131	application	merged-accounts	findone	t		1	\N	\N
+2080	application	administrator-account-requests	create	f		3	\N	\N
+2081	application	administrator-account-requests	create	f		8	\N	\N
+2082	application	administrator-account-requests	create	f		9	\N	\N
+2127	application	merged-accounts	find	t		2	\N	\N
+2119	application	merged-accounts	delete	t		1	\N	\N
+2086	application	administrator-account-requests	delete	f		3	\N	\N
+2087	application	administrator-account-requests	delete	f		8	\N	\N
+2088	application	administrator-account-requests	delete	f		9	\N	\N
+2121	application	merged-accounts	delete	t		2	\N	\N
+2107	application	merged-accounts	count	t		1	\N	\N
+2092	application	administrator-account-requests	find	f		3	\N	\N
+2093	application	administrator-account-requests	find	f		8	\N	\N
+2094	application	administrator-account-requests	find	f		9	\N	\N
+2109	application	merged-accounts	count	t		2	\N	\N
+2137	application	merged-accounts	update	t		1	\N	\N
+2098	application	administrator-account-requests	findone	f		3	\N	\N
+2099	application	administrator-account-requests	findone	f		8	\N	\N
+2100	application	administrator-account-requests	findone	f		9	\N	\N
+2101	application	administrator-account-requests	update	t		1	\N	\N
+2104	application	administrator-account-requests	update	f		3	\N	\N
+2105	application	administrator-account-requests	update	f		8	\N	\N
+2106	application	administrator-account-requests	update	f		9	\N	\N
+2077	application	administrator-account-requests	create	t		1	\N	\N
+2084	application	administrator-account-requests	delete	t		10	\N	\N
+2120	application	merged-accounts	delete	t		10	\N	\N
+2110	application	merged-accounts	count	f		3	\N	\N
+2111	application	merged-accounts	count	f		8	\N	\N
+2112	application	merged-accounts	count	f		9	\N	\N
+2132	application	merged-accounts	findone	t		10	\N	\N
+2138	application	merged-accounts	update	t		10	\N	\N
+2090	application	administrator-account-requests	find	t		10	\N	\N
+2116	application	merged-accounts	create	f		3	\N	\N
+2117	application	merged-accounts	create	f		8	\N	\N
+2118	application	merged-accounts	create	f		9	\N	\N
+2072	application	administrator-account-requests	count	t		1	\N	\N
+2096	application	administrator-account-requests	findone	t		10	\N	\N
+2114	application	merged-accounts	create	t		10	\N	\N
+2122	application	merged-accounts	delete	f		3	\N	\N
+2123	application	merged-accounts	delete	f		8	\N	\N
+2095	application	administrator-account-requests	findone	t		1	\N	\N
+2078	application	administrator-account-requests	create	t		10	\N	\N
+2128	application	merged-accounts	find	f		3	\N	\N
+2124	application	merged-accounts	delete	f		9	\N	\N
+2129	application	merged-accounts	find	f		8	\N	\N
+2130	application	merged-accounts	find	f		9	\N	\N
+2089	application	administrator-account-requests	find	t		1	\N	\N
+2102	application	administrator-account-requests	update	t		10	\N	\N
+2071	application	administrator-account-requests	count	t		10	\N	\N
+2134	application	merged-accounts	findone	f		3	\N	\N
+2135	application	merged-accounts	findone	f		8	\N	\N
+2108	application	merged-accounts	count	t		10	\N	\N
+2140	application	merged-accounts	update	f		3	\N	\N
+2141	application	merged-accounts	update	f		8	\N	\N
+2142	application	merged-accounts	update	f		9	\N	\N
+2136	application	merged-accounts	findone	f		9	\N	\N
+2085	application	administrator-account-requests	delete	t		2	\N	\N
+2097	application	administrator-account-requests	findone	t		2	\N	\N
+2091	application	administrator-account-requests	find	t		2	\N	\N
+2103	application	administrator-account-requests	update	t		2	\N	\N
+2073	application	administrator-account-requests	count	t		2	\N	\N
+2079	application	administrator-account-requests	create	t		2	\N	\N
+2083	application	administrator-account-requests	delete	t		1	\N	\N
+12	application	block	update	t		2	\N	\N
+10	application	block	findone	t		2	\N	\N
+6	application	block	delete	t		2	\N	\N
+8	application	block	find	t		2	\N	\N
+46	application	activity	create	t		2	\N	\N
+44	application	activity	count	t		2	\N	\N
+48	application	activity	delete	t		2	\N	\N
+1767	application	activity	activitytemplateupdate	t		2	\N	\N
+1329	application	activity	templateupdate	t		2	\N	\N
+1712	application	authorized-workspace	delete	t		2	\N	\N
+1732	application	authorized-workspace	update	t		2	\N	\N
+52	application	activity	findone	t		2	\N	\N
+1722	application	authorized-workspace	findone	t		2	\N	\N
+2113	application	merged-accounts	create	t		1	\N	\N
+2139	application	merged-accounts	update	t		2	\N	\N
+2126	application	merged-accounts	find	t		10	\N	\N
+314	users-permissions	userspermissions	getpermissions	t		2	\N	\N
+304	users-permissions	userspermissions	createrole	t		2	\N	\N
+330	users-permissions	userspermissions	searchusers	t		2	\N	\N
+326	users-permissions	userspermissions	index	t		2	\N	\N
+310	users-permissions	userspermissions	getadvancedsettings	t		2	\N	\N
+334	users-permissions	userspermissions	updateemailtemplate	t		2	\N	\N
+336	users-permissions	userspermissions	updateproviders	t		2	\N	\N
+302	users-permissions	user	update	t		2	\N	\N
+288	users-permissions	user	count	t		2	\N	\N
+290	users-permissions	user	create	t		2	\N	\N
+292	users-permissions	user	destroy	t		2	\N	\N
+544	application	submission	find	t		1	\N	\N
+520	application	save	delete	t		1	\N	\N
+529	application	save	findone	t		1	\N	\N
+39	application	classroom	join	t		1	\N	\N
+27	application	classroom	count	t		1	\N	\N
+1379	application	learning-components	count	t		1	\N	\N
+1389	application	learning-components	delete	t		1	\N	\N
+1384	application	learning-components	create	t		1	\N	\N
+1374	application	learning-component-types	update	t		1	\N	\N
+1364	application	learning-component-types	find	t		1	\N	\N
+1369	application	learning-component-types	findone	t		1	\N	\N
+1354	application	learning-component-types	create	t		1	\N	\N
+1359	application	learning-component-types	delete	t		1	\N	\N
+1349	application	learning-component-types	count	t		1	\N	\N
 \.
 
 
@@ -4297,10 +4749,11 @@ COPY public."users-permissions_permission" (id, type, controller, action, enable
 
 COPY public."users-permissions_role" (id, name, description, type, created_by, updated_by) FROM stdin;
 3	Student	Default role given to a student user.	student	\N	\N
-2	Public	Default role given to unauthenticated user.	public	\N	\N
-9	Researcher	Role for researchers	researcher	\N	\N
-1	Classroom Manager	Default role given to authenticated user.	authenticated	\N	\N
 8	Content Creator	Role given to content Creators	content_creator	\N	\N
+9	Researcher	Role for researchers	researcher	\N	\N
+2	Public	Default role given to unauthenticated user.	public	\N	\N
+1	Classroom Manager	Default role given to authenticated user.	authenticated	\N	\N
+10	Personal	Personal Accounts	personal	\N	\N
 \.
 
 
@@ -4337,6 +4790,13 @@ SELECT pg_catalog.setval('public.activities_id_seq', 965, true);
 --
 
 SELECT pg_catalog.setval('public.activities_learning_components__learning_components_activities_', 56, true);
+
+
+--
+-- Name: administrator_account_requests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.administrator_account_requests_id_seq', 6, true);
 
 
 --
@@ -4399,7 +4859,7 @@ SELECT pg_catalog.setval('public.classrooms_id_seq', 13, true);
 -- Name: classrooms_mentors__mentors_classrooms_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.classrooms_mentors__mentors_classrooms_id_seq', 20, true);
+SELECT pg_catalog.setval('public.classrooms_mentors__mentors_classrooms_id_seq', 29, true);
 
 
 --
@@ -4413,7 +4873,7 @@ SELECT pg_catalog.setval('public.classrooms_teachers__teachers_classrooms_id_seq
 -- Name: core_store_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.core_store_id_seq', 315, true);
+SELECT pg_catalog.setval('public.core_store_id_seq', 322, true);
 
 
 --
@@ -4448,7 +4908,14 @@ SELECT pg_catalog.setval('public.lesson_modules_id_seq', 242, true);
 -- Name: mentors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.mentors_id_seq', 7, true);
+SELECT pg_catalog.setval('public.mentors_id_seq', 12, true);
+
+
+--
+-- Name: merged_accounts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.merged_accounts_id_seq', 29, true);
 
 
 --
@@ -4463,6 +4930,13 @@ SELECT pg_catalog.setval('public.objective_types_id_seq', 3, true);
 --
 
 SELECT pg_catalog.setval('public.objectives_id_seq', 6, true);
+
+
+--
+-- Name: personal_users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.personal_users_id_seq', 5, true);
 
 
 --
@@ -4497,14 +4971,14 @@ SELECT pg_catalog.setval('public.sessions__saves_id_seq', 1, false);
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 1745, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 1746, true);
 
 
 --
 -- Name: sessions_students__students_sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sessions_students__students_sessions_id_seq', 3238, true);
+SELECT pg_catalog.setval('public.sessions_students__students_sessions_id_seq', 3239, true);
 
 
 --
@@ -4518,7 +4992,7 @@ SELECT pg_catalog.setval('public.strapi_administrator_id_seq', 2, false);
 -- Name: strapi_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.strapi_permission_id_seq', 4388, true);
+SELECT pg_catalog.setval('public.strapi_permission_id_seq', 4966, true);
 
 
 --
@@ -4546,7 +5020,7 @@ SELECT pg_catalog.setval('public.strapi_webhooks_id_seq', 1, false);
 -- Name: students_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.students_id_seq', 62, true);
+SELECT pg_catalog.setval('public.students_id_seq', 65, true);
 
 
 --
@@ -4602,21 +5076,21 @@ SELECT pg_catalog.setval('public.upload_file_morph_id_seq', 79, true);
 -- Name: users-permissions_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."users-permissions_permission_id_seq"', 1806, true);
+SELECT pg_catalog.setval('public."users-permissions_permission_id_seq"', 2142, true);
 
 
 --
 -- Name: users-permissions_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."users-permissions_role_id_seq"', 9, true);
+SELECT pg_catalog.setval('public."users-permissions_role_id_seq"', 10, true);
 
 
 --
 -- Name: users-permissions_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public."users-permissions_user_id_seq"', 10, true);
+SELECT pg_catalog.setval('public."users-permissions_user_id_seq"', 44, true);
 
 
 --
@@ -4633,6 +5107,14 @@ ALTER TABLE ONLY public.activities__blocks
 
 ALTER TABLE ONLY public.activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: administrator_account_requests administrator_account_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.administrator_account_requests
+    ADD CONSTRAINT administrator_account_requests_pkey PRIMARY KEY (id);
 
 
 --
@@ -4796,6 +5278,14 @@ ALTER TABLE ONLY public.mentors
 
 
 --
+-- Name: merged_accounts merged_accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.merged_accounts
+    ADD CONSTRAINT merged_accounts_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: objective_types objective_types_name_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -4817,6 +5307,14 @@ ALTER TABLE ONLY public.objective_types
 
 ALTER TABLE ONLY public.objectives
     ADD CONSTRAINT objectives_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: personal_users personal_users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.personal_users
+    ADD CONSTRAINT personal_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -5038,3 +5536,4 @@ ALTER TABLE ONLY public."users-permissions_user"
 --
 -- PostgreSQL database dump complete
 --
+
