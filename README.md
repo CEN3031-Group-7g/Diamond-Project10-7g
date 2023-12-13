@@ -9,6 +9,114 @@ Cloud-based programming interface
 
 <br/>
 
+## Group 7g Diamond Division - Project 10: Personal and Organizational Accounts
+
+### Features Implemented
+
+* #### User Signup
+	* Users not logged in will see an option for the signup page in the navbar which redirects to /signup
+	* Users can sign up with username, email, password. This will make a new user in the "Users" collection with their role set to "Personal"
+	* Input validation such as checking if username/email exists, checking if email is valid, checking password strength, checking for empty fields.
+	<img width="435" alt="Signup1" src="https://github.com/CEN3031-Group-7g/Diamond-Project10-7g/assets/100661623/0b9471ca-323b-48c4-8499-3f679668eb7a">
+
+
+* #### User Settings
+	* Logged in users will see an option for the settings page in the navbar which redirects to /settings
+	* On the settings page, there are options and buttons for:
+		* ##### Change Username
+		 	* Updates username in database
+		 	* Verify password before changing
+		 	* Makes sure username is valid and is not taken
+		* ##### Change Password
+			* Updates password of user
+			* Verify Password before changing
+		* ##### Change Email
+			* Updates email of user
+			* Verify password before changing
+			* Makes sure email is valid with regex, and not taken
+		* ##### Merge Accounts 
+			* Appears only for personal accounts
+			* Select student from dropdown/search
+			* Select emoji from dropdown, checks if correct emoji
+			* Merges the personal account to the student account, using the table "Merged accounts"
+        * ##### Delete Account
+        	* Deletes account from database, redirects to login
+        	* Account is removed from "Users" collection
+        	* Verify password before deleting
+ 	
+<img width="327" alt="Settings1" src="https://github.com/CEN3031-Group-7g/Diamond-Project10-7g/assets/100661623/89e4921c-71bf-49ea-b317-91f70e1dd3f8">
+<img width="330" alt="Settings2" src="https://github.com/CEN3031-Group-7g/Diamond-Project10-7g/assets/100661623/f9c8ccae-4885-4d1c-8472-fee055b88581">
+
+
+* #### Admin Request
+	* On signup page /signup, users can click the link at the bottom to request an admin account
+	* This is for users who are asking for permissions to the strapi backend
+	* They enter username, email, password.
+	* Pressing submit opens their email client to send an email to the strapi admins to approve or deny them, also adding their information to the "Administrator Account Requests" collection to prevent spam from the same email and help in the approval process.
+	<img width="222" alt="AdminRequest1" src="https://github.com/CEN3031-Group-7g/Diamond-Project10-7g/assets/100661623/2d87e123-ab45-465a-a910-8962b6b409d5">
+<img width="368" alt="AdminRequest2" src="https://github.com/CEN3031-Group-7g/Diamond-Project10-7g/assets/100661623/34028fd2-7317-4d9b-97f3-79ae3fcfce87">
+
+
+
+* #### User Permissions
+	* Implemented features onto frontend utility for pages and route directory, as well as settings page for function permission - currently only supports current existing roles (Mentor, ContentCreator, Student, Researcher, Personal)
+		* Checks if user is authorized to be on route/page based on their role
+		* Redirects user back to their designated homepage if not authorized
+		* Checks for specific role when displaying specific user functionalities (Merge - visible to only Personal users)
+	* The redirection checks serve to prevent users from accessing pages that are not for them or would otherwise be a hindrance for them (ex: accidentally typing into login URL based on browser suggestion when accessing pages through url) For public route checks, the component checks for a user token that is generated if a user logs in. If a user token exists, then the user cannot access any route marked with the PublicRoute component and will be redirected to their respective dashboard/hub. RedirectCheck checks for the user’s current role and compares it to the role that is designated for the specific page, redirecting users back to their dashboard/hub similar to PublicRoute if unauthorized.
+	* Screenshot cannot demonstrate this feature 
+
+## How to Run
+
+The `develop` branch on this GitHub Repository holds the code we have developed and that is ready for you to run and merge into the main repo. This is the branch you should run to test all of the functionality that we have implemented.
+
+To get the **frontend** running (casmm-client-dev):
+1. Follow the [client](/client#setup) setup
+2. Run  `yarn` from `/client` to install dependencies
+3. Run `yarn start` from `/client`
+
+To get the **backend** running (casmm-server-dev, casmm-compile-dev, casmm-db-dev, and casmm-compile_queue-dev)
+1. Install [docker](https://docs.docker.com/get-docker/):
+
+2. Run `docker compose up` from `/`
+
+   > Grant permission to the **scripts** and **server** directories if you are prompted
+
+**IMPORTANT:** If this isn’t your first time running Casmm and you already have Casmm containers in docker, 
+1. Use the command `docker compose down` in /, 
+2. Use the command `docker compose up` from /. 
+
+> This ensures that the database is configured with our new dump in `scripts/development_db.dump`, which has the tables, roles, and permissions we added.
+
+## Database and Server connections
+We dumped our database in `scripts/development_db.dump`, which has the tables, roles, and permissions we added. To apply this on your machine locally, please 
+1. Use the command `docker compose down` in /, 
+2. Use the command `docker compose up` from /. 
+
+We added two new collections/tables to the database:
+
+`Merged accounts` with schema Username(string) Student(string) StudentID(string) Classroom(string), id(integer). This collection is used to store personal users who have merged their account to a student account. The intent is for this database to be used on the student login page and the gallery page. For example, on the gallery page, this table should be checked to see if the student account merged to the personal account has any projects that should be displayed.
+
+`Administrator Account Requests` with schema Admin_email(string), approval_status(String), created_at(date), updated_at(string), id(integer). This collection is used to store incoming admin account requests. These requests are for strapi admin accounts that only other strapi admin accounts can create. The intent is to prevent spam/duplicate requests and allow existing admins to quickly review applicants to add them.
+
+Additionally, we added a new role to the users and permission plugin, a `Personal` role which lets users create personal accounts on the signup page.
+
+You can add to these collections with the endpoints given in the documentation found in strapi.
+
+## Update database and Strapi dump files
+We dumped our database in `scripts/development_db.dump`, which has the tables, roles, and permissions we added. To apply this on your machine locally, please 
+1. Use the command `docker compose down` in /, 
+2. Use the command `docker compose up` from /. 
+
+To create your own dump and apply it, please read the dump instructions in the readme for [`/scripts`](/scripts)
+
+## Outstanding work
+
+None.
+
+## Built Upon
+We installed a dependency with yarn, called [`react-select`](https://react-select.com/home), which was used for the student and emoji dropdowns in the merge modal on the user settings page. Simply navigate to the /client folder of the repo and run yarn to install this dependency. 
+
 ## Application
 
 ### `client` 
@@ -44,21 +152,6 @@ The development environment is composed of five servers. The first one is run wi
   > The first time the db is started, the [init_db.sh](/scripts/init_db.sh) script will run and seed the database with an environment specific dump. Read about Postgres initialization scripts [here](https://github.com/docker-library/docs/blob/master/postgres/README.md#initialization-scripts). To see how to create this dump, look [here](https://github.com/DavidMagda/CaSMM_fork_2023/blob/develop/scripts/readme.md).
 
 * `casmm-compile_queue-dev`
-
-#### Running
-
-`casmm-client-dev`
-
-1. Follow the [client](/client#setup) setup
-2. Run `yarn start` from `/client`
-
-`casmm-server-dev`, `casmm-compile-dev`, `casmm-db-dev`, and `casmm-compile_queue-dev`
-
-1. Install [docker](https://docs.docker.com/get-docker/)
-
-2. Run `docker compose up` from `/`
-
-   > Grant permission to the **scripts** and **server** directories if you are prompted
    
 
 ### Staging
