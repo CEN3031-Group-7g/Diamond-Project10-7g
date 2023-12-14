@@ -101,6 +101,8 @@ We added two new collections/tables to the database:
 
 Additionally, we added a new role to the users and permission plugin, a `Personal` role which lets users create personal accounts on the signup page.
 
+Once you have the backend running, navigate to [localhost:1337/admin](http://localhost:1337/admin/). This is the strapi backend where you can manage the database, such as adding collections, adding entries to collections, updating entries in collections, and deleting entries in the collections. Please read the [Strapi](https://docs.strapi.io/) documentation 
+
 You can add to these collections with the endpoints given in the documentation found in strapi.
 
 ## Update database and Strapi dump files
@@ -108,7 +110,11 @@ We dumped our database in `scripts/development_db.dump`, which has the tables, r
 1. Use the command `docker compose down` in /, 
 2. Use the command `docker compose up` from /. 
 
-To create your own dump and apply it, please read the dump instructions in the readme for [`/scripts`](/scripts)
+To create your own dump and apply it, please read the dump instructions in the readme for [`/scripts`](/scripts). 
+
+The command in that readme should be `pg_dump -U postgres -d strapi -f development_db.dump`, which you should execute in the `casmm-db-dev` container in docker.
+
+Replace the existing `development_db.dump` in `/scripts` with the new dump and then run `docker compose down` and `docker compose up`.
 
 ## Outstanding work
 
